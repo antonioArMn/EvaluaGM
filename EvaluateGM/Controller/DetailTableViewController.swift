@@ -16,7 +16,16 @@ class DetailTableViewController: UITableViewController {
     //Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var averageLabel: UILabel!
+    @IBOutlet weak var firstSectionView: UIView!
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var firstSectionStackView: UIStackView!
+    @IBOutlet weak var cultureAttatchment: UILabel!
+    @IBOutlet weak var dpoImplementation: UILabel!
+    @IBOutlet weak var attitude: UILabel!
+    @IBOutlet weak var trainingAdaptation: UILabel!
+    @IBOutlet weak var performance: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,18 +45,32 @@ class DetailTableViewController: UITableViewController {
     
     //Methods
     func setupUI() {
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.heightAnchor.constraint(equalToConstant: ((firstSectionView.frame.height - firstSectionStackView.frame.height) / 2) + imageView.frame.height / 2).isActive = true
+    
         imageView.layer.borderWidth = 1.0
         imageView.layer.masksToBounds = false
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.size.height / 2
         imageView.clipsToBounds = true
         
-        guard let image = employee?.photo, let name = employee?.name, let lastName = employee?.lastName, let average = employee?.average else {
+        guard let image = employee?.photo, let name = employee?.name, let lastName = employee?.lastName, let average = employee?.average , let type = employee?.typeString else {
             return
         }
+        
         imageView.image = image
         nameLabel.text = name + " " + lastName
+        typeLabel.text = type
         averageLabel.text = "\(average) ★"
+        
+        guard let currentEmployee = employee else {
+            return
+        }
+        cultureAttatchment.text = "\(currentEmployee.cultureAttatchment)"
+        dpoImplementation.text = "\(currentEmployee.dpoImplementation)"
+        attitude.text = "\(currentEmployee.attitude)"
+        trainingAdaptation.text = "\(currentEmployee.trainingAdaptation)"
+        performance.text = "\(currentEmployee.performance)"
     }
 
     // MARK: - Table view data source
