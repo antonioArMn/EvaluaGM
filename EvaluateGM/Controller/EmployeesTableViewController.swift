@@ -17,7 +17,7 @@ class EmployeesTableViewController: UIViewController, UINavigationControllerDele
     //Properties
     var user: User?
     var employees: [Employee] = [
-        Employee(photo: UIImage(named: "User")!, name: "Christian", lastName: "Alonso Aranda", average: 9.35),
+        Employee(photo: UIImage(named: "User")!, name: "Christian", lastName: "Montacarga Aranda", average: 9.35),
         Employee(photo: UIImage(named: "User")!, name: "Pablo", lastName: "Corona Flores", average: 7.38),
         Employee(photo: UIImage(named: "User")!, name: "Gerardo", lastName: "Cruz Ramírez", average: 8.28),
         Employee(photo: UIImage(named: "User")!, name: "Fernando", lastName: "Belmont Hurtado", average: 9.83),
@@ -49,7 +49,6 @@ class EmployeesTableViewController: UIViewController, UINavigationControllerDele
             return
         }
         print("User received in employees: \(user)")
-        segmentedControl.selectedSegmentIndex = 0
         
         //Constraints
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +67,21 @@ class EmployeesTableViewController: UIViewController, UINavigationControllerDele
     }
     
     //Actions
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+        guard let isSupervisor = user?.isSupervisor else {
+            return
+        }
+        if(isSupervisor) {
+            let alertController = UIAlertController(title: "Permisos para editar empleados sólo para Recursos Humanos.", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            let tableViewEditingMode = employeesTableView.isEditing
+            employeesTableView.setEditing(!tableViewEditingMode, animated: true)
+        }
+    }
+    
     @IBAction func segmentedControlChange(_ sender: Any) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -216,7 +230,6 @@ class EmployeesTableViewController: UIViewController, UINavigationControllerDele
         cell.showsReorderControl = true
         
         //4. Retornamos celda
-        print(cell)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

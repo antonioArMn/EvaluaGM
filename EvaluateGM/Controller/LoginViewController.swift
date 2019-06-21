@@ -52,7 +52,6 @@ class LoginViewController: UIViewController {
     }
     @IBAction func loginButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, emailTextField.text?.count != 0, passwordTextField.text?.count != 0 else {
-            print("Enter email and password")
             let alertController = UIAlertController(title: "Ingrese email y contraseña", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alertController.addAction(okAction)

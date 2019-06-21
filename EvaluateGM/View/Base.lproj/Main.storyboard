@@ -291,7 +291,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pp5-nG-JwK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Empleados" id="kmI-ao-ArT"/>
+                    <navigationItem key="navigationItem" title="Empleados" id="kmI-ao-ArT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="aQs-il-RJi">
+                            <connections>
+                                <action selector="editButtonTapped:" destination="lXS-n4-aoe" id="BAF-fU-yQO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="employeesTableView" destination="xuW-kY-SlU" id="2yr-aD-HON"/>
                         <outlet property="segmentedControl" destination="Atu-mK-pmF" id="JSd-RR-5M2"/>
