@@ -59,17 +59,17 @@ class LoginViewController: UIViewController {
             return
         }
         self.user = User(email: email, password: password, isSupervisor: supervisorSwith.isOn)
-        performSegue(withIdentifier: "toEmployees", sender: nil)
+        performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
     }
     
     //Functions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "toEmployees") {
-            guard let navigationController = segue.destination as? UINavigationController, let employeesTableViewController = navigationController.viewControllers.first as? EmployeesTableViewController else {
+        if(segue.identifier == "toEmployeesTableVC") {
+            guard let navigationController = segue.destination as? UINavigationController, let employeeTableViewController = navigationController.viewControllers.first as? EmployeeTableViewController else {
                 print("Cant set login user")
                 return
             }
-            employeesTableViewController.user = self.user
+            employeeTableViewController.user = self.user
         }
     }
     

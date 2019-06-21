@@ -192,7 +192,7 @@
                         <outlet property="loginButton" destination="stA-l3-VFa" id="93U-cD-Na6"/>
                         <outlet property="passwordTextField" destination="b8X-Dh-maq" id="4rE-60-btV"/>
                         <outlet property="supervisorSwith" destination="ynR-vT-n3E" id="7pS-Ep-Yrv"/>
-                        <segue destination="f9k-1h-nb1" kind="show" identifier="toEmployees" id="CRT-vk-yC9"/>
+                        <segue destination="lfY-ed-WdW" kind="show" identifier="toEmployeesTableVC" id="bR3-nI-laZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -205,107 +205,88 @@
             <point key="canvasLocation" x="99" y="20"/>
         </scene>
         <!--Empleados-->
-        <scene sceneID="5Td-6s-FxZ">
+        <scene sceneID="TE9-t8-2hO">
             <objects>
-                <viewController id="lXS-n4-aoe" customClass="EmployeesTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="av7-cd-hz7">
+                <tableViewController id="alj-NI-77M" customClass="EmployeeTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mrz-To-xXG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="qWt-nR-g0c">
-                                <rect key="frame" x="0.0" y="116" width="414" height="620"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Atu-mK-pmF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="29"/>
-                                        <segments>
-                                            <segment title="Montacarga"/>
-                                            <segment title="Reparto"/>
-                                            <segment title="A. Almacén "/>
-                                            <segment title="A. Reparto"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="segmentedControlChange:" destination="lXS-n4-aoe" eventType="valueChanged" id="OQ3-py-ZkP"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xuW-kY-SlU">
-                                        <rect key="frame" x="0.0" y="29" width="414" height="591"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmployeeCell" rowHeight="94" id="hec-S6-Vsq" customClass="EmployeeTableViewCell" customModule="EvaluateGM" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="94"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hec-S6-Vsq" id="gjV-0t-hK0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="93.666666666666671"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rjX-zy-ANl">
-                                                            <rect key="frame" x="20" y="16" width="380.33333333333331" height="60"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="IJS-cd-pT1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="60" id="CUr-Om-sc6"/>
-                                                                        <constraint firstAttribute="height" constant="60" id="cE5-Jg-mFO"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="o0S-CA-VeH">
-                                                                    <rect key="frame" x="68" y="10" width="312.33333333333331" height="40.333333333333336"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PrimerNombre SegundoNombre Apellido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1V-CE-9sy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="312.33333333333331" height="20.333333333333332"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.6 ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6U-mX-VSA">
-                                                                            <rect key="frame" x="0.0" y="23.333333333333336" width="37" height="17"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                        </stackView>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="averageLabel" destination="L6U-mX-VSA" id="VQ5-42-AlD"/>
-                                                    <outlet property="nameLabel" destination="H1V-CE-9sy" id="N4D-LO-Kvf"/>
-                                                    <outlet property="photoImageView" destination="IJS-cd-pT1" id="Isd-0j-W23"/>
-                                                    <segue destination="xPI-lw-LLJ" kind="show" identifier="toDetailViewController" id="JWD-QN-8tQ"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="qWt-nR-g0c" firstAttribute="top" secondItem="pp5-nG-JwK" secondAttribute="top" id="Dem-Kg-YhB"/>
-                            <constraint firstItem="qWt-nR-g0c" firstAttribute="trailing" secondItem="pp5-nG-JwK" secondAttribute="trailing" id="c8x-o8-5Zh"/>
-                            <constraint firstAttribute="bottom" secondItem="qWt-nR-g0c" secondAttribute="bottom" id="ocS-5n-ycF"/>
-                            <constraint firstItem="qWt-nR-g0c" firstAttribute="leading" secondItem="pp5-nG-JwK" secondAttribute="leading" id="vrc-th-43L"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="pp5-nG-JwK"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Empleados" id="kmI-ao-ArT">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="aQs-il-RJi">
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="employeeCell" rowHeight="94" id="g36-Ai-zRf" customClass="EmployeeCell" customModule="EvaluateGM" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="94"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g36-Ai-zRf" id="DOC-3H-JgI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="93.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tn2-aY-ydH">
+                                            <rect key="frame" x="20" y="16" width="380.33333333333331" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="hgF-la-ObJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="DsS-oa-oj0"/>
+                                                        <constraint firstAttribute="height" constant="60" id="mhZ-zX-Yxh"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-pk-Dak">
+                                                    <rect key="frame" x="68" y="8.3333333333333321" width="312.33333333333331" height="43.666666666666671"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PrimerNombre SegundoNombre Apellido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owD-hU-4Ok">
+                                                            <rect key="frame" x="0.0" y="0.0" width="312.33333333333331" height="20.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.6 ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75w-Gg-e8d">
+                                                            <rect key="frame" x="0.0" y="23.333333333333336" width="44" height="20.333333333333336"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="averageLabel" destination="75w-Gg-e8d" id="YQq-nf-klI"/>
+                                    <outlet property="nameLabel" destination="owD-hU-4Ok" id="Msh-xl-Dik"/>
+                                    <outlet property="photoImageView" destination="hgF-la-ObJ" id="IwI-5Q-SFk"/>
+                                    <segue destination="xPI-lw-LLJ" kind="show" identifier="toDetailVC" id="8H4-nt-uh6"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="alj-NI-77M" id="49t-lT-4YK"/>
+                            <outlet property="delegate" destination="alj-NI-77M" id="lT1-6s-f3z"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Empleados" id="YJD-ak-xI9">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="utw-6w-1oj">
+                            <rect key="frame" x="31.666666666666657" y="7" width="351" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Montacarga"/>
+                                <segment title="Reparto"/>
+                                <segment title="A.Almacén"/>
+                                <segment title="A.Reparto"/>
+                            </segments>
                             <connections>
-                                <action selector="editButtonTapped:" destination="lXS-n4-aoe" id="BAF-fU-yQO"/>
+                                <action selector="segmentedControlChange:" destination="alj-NI-77M" eventType="valueChanged" id="iZh-8f-6eX"/>
                             </connections>
-                        </barButtonItem>
+                        </segmentedControl>
                     </navigationItem>
                     <connections>
-                        <outlet property="employeesTableView" destination="xuW-kY-SlU" id="2yr-aD-HON"/>
-                        <outlet property="segmentedControl" destination="Atu-mK-pmF" id="JSd-RR-5M2"/>
+                        <outlet property="segmentedControl" destination="utw-6w-1oj" id="q2j-cn-5Jd"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ubK-Ai-PrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="znx-ga-ov6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741" y="20"/>
+            <point key="canvasLocation" x="1728" y="20"/>
         </scene>
         <!--Detail Table View Controller-->
         <scene sceneID="l58-cQ-U6k">
@@ -400,22 +381,22 @@
             <point key="canvasLocation" x="2526" y="20"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="uD5-Kc-k0G">
+        <scene sceneID="Lcw-OT-0uC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f9k-1h-nb1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lfY-ed-WdW" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="SpV-oE-51Z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="V0w-4g-PdV">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="lXS-n4-aoe" kind="relationship" relationship="rootViewController" id="Khd-mj-6hd"/>
+                        <segue destination="alj-NI-77M" kind="relationship" relationship="rootViewController" id="vxh-Uv-DJ5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cnb-VZ-X69" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWt-0j-cDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="20"/>
+            <point key="canvasLocation" x="910" y="20"/>
         </scene>
     </scenes>
     <resources>

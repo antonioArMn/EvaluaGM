@@ -1,18 +1,17 @@
 //
-//  EmployeesTableViewController.swift
+//  EmployeeTableViewController.swift
 //  EvaluateGM
 //
-//  Created by José Antonio Arellano Mendoza on 6/19/19.
+//  Created by José Antonio Arellano Mendoza on 6/21/19.
 //  Copyright © 2019 José Antonio Arellano Mendoza. All rights reserved.
 //
 
 import UIKit
 
-class EmployeesTableViewController: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class EmployeeTableViewController: UITableViewController {
     
     //Outlets
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var employeesTableView: UITableView!
     
     //Properties
     var user: User?
@@ -43,46 +42,112 @@ class EmployeesTableViewController: UIViewController, UINavigationControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigationBar()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         guard let user = user else{
-            print("User no received in employees")
+            print("User no received in EmployeeTableVC")
             return
         }
-        print("User received in employees: \(user)")
+        print("User received in EmployeeTableVC: \(user)")
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return employees.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //Constraints
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-        employeesTableView.translatesAutoresizingMaskIntoConstraints = false
-        employeesTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        employeesTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        //1. Creamos la celda del mismo tipo que definimos en el storyboard: "ArticleCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "employeeCell", for: indexPath) as! EmployeeCell
+        
+        //2. Get the appropiate model object to display on the cell
+        let employee = employees[indexPath.row]
+        
+        //3. Configuramos celda
+        cell.photoImageView.image = employee.photo
+        cell.nameLabel.text = employee.name + " " + employee.lastName
+        cell.averageLabel.text = "\(employee.average) ★"
+        
+        //Reorder control button
+        cell.showsReorderControl = true
+        
+        //4. Retornamos celda
+        return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        employeesTableView.reloadData()
-        employeesTableView.dataSource = self
-        employeesTableView.delegate = self
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84.0
+    }
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
     
     //Actions
-    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-        guard let isSupervisor = user?.isSupervisor else {
-            return
-        }
-        if(isSupervisor) {
-            let alertController = UIAlertController(title: "Permisos para editar empleados sólo para Recursos Humanos.", message: nil, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        } else {
-            let tableViewEditingMode = employeesTableView.isEditing
-            employeesTableView.setEditing(!tableViewEditingMode, animated: true)
-        }
-    }
-    
-    @IBAction func segmentedControlChange(_ sender: Any) {
+    @IBAction func segmentedControlChange(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             employees = [
@@ -187,55 +252,23 @@ class EmployeesTableViewController: UIViewController, UINavigationControllerDele
         default:
             print("Other case")
         }
-        employeesTableView.reloadData()
+        tableView.reloadData()
     }
     
-    //Methods
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "toDetailViewController") {
-            guard let detalTableViewController = segue.destination as? DetailTableViewController, let index = employeesTableView.indexPathForSelectedRow?.row else {
-                print("Cant set employee")
-                return
-            }
-            detalTableViewController.employee = employees[index]
-        }
-    }
-    
+    //Functions
     func setupNavigationBar() {
         //Add search controller
         let searchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = searchController
     }
     
-    //Data Source
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employees.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //1. Creamos la celda del mismo tipo que definimos en el storyboard: "ArticleCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeCell", for: indexPath) as! EmployeeTableViewCell
-        
-        //2. Get the appropiate model object to display on the cell
-        let employee = employees[indexPath.row]
-        
-        //3. Configuramos celda
-        cell.photoImageView.image = employee.photo
-        cell.nameLabel.text = employee.name + " " + employee.lastName
-        cell.averageLabel.text = "\(employee.average) ★"
-        
-        //Reorder control button
-        cell.showsReorderControl = true
-        
-        //4. Retornamos celda
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 84.0
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "toDetailVC") {
+            guard let detailTableViewController = segue.destination as? DetailTableViewController, let index = tableView.indexPathForSelectedRow?.row else {
+                print("Cant set employee")
+                return
+            }
+            detailTableViewController.employee = employees[index]
+        }
     }
 }
