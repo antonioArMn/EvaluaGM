@@ -1,20 +1,19 @@
 //
-//  EmployeeTableViewCell.swift
+//  EmployeeCell.swift
 //  EvaluateGM
 //
-//  Created by José Antonio Arellano Mendoza on 6/19/19.
+//  Created by José Antonio Arellano Mendoza on 6/21/19.
 //  Copyright © 2019 José Antonio Arellano Mendoza. All rights reserved.
 //
 
 import UIKit
 
-class EmployeeTableViewCell: UITableViewCell {
+class EmployeeCell: UITableViewCell {
     
     //Outlets
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var averageLabel: UILabel!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

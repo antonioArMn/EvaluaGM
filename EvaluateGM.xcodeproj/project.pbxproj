@@ -17,9 +17,9 @@
 		F7A8EC2422B1C5E300B23BBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EC2322B1C5E300B23BBA /* LoginViewController.swift */; };
 		F7A8EC2622B20A0800B23BBA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EC2522B20A0800B23BBA /* User.swift */; };
 		F7A8EC2822B20AC300B23BBA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EC2722B20AC300B23BBA /* Employee.swift */; };
-		F7DC5DD322BAB1A700DD7FD7 /* EmployeesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DD222BAB1A700DD7FD7 /* EmployeesTableViewController.swift */; };
-		F7DC5DD522BABDA400DD7FD7 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DD422BABDA400DD7FD7 /* EmployeeTableViewCell.swift */; };
 		F7DC5DD922BC912100DD7FD7 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */; };
+		F7DC5DDD22BD398400DD7FD7 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */; };
+		F7DC5DDF22BD3AE300DD7FD7 /* EmployeeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +56,9 @@
 		F7A8EC2322B1C5E300B23BBA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F7A8EC2522B20A0800B23BBA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F7A8EC2722B20AC300B23BBA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
-		F7DC5DD222BAB1A700DD7FD7 /* EmployeesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesTableViewController.swift; sourceTree = "<group>"; };
-		F7DC5DD422BABDA400DD7FD7 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
+		F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,9 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				F7A8EC2322B1C5E300B23BBA /* LoginViewController.swift */,
-				F7DC5DD222BAB1A700DD7FD7 /* EmployeesTableViewController.swift */,
-				F7DC5DD422BABDA400DD7FD7 /* EmployeeTableViewCell.swift */,
 				F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */,
+				F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */,
+				F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -315,10 +315,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A8EC2422B1C5E300B23BBA /* LoginViewController.swift in Sources */,
-				F7DC5DD522BABDA400DD7FD7 /* EmployeeTableViewCell.swift in Sources */,
 				F7A8EC2822B20AC300B23BBA /* Employee.swift in Sources */,
+				F7DC5DDF22BD3AE300DD7FD7 /* EmployeeTableViewController.swift in Sources */,
+				F7DC5DDD22BD398400DD7FD7 /* EmployeeCell.swift in Sources */,
 				F7DC5DD922BC912100DD7FD7 /* DetailTableViewController.swift in Sources */,
-				F7DC5DD322BAB1A700DD7FD7 /* EmployeesTableViewController.swift in Sources */,
 				F73ED53322B4089C004EB83B /* UITextField+Empty.swift in Sources */,
 				F7A8EBF222B1A2D700B23BBA /* AppDelegate.swift in Sources */,
 				F7A8EC2622B20A0800B23BBA /* User.swift in Sources */,
