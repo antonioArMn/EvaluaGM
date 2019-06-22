@@ -78,16 +78,16 @@ class DetailTableViewController: UITableViewController {
         imageView.image = image
         nameLabel.text = name + " " + lastName
         typeLabel.text = type
-        averageLabel.text = "\(average) ★"
+        averageLabel.text = "\(String(format: "%.2f", average)) ★"
         
         guard let currentEmployee = employee else {
             return
         }
-        cultureAttatchment.text = "\(currentEmployee.cultureAttatchment)"
-        dpoImplementation.text = "\(currentEmployee.dpoImplementation)"
-        attitude.text = "\(currentEmployee.attitude)"
-        trainingAdaptation.text = "\(currentEmployee.trainingAdaptation)"
-        performance.text = "\(currentEmployee.performance)"
+        cultureAttatchment.text = "\(String(format: "%.2f", currentEmployee.cultureAttatchment))"
+        dpoImplementation.text = "\(String(format: "%.2f", currentEmployee.dpoImplementation))"
+        attitude.text = "\(String(format: "%.2f", currentEmployee.attitude))"
+        trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.trainingAdaptation))"
+        performance.text = "\(String(format: "%.2f", currentEmployee.performance))"
     }
 
     // MARK: - Table view data source

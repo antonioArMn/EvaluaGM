@@ -267,7 +267,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Empleados" id="YJD-ak-xI9">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="utw-6w-1oj">
-                            <rect key="frame" x="31.666666666666657" y="7" width="351" height="30"/>
+                            <rect key="frame" x="12" y="7" width="348" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Montacarga"/>
@@ -279,6 +279,7 @@
                                 <action selector="segmentedControlChange:" destination="alj-NI-77M" eventType="valueChanged" id="iZh-8f-6eX"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mPw-Ug-Ydl"/>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="utw-6w-1oj" id="q2j-cn-5Jd"/>
@@ -322,8 +323,8 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre Apellido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6d-EP-FE6">
-                                                            <rect key="frame" x="22.666666666666657" y="193" width="145" height="24"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <rect key="frame" x="16.666666666666657" y="193" width="157" height="24"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -367,7 +368,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Lineamientos Generales" id="Zwh-g2-mcZ">
+                            <tableViewSection headerTitle=" " id="Zwh-g2-mcZ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="E9g-Es-dGs">
                                         <rect key="frame" x="0.0" y="328" width="414" height="44"/>
@@ -511,7 +512,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Lineamientos Particulares" id="GFi-Go-K8w">
+                            <tableViewSection headerTitle=" " id="GFi-Go-K8w">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="nbo-iS-MSv" detailTextLabel="97g-cO-8e9" style="IBUITableViewCellStyleValue1" id="spa-ip-dz9">
                                         <rect key="frame" x="0.0" y="576" width="414" height="44"/>

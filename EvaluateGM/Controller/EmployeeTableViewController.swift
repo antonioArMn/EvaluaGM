@@ -85,7 +85,7 @@ class EmployeeTableViewController: UITableViewController {
         //3. Configuramos celda
         cell.photoImageView.image = employee.photo
         cell.nameLabel.text = employee.name + " " + employee.lastName
-        cell.averageLabel.text = "\(employee.average) ★"
+        cell.averageLabel.text = "\(String(format: "%.2f", employee.average)) ★" 
         
         //Reorder control button
         cell.showsReorderControl = true
