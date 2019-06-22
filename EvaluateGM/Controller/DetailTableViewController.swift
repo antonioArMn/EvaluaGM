@@ -26,6 +26,7 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var attitude: UILabel!
     @IBOutlet weak var trainingAdaptation: UILabel!
     @IBOutlet weak var performance: UILabel!
+    @IBOutlet weak var cameraButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +44,15 @@ class DetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    //Actions
+    @IBAction func cameraButtonTapped(_ sender: UIButton) {
+        print("Camera button tapped")
+    }
+    
     //Methods
     func setupUI() {
+        tableView.allowsSelection = false
+        
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.heightAnchor.constraint(equalToConstant: ((firstSectionView.frame.height - firstSectionStackView.frame.height) / 2) + imageView.frame.height / 2).isActive = true
     
@@ -53,6 +61,15 @@ class DetailTableViewController: UITableViewController {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.size.height / 2
         imageView.clipsToBounds = true
+        
+        cameraButton.translatesAutoresizingMaskIntoConstraints = false
+        cameraButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10).isActive = true
+        cameraButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10).isActive = true
+        cameraButton.layer.borderWidth = 1.0
+        cameraButton.layer.masksToBounds = false
+        cameraButton.layer.borderColor = UIColor.white.cgColor
+        cameraButton.layer.cornerRadius = cameraButton.frame.size.height / 2
+        cameraButton.clipsToBounds = true
         
         guard let image = employee?.photo, let name = employee?.name, let lastName = employee?.lastName, let average = employee?.average , let type = employee?.typeString else {
             return
