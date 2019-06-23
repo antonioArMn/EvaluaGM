@@ -10,6 +10,15 @@ import UIKit
 
 class EvaluateTableViewController: UITableViewController {
     
+    //Outlets
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var averageLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var firstSectionView: UIView!
+    @IBOutlet weak var firstSectionStackView: UIStackView!
+    
     //Properties
     var employee: Employee?
 
@@ -20,6 +29,7 @@ class EvaluateTableViewController: UITableViewController {
             return
         }
         print("Employee received in evaluateVC: \(employee)")
+        setupUI()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,13 +38,36 @@ class EvaluateTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    //Methods
+    //Actions
+    
+    //Setup segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         employee = Employee(name: "Alejandro", lastName: "Bosch Maldonado", type: .warehouseAssistant)
     }
+    
+    //Methods
+    func setupUI() {
+        tableView.allowsSelection = false
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.heightAnchor.constraint(equalToConstant: ((firstSectionView.frame.height - firstSectionStackView.frame.height) / 2) + imageView.frame.height / 2).isActive = true
+        imageView.layer.borderWidth = 6.0
+        imageView.layer.masksToBounds = false
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.cornerRadius = imageView.frame.size.height / 2
+        imageView.clipsToBounds = true
+        
+        guard let currentEmployee = employee else {
+            return
+        }
+        imageView.image = currentEmployee.photo
+        nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
+        typeLabel.text = currentEmployee.typeString
+        averageLabel.text = "\(String(format: "%.2f", currentEmployee.average)) ★"
+    }
 
     // MARK: - Table view data source
-
+    /*
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
@@ -44,6 +77,7 @@ class EvaluateTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
+    */
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

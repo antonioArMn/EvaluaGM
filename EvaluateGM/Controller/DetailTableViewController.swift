@@ -111,7 +111,7 @@ class DetailTableViewController: UITableViewController {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.heightAnchor.constraint(equalToConstant: ((firstSectionView.frame.height - firstSectionStackView.frame.height) / 2) + imageView.frame.height / 2).isActive = true
     
-        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderWidth = 6.0
         imageView.layer.masksToBounds = false
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.size.height / 2
