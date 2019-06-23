@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 struct Employee {
+    
+    //General properties
     var photo: UIImage = UIImage(named: "User")!
     let name: String
     let lastName: String
@@ -19,9 +21,19 @@ struct Employee {
     var attitude: Float = 0.0
     var trainingAdaptation: Float = 0.0
     var performance: Float = 0.0
+    var specificGrades: [Float] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     var average: Float {
-        return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance) / 5
+        switch type {
+        case .forklift, .warehouseAssistant:
+            return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 10
+        case .delivery, .deliveryAssistant:
+            return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 11
+        default:
+            return 10
+        }
     }
+    
+    //Specific properties
     var typeString: String {
         switch type {
         case .forklift:

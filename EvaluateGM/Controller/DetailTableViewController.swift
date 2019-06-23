@@ -35,11 +35,18 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let employee = employee else{
+        guard var employee = employee else{
             print("Emplyee no received in detailVC")
             return
         }
         print("Employee received in detalVC: \(employee)")
+        print(employee.specificGrades)
+        employee.specificGrades[0] = 9.0
+        employee.specificGrades[1] = 8.5
+        employee.specificGrades[2] = 9.3
+        employee.specificGrades[3] = 7.9
+        employee.specificGrades[4] = 8.2
+        print(employee.specificGrades)
         setupUI()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
@@ -95,25 +102,19 @@ class DetailTableViewController: UITableViewController {
     func shouldHideSection(section: Int) -> Bool {
         switch section {
         case 2:
-            if(hideMontacarga) {
+            if(employee?.type != Type.forklift) {
                 return true
             } else {
                 return false
             }
         case 3:
-            if(hideReparto) {
+            if(employee?.type != Type.delivery && employee?.type != Type.deliveryAssistant) {
                 return true
             } else {
                 return false
             }
         case 4:
-            if(hideAAlmacen) {
-                return true
-            } else {
-                return false
-            }
-        case 5:
-            if(hideAReparto) {
+            if(employee?.type != Type.warehouseAssistant) {
                 return true
             } else {
                 return false
