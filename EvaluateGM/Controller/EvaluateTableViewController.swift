@@ -15,7 +15,7 @@ class EvaluateTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard var employee = employee else{
+        guard let employee = employee else{
             print("Employee no received in detailVC")
             return
         }
@@ -26,6 +26,11 @@ class EvaluateTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    //Methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        employee = Employee(name: "Alejandro", lastName: "Bosch Maldonado", type: .warehouseAssistant)
     }
 
     // MARK: - Table view data source

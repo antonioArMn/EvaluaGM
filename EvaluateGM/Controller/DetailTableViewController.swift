@@ -68,9 +68,19 @@ class DetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        setupUI()
+    }
+    
     //Actions
     @IBAction func save(unwindSegue: UIStoryboardSegue) {
-        
+        guard let evaluateViewController = unwindSegue.source as? EvaluateTableViewController else {
+            print("Cant receive evaluated employee")
+            return
+        }
+        employee = evaluateViewController.employee
     }
     @IBAction func cancel(unwindSegue: UIStoryboardSegue) {
         
@@ -81,6 +91,17 @@ class DetailTableViewController: UITableViewController {
     }
     @IBAction func evaluateButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "toEvaluateVC", sender: nil)
+    }
+    
+    //Setup Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "toEvaluateVC") {
+            guard let navigationController = segue.destination as? UINavigationController, let evaluateTableViewController = navigationController.viewControllers.first as? EvaluateTableViewController else {
+                print("Cant set employee")
+                return
+            }
+            evaluateTableViewController.employee = employee
+        }
     }
     
     //Methods
@@ -163,16 +184,6 @@ class DetailTableViewController: UITableViewController {
             }
         default:
             return false
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "toEvaluateVC") {
-            guard let navigationController = segue.destination as? UINavigationController, let evaluateTableViewController = navigationController.viewControllers.first as? EvaluateTableViewController else {
-                print("Cant set employee")
-                return
-            }
-            evaluateTableViewController.employee = employee
         }
     }
 
