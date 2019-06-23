@@ -13,12 +13,8 @@ class DetailTableViewController: UITableViewController {
     //Properties
     var employee: Employee?
     var imagePicker: ImagePicker!
-    let hideMontacarga: Bool = false
-    let hideReparto: Bool = true
-    let hideAAlmacen: Bool = true
-    let hideAReparto: Bool = true
     
-    //Outlets
+    //General Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -33,20 +29,35 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var performance: UILabel!
     @IBOutlet weak var cameraButton: UIButton!
     
+    //Specific Outlets (Forklift)
+    @IBOutlet weak var forkliftSecurity: UILabel!
+    @IBOutlet weak var forkliftSecurityRoutine: UILabel!
+    @IBOutlet weak var forkliftChecklist: UILabel!
+    @IBOutlet weak var forkliftDownloadUpload: UILabel!
+    @IBOutlet weak var forkliftExampleToFollow: UILabel!
+    
+    //Specific Outlets (Delivery & DeliveryAssistant)
+    @IBOutlet weak var deliverySecurity: UILabel!
+    @IBOutlet weak var deliveryTraining: UILabel!
+    @IBOutlet weak var deliveryKnowSegment: UILabel!
+    @IBOutlet weak var deliveryKnowledgeIndicators: UILabel!
+    @IBOutlet weak var deliveryAssists: UILabel!
+    @IBOutlet weak var deliveryTeamwork: UILabel!
+    
+    //Specific Outlets (WarehouseAssistant)
+    @IBOutlet weak var warehouseSecurity: UILabel!
+    @IBOutlet weak var warehouseSelectionGoal: UILabel!
+    @IBOutlet weak var warehousePickeoGoal: UILabel!
+    @IBOutlet weak var warehouseJobGoals: UILabel!
+    @IBOutlet weak var warehouseExampleToFollow: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard var employee = employee else{
-            print("Emplyee no received in detailVC")
+        guard let employee = employee else{
+            print("Employee no received in detailVC")
             return
         }
         print("Employee received in detalVC: \(employee)")
-        print(employee.specificGrades)
-        employee.specificGrades[0] = 9.0
-        employee.specificGrades[1] = 8.5
-        employee.specificGrades[2] = 9.3
-        employee.specificGrades[3] = 7.9
-        employee.specificGrades[4] = 8.2
-        print(employee.specificGrades)
         setupUI()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
@@ -58,9 +69,18 @@ class DetailTableViewController: UITableViewController {
     }
     
     //Actions
+    @IBAction func save(unwindSegue: UIStoryboardSegue) {
+        
+    }
+    @IBAction func cancel(unwindSegue: UIStoryboardSegue) {
+        
+    }
     @IBAction func cameraButtonTapped(_ sender: UIButton) {
         print("Camera button tapped")
         self.imagePicker.present(from: sender)
+    }
+    @IBAction func evaluateButtonTapped(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toEvaluateVC", sender: nil)
     }
     
     //Methods
@@ -97,6 +117,28 @@ class DetailTableViewController: UITableViewController {
         attitude.text = "\(String(format: "%.2f", currentEmployee.attitude))"
         trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.trainingAdaptation))"
         performance.text = "\(String(format: "%.2f", currentEmployee.performance))"
+        switch currentEmployee.type {
+        case .forklift:
+            forkliftSecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
+            forkliftSecurityRoutine.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
+            forkliftChecklist.text = "\(String(format: "%.2f", currentEmployee.specificGrades[2]))"
+            forkliftDownloadUpload.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
+            forkliftExampleToFollow.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
+            
+        case .delivery, .deliveryAssistant:
+            deliverySecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
+            deliveryTraining.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
+            deliveryKnowSegment.text = "\(String(format: "%.2f", currentEmployee.specificGrades[2]))"
+            deliveryKnowledgeIndicators.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
+            deliveryAssists.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
+            deliveryTeamwork.text = "\(String(format: "%.2f", currentEmployee.specificGrades[5]))"
+        case .warehouseAssistant:
+            warehouseSecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
+            warehouseSelectionGoal.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
+            warehousePickeoGoal.text = "\(String(format: "%.2f", currentEmployee.specificGrades[2]))"
+            warehouseJobGoals.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
+            warehouseExampleToFollow.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
+        }
     }
     
     func shouldHideSection(section: Int) -> Bool {
@@ -121,6 +163,16 @@ class DetailTableViewController: UITableViewController {
             }
         default:
             return false
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "toEvaluateVC") {
+            guard let navigationController = segue.destination as? UINavigationController, let evaluateTableViewController = navigationController.viewControllers.first as? EvaluateTableViewController else {
+                print("Cant set employee")
+                return
+            }
+            evaluateTableViewController.employee = employee
         }
     }
 

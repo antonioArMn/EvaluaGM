@@ -28,8 +28,6 @@ struct Employee {
             return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 10
         case .delivery, .deliveryAssistant:
             return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 11
-        default:
-            return 10
         }
     }
     
