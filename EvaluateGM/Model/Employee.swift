@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct Employee {
-    let photo: UIImage
+    var photo: UIImage = UIImage(named: "User")!
     let name: String
     let lastName: String
     let type: Type
@@ -35,8 +35,7 @@ struct Employee {
         }
     }
 
-    init(photo: UIImage, name: String, lastName: String, type: Type) {
-        self.photo = photo
+    init(name: String, lastName: String, type: Type) {
         self.name = name
         self.lastName = lastName
         self.type = type

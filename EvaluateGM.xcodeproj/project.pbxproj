@@ -17,9 +17,14 @@
 		F7A8EC2422B1C5E300B23BBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EC2322B1C5E300B23BBA /* LoginViewController.swift */; };
 		F7A8EC2622B20A0800B23BBA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EC2522B20A0800B23BBA /* User.swift */; };
 		F7A8EC2822B20AC300B23BBA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EC2722B20AC300B23BBA /* Employee.swift */; };
+		F7BF800B22BE926900DD5719 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BF800A22BE926900DD5719 /* ImagePicker.swift */; };
 		F7DC5DD922BC912100DD7FD7 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */; };
 		F7DC5DDD22BD398400DD7FD7 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */; };
 		F7DC5DDF22BD3AE300DD7FD7 /* EmployeeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */; };
+		F7F33A7C22BF2908002F2878 /* ForkliftEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F33A7B22BF2908002F2878 /* ForkliftEmployee.swift */; };
+		F7F33A7E22BF2A82002F2878 /* DeliveryEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F33A7D22BF2A82002F2878 /* DeliveryEmployee.swift */; };
+		F7F33A8022BF2BDA002F2878 /* WarehouseAssistantEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F33A7F22BF2BDA002F2878 /* WarehouseAssistantEmployee.swift */; };
+		F7F33A8222BF2CC9002F2878 /* DeliveryAssistantEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F33A8122BF2CC9002F2878 /* DeliveryAssistantEmployee.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +61,14 @@
 		F7A8EC2322B1C5E300B23BBA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F7A8EC2522B20A0800B23BBA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F7A8EC2722B20AC300B23BBA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		F7BF800A22BE926900DD5719 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewController.swift; sourceTree = "<group>"; };
+		F7F33A7B22BF2908002F2878 /* ForkliftEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForkliftEmployee.swift; sourceTree = "<group>"; };
+		F7F33A7D22BF2A82002F2878 /* DeliveryEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryEmployee.swift; sourceTree = "<group>"; };
+		F7F33A7F22BF2BDA002F2878 /* WarehouseAssistantEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarehouseAssistantEmployee.swift; sourceTree = "<group>"; };
+		F7F33A8122BF2CC9002F2878 /* DeliveryAssistantEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAssistantEmployee.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +162,11 @@
 			children = (
 				F7A8EC2522B20A0800B23BBA /* User.swift */,
 				F7A8EC2722B20AC300B23BBA /* Employee.swift */,
+				F7BF800A22BE926900DD5719 /* ImagePicker.swift */,
+				F7F33A7B22BF2908002F2878 /* ForkliftEmployee.swift */,
+				F7F33A7D22BF2A82002F2878 /* DeliveryEmployee.swift */,
+				F7F33A7F22BF2BDA002F2878 /* WarehouseAssistantEmployee.swift */,
+				F7F33A8122BF2CC9002F2878 /* DeliveryAssistantEmployee.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,9 +331,14 @@
 			files = (
 				F7A8EC2422B1C5E300B23BBA /* LoginViewController.swift in Sources */,
 				F7A8EC2822B20AC300B23BBA /* Employee.swift in Sources */,
+				F7F33A7C22BF2908002F2878 /* ForkliftEmployee.swift in Sources */,
 				F7DC5DDF22BD3AE300DD7FD7 /* EmployeeTableViewController.swift in Sources */,
+				F7F33A7E22BF2A82002F2878 /* DeliveryEmployee.swift in Sources */,
+				F7F33A8222BF2CC9002F2878 /* DeliveryAssistantEmployee.swift in Sources */,
+				F7BF800B22BE926900DD5719 /* ImagePicker.swift in Sources */,
 				F7DC5DDD22BD398400DD7FD7 /* EmployeeCell.swift in Sources */,
 				F7DC5DD922BC912100DD7FD7 /* DetailTableViewController.swift in Sources */,
+				F7F33A8022BF2BDA002F2878 /* WarehouseAssistantEmployee.swift in Sources */,
 				F73ED53322B4089C004EB83B /* UITextField+Empty.swift in Sources */,
 				F7A8EBF222B1A2D700B23BBA /* AppDelegate.swift in Sources */,
 				F7A8EC2622B20A0800B23BBA /* User.swift in Sources */,

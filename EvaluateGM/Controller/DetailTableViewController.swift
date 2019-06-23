@@ -12,6 +12,11 @@ class DetailTableViewController: UITableViewController {
     
     //Properties
     var employee: Employee?
+    var imagePicker: ImagePicker!
+    let hideMontacarga: Bool = false
+    let hideReparto: Bool = true
+    let hideAAlmacen: Bool = true
+    let hideAReparto: Bool = true
     
     //Outlets
     @IBOutlet weak var imageView: UIImageView!
@@ -36,6 +41,7 @@ class DetailTableViewController: UITableViewController {
         }
         print("Employee received in detalVC: \(employee)")
         setupUI()
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -47,6 +53,7 @@ class DetailTableViewController: UITableViewController {
     //Actions
     @IBAction func cameraButtonTapped(_ sender: UIButton) {
         print("Camera button tapped")
+        self.imagePicker.present(from: sender)
     }
     
     //Methods
@@ -71,27 +78,84 @@ class DetailTableViewController: UITableViewController {
         cameraButton.layer.cornerRadius = cameraButton.frame.size.height / 2
         cameraButton.clipsToBounds = true
         
-        guard let image = employee?.photo, let name = employee?.name, let lastName = employee?.lastName, let average = employee?.average , let type = employee?.typeString else {
-            return
-        }
-        
-        imageView.image = image
-        nameLabel.text = name + " " + lastName
-        typeLabel.text = type
-        averageLabel.text = "\(String(format: "%.2f", average)) ★"
-        
         guard let currentEmployee = employee else {
             return
         }
+        imageView.image = currentEmployee.photo
+        nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
+        typeLabel.text = currentEmployee.typeString
+        averageLabel.text = "\(String(format: "%.2f", currentEmployee.average)) ★"
         cultureAttatchment.text = "\(String(format: "%.2f", currentEmployee.cultureAttatchment))"
         dpoImplementation.text = "\(String(format: "%.2f", currentEmployee.dpoImplementation))"
         attitude.text = "\(String(format: "%.2f", currentEmployee.attitude))"
         trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.trainingAdaptation))"
         performance.text = "\(String(format: "%.2f", currentEmployee.performance))"
     }
+    
+    func shouldHideSection(section: Int) -> Bool {
+        switch section {
+        case 2:
+            if(hideMontacarga) {
+                return true
+            } else {
+                return false
+            }
+        case 3:
+            if(hideReparto) {
+                return true
+            } else {
+                return false
+            }
+        case 4:
+            if(hideAAlmacen) {
+                return true
+            } else {
+                return false
+            }
+        case 5:
+            if(hideAReparto) {
+                return true
+            } else {
+                return false
+            }
+        default:
+            return false
+        }
+    }
 
     // MARK: - Table view data source
 
+    //Hide headers
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return shouldHideSection(section: section) ? 0.1 : super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    //Hide footers
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return shouldHideSection(section: section) ? 0.1 : super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    //Hide rows in hidden sections
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return shouldHideSection(section: indexPath.section) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
+    //Hide header text
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if(shouldHideSection(section: section)) {
+            let headerView = view as! UITableViewHeaderFooterView
+            headerView.textLabel!.textColor = UIColor.clear
+        }
+    }
+    
+    //Hide footer text
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if(shouldHideSection(section: section)) {
+            let footerView = view as! UITableViewHeaderFooterView
+            footerView.textLabel!.textColor = UIColor.clear
+        }
+    }
+    
     /*
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -159,4 +223,15 @@ class DetailTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension DetailTableViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        guard let imageSelected = image else {
+            return
+        }
+        employee?.photo = imageSelected
+        setupUI()
+        //self.imageView.image = image
+    }
 }
