@@ -54,10 +54,30 @@ class EvaluateTableViewController: UITableViewController {
         let roundedValue = round(cultureAttatchmentSlider.value * 2) / 2
         cultureAttatchmentLabel.text = "\(String(format: "%.1f", roundedValue))"
     }
+    @IBAction func dpoImplementationSliderChange(_ sender: UISlider) {
+        let roundedValue = round(dpoImplementationSlider.value * 2) / 2
+        dpoImplementationLabel.text = "\(String(format: "%.1f", roundedValue))"
+    }
+    @IBAction func attitudeSliderChange(_ sender: UISlider) {
+        let roundedValue = round(attitudeSlider.value * 2) / 2
+        attitudeLabel.text = "\(String(format: "%.1f", roundedValue))"
+    }
+    @IBAction func trainingAdaptation(_ sender: UISlider) {
+        let roundedValue = round(trainingAdaptationSlider.value * 2) / 2
+        traningAdaptationLabel.text = "\(String(format: "%.1f", roundedValue))"
+    }
+    @IBAction func performanceSliderChange(_ sender: UISlider) {
+        let roundedValue = round(performanceSlider.value * 2) / 2
+        performanceLabel.text = "\(String(format: "%.1f", roundedValue))"
+    }
     
     //Setup segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        employee = Employee(name: "Alejandro", lastName: "Bosch Maldonado", type: .warehouseAssistant)
+        employee?.cultureAttatchment = (cultureAttatchmentLabel.text! as NSString).floatValue
+        employee?.dpoImplementation = (dpoImplementationLabel.text! as NSString).floatValue
+        employee?.attitude = (attitudeLabel.text! as NSString).floatValue
+        employee?.trainingAdaptation = (traningAdaptationLabel.text! as NSString).floatValue
+        employee?.performance = (performanceLabel.text! as NSString).floatValue
     }
     
     //Methods
@@ -73,6 +93,10 @@ class EvaluateTableViewController: UITableViewController {
         imageView.clipsToBounds = true
         
         cultureAttatchmentLabel.text = "\(String(format: "%.1f", cultureAttatchmentSlider.value))"
+        dpoImplementationLabel.text = "\(String(format: "%.1f", dpoImplementationSlider.value))"
+        attitudeLabel.text = "\(String(format: "%.1f", attitudeSlider.value))"
+        traningAdaptationLabel.text = "\(String(format: "%.1f", trainingAdaptationSlider.value))"
+        performanceLabel.text = "\(String(format: "%.1f", performanceSlider.value))"
         
         guard let currentEmployee = employee else {
             return

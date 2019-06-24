@@ -276,6 +276,7 @@
                             <outlet property="delegate" destination="alj-NI-77M" id="lT1-6s-f3z"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Empleados" id="YJD-ak-xI9">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="utw-6w-1oj">
                             <rect key="frame" x="12" y="7" width="348" height="30"/>
@@ -620,19 +621,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rutina de seguridad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paB-dt-kS8">
-                                                    <rect key="frame" x="20" y="11.333333333333336" width="153" height="21"/>
+                                                    <rect key="frame" x="8" y="11.333333333333336" width="153" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYJ-Lu-cbV">
-                                                    <rect key="frame" x="369" y="11.333333333333336" width="25" height="21"/>
+                                                    <rect key="frame" x="381" y="11.333333333333336" width="25" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↑" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9K-dp-oxu">
-                                                    <rect key="frame" x="354" y="11.333333333333336" width="15" height="21"/>
+                                                    <rect key="frame" x="366" y="11.333333333333336" width="15" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1376,6 +1377,9 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dly-gb-eaP">
                                                     <rect key="frame" x="43" y="42" width="328" height="31"/>
+                                                    <connections>
+                                                        <action selector="dpoImplementationSliderChange:" destination="9Hq-Iv-CWy" eventType="valueChanged" id="LzD-bd-NmD"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -1426,6 +1430,9 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="DV7-YJ-gXv">
                                                     <rect key="frame" x="43" y="42" width="328" height="31"/>
+                                                    <connections>
+                                                        <action selector="attitudeSliderChange:" destination="9Hq-Iv-CWy" eventType="valueChanged" id="SVw-uh-ulW"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -1476,6 +1483,9 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="19o-Bd-o7e">
                                                     <rect key="frame" x="43" y="42" width="328" height="31"/>
+                                                    <connections>
+                                                        <action selector="trainingAdaptation:" destination="9Hq-Iv-CWy" eventType="valueChanged" id="G9r-3i-hGT"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -1524,8 +1534,11 @@
                                                     <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZF6-CY-l7f">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZF6-CY-l7f">
                                                     <rect key="frame" x="31" y="44.666666666666664" width="352" height="30.999999999999993"/>
+                                                    <connections>
+                                                        <action selector="performanceSliderChange:" destination="9Hq-Iv-CWy" eventType="valueChanged" id="FL0-Gd-yKg"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
