@@ -19,6 +19,17 @@ class EvaluateTableViewController: UITableViewController {
     @IBOutlet weak var firstSectionView: UIView!
     @IBOutlet weak var firstSectionStackView: UIStackView!
     
+    @IBOutlet weak var cultureAttatchmentLabel: UILabel!
+    @IBOutlet weak var cultureAttatchmentSlider: UISlider!
+    @IBOutlet weak var dpoImplementationLabel: UILabel!
+    @IBOutlet weak var dpoImplementationSlider: UISlider!
+    @IBOutlet weak var attitudeLabel: UILabel!
+    @IBOutlet weak var attitudeSlider: UISlider!
+    @IBOutlet weak var traningAdaptationLabel: UILabel!
+    @IBOutlet weak var trainingAdaptationSlider: UISlider!
+    @IBOutlet weak var performanceLabel: UILabel!
+    @IBOutlet weak var performanceSlider: UISlider!
+    
     //Properties
     var employee: Employee?
 
@@ -39,6 +50,10 @@ class EvaluateTableViewController: UITableViewController {
     }
     
     //Actions
+    @IBAction func cultureAttatchmentSliderChange(_ sender: UISlider) {
+        let roundedValue = round(cultureAttatchmentSlider.value * 2) / 2
+        cultureAttatchmentLabel.text = "\(String(format: "%.1f", roundedValue))"
+    }
     
     //Setup segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,6 +71,8 @@ class EvaluateTableViewController: UITableViewController {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.size.height / 2
         imageView.clipsToBounds = true
+        
+        cultureAttatchmentLabel.text = "\(String(format: "%.1f", cultureAttatchmentSlider.value))"
         
         guard let currentEmployee = employee else {
             return
