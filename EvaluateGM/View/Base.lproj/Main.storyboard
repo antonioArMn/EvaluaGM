@@ -276,7 +276,13 @@
                             <outlet property="delegate" destination="alj-NI-77M" id="lT1-6s-f3z"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jXQ-SK-zYX"/>
+                        <barButtonItem title="Cerrar sesión" id="POx-fa-8l9">
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="1ny-Jk-52p"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Empleados" id="YJD-ak-xI9">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="utw-6w-1oj">
                             <rect key="frame" x="12" y="7" width="348" height="30"/>
@@ -293,6 +299,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="mPw-Ug-Ydl"/>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="segmentedControl" destination="utw-6w-1oj" id="q2j-cn-5Jd"/>
                     </connections>
@@ -1169,6 +1176,13 @@
                             <outlet property="delegate" destination="xPI-lw-LLJ" id="PWb-Ug-3uk"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="aA0-A6-xJN"/>
+                        <barButtonItem title="Cerrar sesión" id="emo-R8-sXX">
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="iee-NC-Tri"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Resumen" largeTitleDisplayMode="never" id="yPo-aG-NQc">
                         <barButtonItem key="rightBarButtonItem" title="Evaluar" id="4ZX-EM-xmT">
                             <connections>
@@ -1176,6 +1190,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attitude" destination="NSd-yN-pTj" id="S14-u4-5mv"/>
                         <outlet property="averageLabel" destination="6fp-LM-ngP" id="AUM-07-x24"/>

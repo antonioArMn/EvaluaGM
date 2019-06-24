@@ -260,6 +260,7 @@ class EmployeeTableViewController: UITableViewController {
         //Add search controller
         let searchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = searchController
+        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -268,6 +269,7 @@ class EmployeeTableViewController: UITableViewController {
                 print("Cant set employee")
                 return
             }
+            detailTableViewController.user = user
             detailTableViewController.employee = employees[index]
         }
     }

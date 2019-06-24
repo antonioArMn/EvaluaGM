@@ -11,6 +11,7 @@ import UIKit
 class DetailTableViewController: UITableViewController {
     
     //Properties
+    var user: User?
     var employee: Employee?
     var imagePicker: ImagePicker!
     
@@ -96,11 +97,21 @@ class DetailTableViewController: UITableViewController {
     //Setup Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "toEvaluateVC") {
-            guard let navigationController = segue.destination as? UINavigationController, let evaluateTableViewController = navigationController.viewControllers.first as? EvaluateTableViewController else {
-                print("Cant set employee")
+            guard let user = user  else {
                 return
             }
-            evaluateTableViewController.employee = employee
+            if(user.isSupervisor) {
+                guard let navigationController = segue.destination as? UINavigationController, let evaluateTableViewController = navigationController.viewControllers.first as? EvaluateTableViewController else {
+                    print("Cant set employee")
+                    return
+                }
+                evaluateTableViewController.employee = employee
+            } else {
+                let alertController = UIAlertController(title: "Acción sólo válida para usuarios supervisores.", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
