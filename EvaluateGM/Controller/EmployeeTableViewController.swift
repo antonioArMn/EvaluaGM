@@ -111,7 +111,7 @@ class EmployeeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 84.0
+        return 64.0
     }
 
     /*

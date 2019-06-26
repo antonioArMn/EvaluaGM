@@ -220,19 +220,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="93.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tn2-aY-ydH">
-                                            <rect key="frame" x="20" y="16" width="380.33333333333331" height="60"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tn2-aY-ydH">
+                                            <rect key="frame" x="20" y="25" width="360.33333333333331" height="43.666666666666657"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="hgF-la-ObJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                    <rect key="frame" x="0.0" y="2" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="DsS-oa-oj0"/>
-                                                        <constraint firstAttribute="height" constant="60" id="mhZ-zX-Yxh"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Lp2-xg-2bG"/>
+                                                        <constraint firstAttribute="height" constant="40" id="P3b-xU-a6M"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-pk-Dak">
-                                                    <rect key="frame" x="68" y="8.3333333333333321" width="312.33333333333331" height="43.666666666666671"/>
+                                                    <rect key="frame" x="48" y="0.0" width="312.33333333333331" height="43.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PrimerNombre SegundoNombre Apellido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owD-hU-4Ok">
                                                             <rect key="frame" x="0.0" y="0.0" width="312.33333333333331" height="20.333333333333332"/>
@@ -262,6 +261,10 @@
                                             </subviews>
                                         </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tn2-aY-ydH" firstAttribute="centerY" secondItem="DOC-3H-JgI" secondAttribute="centerY" id="0rT-Lr-i4V"/>
+                                        <constraint firstItem="tn2-aY-ydH" firstAttribute="leading" secondItem="DOC-3H-JgI" secondAttribute="leadingMargin" id="L4Y-Ud-MQ7"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="averageLabel" destination="75w-Gg-e8d" id="YQq-nf-klI"/>
