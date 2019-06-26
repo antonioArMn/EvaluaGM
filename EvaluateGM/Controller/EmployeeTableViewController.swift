@@ -15,6 +15,8 @@ class EmployeeTableViewController: UITableViewController {
     
     //Properties
     var user: User?
+    var sections = [Section]()
+    
     var employees: [Employee] = [
         Employee(name: "Christian", lastName: "Montacarga Aranda", type: .forklift),
         Employee(name: "Pablo", lastName: "Corona Flores", type: .forklift),
@@ -22,7 +24,7 @@ class EmployeeTableViewController: UITableViewController {
         Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .forklift),
         Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .forklift),
         Employee(name: "José", lastName: "Herrera Ruiz", type: .forklift),
-        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .forklift),
+        Employee(name: "Cesar Alberto", lastName: "Bazán Caballero", type: .forklift),
         Employee(name: "Abraham", lastName: "Curiel Reyes", type: .forklift),
         Employee(name: "Andrés", lastName: "Guardado Hernández", type: .forklift),
         Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .forklift),
@@ -53,6 +55,12 @@ class EmployeeTableViewController: UITableViewController {
             return
         }
         print("User received in EmployeeTableVC: \(user)")
+        
+        orderEmployees(employeesArray: employees)
+        
+        //let groupedDictionary = Dictionary(grouping: employees, by: {String($0.name.prefix(1))})
+        //let keys = groupedDictionary.keys.sorted()
+        //sections = keys.map{Section(letter: $0, employees: groupedDictionary[$0]!.sorted(by: <))}
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -64,13 +72,11 @@ class EmployeeTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return employees.count
+        return sections[section].employees.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,11 +85,17 @@ class EmployeeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "employeeCell", for: indexPath) as! EmployeeCell
         
         //2. Get the appropiate model object to display on the cell
-        let employee = employees[indexPath.row]
+        //let section = sections[indexPath.section]
+        //let employee = section.employees[indexPath.row]
+        
+        //let section = sections[indexPath.section]
+        let employee = sections[indexPath.section].employees[indexPath.row]
+        
+        //let employee = employees[indexPath.row]
         
         //3. Configuramos celda
         cell.photoImageView.image = employee.photo
-        cell.nameLabel.text = employee.name + " " + employee.lastName
+        cell.nameLabel.text = "\(employee.name) \(employee.lastName)"
         cell.averageLabel.text = "\(String(format: "%.2f", employee.average)) ★" 
         
         //Reorder control button
@@ -91,6 +103,14 @@ class EmployeeTableViewController: UITableViewController {
         
         //4. Retornamos celda
         return cell
+    }
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sections.map{$0.letter}
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].letter
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -174,6 +194,7 @@ class EmployeeTableViewController: UITableViewController {
                 Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .forklift),
                 Employee(name: "Jorge", lastName: "Ruiz Frias", type: .forklift)
             ]
+            orderEmployees(employeesArray: employees)
         case 1:
             employees = [
                 Employee(name: "Christian", lastName: "Reparto Aranda", type: .delivery),
@@ -199,6 +220,7 @@ class EmployeeTableViewController: UITableViewController {
                 Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .delivery),
                 Employee(name: "Jorge", lastName: "Ruiz Frias", type: .delivery)
             ]
+            orderEmployees(employeesArray: employees)
         case 2:
             employees = [
                 Employee(name: "Christian", lastName: "A.Almacen Aranda", type: .warehouseAssistant),
@@ -224,6 +246,7 @@ class EmployeeTableViewController: UITableViewController {
                 Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .warehouseAssistant),
                 Employee(name: "Jorge", lastName: "Ruiz Frias", type: .warehouseAssistant)
             ]
+            orderEmployees(employeesArray: employees)
         case 3:
             employees = [
                 Employee(name: "Christian", lastName: "A.Reparto Aranda", type: .deliveryAssistant),
@@ -249,6 +272,7 @@ class EmployeeTableViewController: UITableViewController {
                 Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .deliveryAssistant),
                 Employee(name: "Jorge", lastName: "Ruiz Frias", type: .deliveryAssistant)
             ]
+            orderEmployees(employeesArray: employees)
         default:
             print("Other case")
         }
@@ -263,14 +287,27 @@ class EmployeeTableViewController: UITableViewController {
         navigationController?.setToolbarHidden(false, animated: true)
     }
     
+    func orderEmployees(employeesArray: [Employee]) {
+        let groupedDictionary = Dictionary(grouping: employeesArray, by: {String($0.name.prefix(1))})
+        let keys = groupedDictionary.keys.sorted()
+        sections = keys.map{Section(letter: $0, employees: groupedDictionary[$0]!.sorted(by: <))}
+    }
+    
+    //let employee = employees[indexPath.row]
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "toDetailVC") {
-            guard let detailTableViewController = segue.destination as? DetailTableViewController, let index = tableView.indexPathForSelectedRow?.row else {
+            guard let detailTableViewController = segue.destination as? DetailTableViewController, let section = tableView.indexPathForSelectedRow?.section, let row = tableView.indexPathForSelectedRow?.row else {
                 print("Cant set employee")
                 return
             }
             detailTableViewController.user = user
-            detailTableViewController.employee = employees[index]
+            detailTableViewController.employee = sections[section].employees[row]
         }
     }
+}
+
+//For order employees alphabetically
+struct Section {
+    let letter: String
+    let employees: [Employee]
 }

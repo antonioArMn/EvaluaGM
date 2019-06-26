@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Employee {
+struct Employee: Equatable, Comparable {
     
     //General properties
     var photo: UIImage = UIImage(named: "User")!
@@ -44,11 +44,21 @@ struct Employee {
             return "Asistente de reparto"
         }
     }
-
+    
+    //Constructor
     init(name: String, lastName: String, type: Type) {
         self.name = name
         self.lastName = lastName
         self.type = type
+    }
+    
+    //Methods
+    static func ==(lhs: Employee, rhs: Employee) -> Bool {
+        return lhs.name == rhs.name && lhs.lastName == rhs.lastName
+    }
+    
+    static func < (lhs: Employee, rhs: Employee) -> Bool {
+        return lhs.name < rhs.name
     }
 }
 
