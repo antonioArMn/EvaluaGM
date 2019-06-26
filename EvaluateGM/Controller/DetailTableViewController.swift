@@ -164,6 +164,7 @@ class DetailTableViewController: UITableViewController {
             deliveryKnowledgeIndicators.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
             deliveryAssists.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
             deliveryTeamwork.text = "\(String(format: "%.2f", currentEmployee.specificGrades[5]))"
+            
         case .warehouseAssistant:
             warehouseSecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
             warehouseSelectionGoal.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
