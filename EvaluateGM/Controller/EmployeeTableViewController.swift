@@ -16,6 +16,7 @@ class EmployeeTableViewController: UITableViewController {
     //Properties
     var user: User?
     var sections = [Section]()
+    var filteredEmployees = [Employee]()
     
     var employees: [Employee] = [
         Employee(name: "Christian", lastName: "Montacarga Aranda", type: .forklift),
@@ -44,23 +45,15 @@ class EmployeeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
-        
         tableView.dataSource = self
         tableView.delegate = self
-        
         guard let user = user else{
             print("User no received in EmployeeTableVC")
             return
         }
         print("User received in EmployeeTableVC: \(user)")
-        
         orderEmployees(employeesArray: employees)
-        
-        //let groupedDictionary = Dictionary(grouping: employees, by: {String($0.name.prefix(1))})
-        //let keys = groupedDictionary.keys.sorted()
-        //sections = keys.map{Section(letter: $0, employees: groupedDictionary[$0]!.sorted(by: <))}
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -283,8 +276,13 @@ class EmployeeTableViewController: UITableViewController {
     func setupNavigationBar() {
         //Add search controller
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Buscar"
+        searchController.searchBar.setValue("Cancelar", forKey: "_cancelButtonText")
         navigationItem.searchController = searchController
+        definesPresentationContext = true
         navigationController?.setToolbarHidden(false, animated: true)
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func orderEmployees(employeesArray: [Employee]) {
@@ -303,6 +301,12 @@ class EmployeeTableViewController: UITableViewController {
             detailTableViewController.user = user
             detailTableViewController.employee = sections[section].employees[row]
         }
+    }
+}
+
+extension EmployeeTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //TODO
     }
 }
 
