@@ -15,6 +15,7 @@ class EvaluateTableViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var averageLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var evaluationAverage: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var firstSectionView: UIView!
     @IBOutlet weak var firstSectionStackView: UIStackView!
@@ -92,92 +93,113 @@ class EvaluateTableViewController: UITableViewController {
     @IBAction func cultureAttatchmentSliderChange(_ sender: UISlider) {
         let roundedValue = round(cultureAttatchmentSlider.value * 2) / 2
         cultureAttatchmentLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func dpoImplementationSliderChange(_ sender: UISlider) {
         let roundedValue = round(dpoImplementationSlider.value * 2) / 2
         dpoImplementationLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func attitudeSliderChange(_ sender: UISlider) {
         let roundedValue = round(attitudeSlider.value * 2) / 2
         attitudeLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func trainingAdaptation(_ sender: UISlider) {
         let roundedValue = round(trainingAdaptationSlider.value * 2) / 2
         traningAdaptationLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func performanceSliderChange(_ sender: UISlider) {
         let roundedValue = round(performanceSlider.value * 2) / 2
         performanceLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     
     //Specific Actions (Forklift)
     @IBAction func forkliftSecuritySliderChange(_ sender: UISlider) {
         let roundedValue = round(forkliftSecuritySlider.value * 2) / 2
         forkliftSecurityLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func forkliftSecurityRoutineSliderChange(_ sender: UISlider) {
         let roundedValue = round(forkliftSecurityRoutineSlider.value * 2) / 2
         forkliftSecurityRoutineLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func forkliftChecklistSliderChange(_ sender: UISlider) {
         let roundedValue = round(forkliftChecklistSlider.value * 2) / 2
         forkliftChecklistLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func forkliftDownloadUploadSliderChange(_ sender: UISlider) {
         let roundedValue = round(forkliftDownloadUploadSlider.value * 2) / 2
         forkliftDownloadUploadLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func forkliftExampleToFollowSliderChange(_ sender: UISlider) {
         let roundedValue = round(forkliftExampleToFollowSlider.value * 2) / 2
         forkliftExampleToFollowLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     
     //Specific Actions (Delivery & DeliveryAssistant)
     @IBAction func deliverySecuritySliderChange(_ sender: UISlider) {
         let roundedValue = round(deliverySecuritySlider.value * 2) / 2
         deliverySecurityLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func deliveryTrainingSliderChange(_ sender: UISlider) {
         let roundedValue = round(deliveryTrainingSlider.value * 2) / 2
         deliveryTrainingLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func deliveryKnowSegmentSliderChange(_ sender: Any) {
         let roundedValue = round(deliveryKnowSegmentSlider.value * 2) / 2
         deliveryKnowSegmentLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func deliveryKnowledgeIndicatorsSliderChange(_ sender: UISlider) {
         let roundedValue = round(deliveryKnowledgeIndicatorsSlider.value * 2) / 2
         deliveryKnowledgeIndicatorsLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func deliveryAssistsSliderChange(_ sender: UISlider) {
         let roundedValue = round(deliveryAssistsSlider.value * 2) / 2
         deliveryAssistsLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func deliveryTeamworkSliderChange(_ sender: UISlider) {
         let roundedValue = round(deliveryTeamworkSlider.value * 2) / 2
         deliveryTeamworkLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     
     //Specific Actions (WarehouseAssistant)
     @IBAction func warehouseSecuritySliderChange(_ sender: UISlider) {
         let roundedValue = round(warehouseSecuritySlider.value * 2) / 2
         warehouseSecurityLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func warehouseSelectionGoalSliderChange(_ sender: UISlider) {
         let roundedValue = round(warehouseSelectionGoalSlider.value * 2) / 2
         warehouseSelectionGoalLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func warehousePickeoGoalSliderChange(_ sender: UISlider) {
         let roundedValue = round(warehousePickeoGoalSlider.value * 2) / 2
         warehousePickeoGoalLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func warehouseJobGoalsSliderChange(_ sender: UISlider) {
         let roundedValue = round(warehouseJobGoalsSlider.value * 2) / 2
         warehouseJobGoalsLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     @IBAction func warehouseExampleToFollowSliderChange(_ sender: UISlider) {
         let roundedValue = round(warehouseExampleToFollowSlider.value * 2) / 2
         warehouseExampleToFollowLabel.text = "\(String(format: "%.1f", roundedValue))"
+        getEvaluationAverage()
     }
     
     //Setup segue
@@ -190,10 +212,10 @@ class EvaluateTableViewController: UITableViewController {
         if (employee?.type == .forklift) {
             //Forklift
             employee?.specificGrades[0] = (forkliftSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[1] = (forkliftSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[2] = (forkliftSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[3] = (forkliftSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[4] = (forkliftSecurityLabel.text! as NSString).floatValue
+            employee?.specificGrades[1] = (forkliftSecurityRoutineLabel.text! as NSString).floatValue
+            employee?.specificGrades[2] = (forkliftChecklistLabel.text! as NSString).floatValue
+            employee?.specificGrades[3] = (forkliftDownloadUploadLabel.text! as NSString).floatValue
+            employee?.specificGrades[4] = (forkliftExampleToFollowLabel.text! as NSString).floatValue
         } else if (employee?.type == .delivery || employee?.type == .deliveryAssistant) {
             //Delivery & DeliveryAssistant
             employee?.specificGrades[0] = (deliverySecurityLabel.text! as NSString).floatValue
@@ -205,10 +227,10 @@ class EvaluateTableViewController: UITableViewController {
         } else {
             //Warehouse
             employee?.specificGrades[0] = (warehouseSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[0] = (warehouseSelectionGoalLabel.text! as NSString).floatValue
-            employee?.specificGrades[0] = (warehousePickeoGoalLabel.text! as NSString).floatValue
-            employee?.specificGrades[0] = (warehouseJobGoalsLabel.text! as NSString).floatValue
-            employee?.specificGrades[0] = (warehouseExampleToFollowLabel.text! as NSString).floatValue
+            employee?.specificGrades[1] = (warehouseSelectionGoalLabel.text! as NSString).floatValue
+            employee?.specificGrades[2] = (warehousePickeoGoalLabel.text! as NSString).floatValue
+            employee?.specificGrades[3] = (warehouseJobGoalsLabel.text! as NSString).floatValue
+            employee?.specificGrades[4] = (warehouseExampleToFollowLabel.text! as NSString).floatValue
         }
     }
     
@@ -249,6 +271,8 @@ class EvaluateTableViewController: UITableViewController {
         warehouseJobGoalsLabel.text = "\(String(format: "%.1f", warehouseJobGoalsSlider.value))"
         warehouseExampleToFollowLabel.text = "\(String(format: "%.1f", warehouseExampleToFollowSlider.value))"
         
+        getEvaluationAverage()
+        
         guard let currentEmployee = employee else {
             return
         }
@@ -281,6 +305,22 @@ class EvaluateTableViewController: UITableViewController {
         default:
             return false
         }
+    }
+    
+    func getEvaluationAverage() {
+        var evalAverage: Float = 0.0
+        guard let currentEmployee = employee else {
+           return
+        }
+        switch currentEmployee.type {
+        case .forklift:
+            evalAverage = (cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (forkliftSecurityLabel.text! as NSString).floatValue + (forkliftSecurityRoutineLabel.text! as NSString).floatValue + (forkliftChecklistLabel.text! as NSString).floatValue + (forkliftDownloadUploadLabel.text! as NSString).floatValue + (forkliftExampleToFollowLabel.text! as NSString).floatValue
+        case .delivery, .deliveryAssistant:
+            evalAverage = (cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (deliverySecurityLabel.text! as NSString).floatValue + (deliveryTrainingLabel.text! as NSString).floatValue + (deliveryKnowSegmentLabel.text! as NSString).floatValue + (deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue + (deliveryAssistsLabel.text! as NSString).floatValue + (deliveryTeamworkLabel.text! as NSString).floatValue
+        case .warehouseAssistant:
+            evalAverage = (cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (warehouseSecurityLabel.text! as NSString).floatValue + (warehouseSelectionGoalLabel.text! as NSString).floatValue + (warehousePickeoGoalLabel.text! as NSString).floatValue + (warehouseJobGoalsLabel.text! as NSString).floatValue + (warehouseExampleToFollowLabel.text! as NSString).floatValue
+        }
+        evaluationAverage.text = "Promedio de evaluación: \(String(format: "%.2f", evalAverage))"
     }
     
     //TableView Configuration
