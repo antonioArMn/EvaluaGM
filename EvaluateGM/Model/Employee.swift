@@ -16,12 +16,68 @@ struct Employee: Equatable, Comparable {
     let name: String
     let lastName: String
     let type: Type
-    var cultureAttatchment: Float = 0.0
-    var dpoImplementation: Float = 0.0
-    var attitude: Float = 0.0
-    var trainingAdaptation: Float = 0.0
-    var performance: Float = 0.0
-    var specificGrades: [Float] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    
+    //General qualifications
+    var cultureAttatchmentArray: [Float] = []
+    var cultureAttatchment: Float {
+        if cultureAttatchmentArray.count == 0 {
+            return 0.0
+        } else {
+            return cultureAttatchmentArray.reduce(0, +) / Float(cultureAttatchmentArray.count)
+        }
+    }
+    
+    var dpoImplementationArray: [Float] = []
+    var dpoImplementation: Float {
+        if cultureAttatchmentArray.count == 0 {
+            return 0.0
+        } else {
+            return dpoImplementationArray.reduce(0, +) / Float(dpoImplementationArray.count)
+        }
+    }
+    
+    var attitudeArray: [Float] = []
+    var attitude: Float {
+        if attitudeArray.count == 0 {
+            return 0.0
+        } else {
+            return attitudeArray.reduce(0, +) / Float(attitudeArray.count)
+        }
+    }
+    
+    var trainingAdaptationArray: [Float] = []
+    var trainingAdaptation: Float {
+        if trainingAdaptationArray.count == 0 {
+            return 0.0
+        } else {
+            return trainingAdaptationArray.reduce(0, +) / Float(trainingAdaptationArray.count)
+        }
+    }
+    
+    var performanceArray: [Float] = []
+    var performance: Float {
+        if performanceArray.count == 0 {
+            return 0.0
+        } else {
+            return performanceArray.reduce(0, +) / Float(performanceArray.count)
+        }
+    }
+    
+    var specificGradesArrays: [[Float]] = [[], [], [], [], [], []]
+    var specificGrades: [Float] {
+        //Any index
+        if specificGradesArrays[0].count == 0 {
+            return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        } else {
+            switch type {
+            case .forklift, .warehouseAssistant:
+                return [specificGradesArrays[0].reduce(0, +) / Float(specificGradesArrays[0].count), specificGradesArrays[1].reduce(0, +) / Float(specificGradesArrays[1].count), specificGradesArrays[2].reduce(0, +) / Float(specificGradesArrays[2].count), specificGradesArrays[3].reduce(0, +) / Float(specificGradesArrays[3].count), specificGradesArrays[4].reduce(0, +) / Float(specificGradesArrays[4].count)]
+            case .delivery, .deliveryAssistant:
+                return [specificGradesArrays[0].reduce(0, +) / Float(specificGradesArrays[0].count), specificGradesArrays[1].reduce(0, +) / Float(specificGradesArrays[1].count), specificGradesArrays[2].reduce(0, +) / Float(specificGradesArrays[2].count), specificGradesArrays[3].reduce(0, +) / Float(specificGradesArrays[3].count), specificGradesArrays[4].reduce(0, +) / Float(specificGradesArrays[4].count), specificGradesArrays[5].reduce(0, +) / Float(specificGradesArrays[5].count)]
+            }
+        }
+    }
+    
     var average: Float {
         switch type {
         case .forklift, .warehouseAssistant:

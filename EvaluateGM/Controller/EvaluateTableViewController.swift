@@ -204,33 +204,33 @@ class EvaluateTableViewController: UITableViewController {
     
     //Setup segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        employee?.cultureAttatchment = (cultureAttatchmentLabel.text! as NSString).floatValue
-        employee?.dpoImplementation = (dpoImplementationLabel.text! as NSString).floatValue
-        employee?.attitude = (attitudeLabel.text! as NSString).floatValue
-        employee?.trainingAdaptation = (traningAdaptationLabel.text! as NSString).floatValue
-        employee?.performance = (performanceLabel.text! as NSString).floatValue
+        employee?.cultureAttatchmentArray.append((cultureAttatchmentLabel.text! as NSString).floatValue)
+        employee?.dpoImplementationArray.append((dpoImplementationLabel.text! as NSString).floatValue)
+        employee?.attitudeArray.append((attitudeLabel.text! as NSString).floatValue)
+        employee?.trainingAdaptationArray.append((traningAdaptationLabel.text! as NSString).floatValue)
+        employee?.performanceArray.append((performanceLabel.text! as NSString).floatValue)
         if (employee?.type == .forklift) {
             //Forklift
-            employee?.specificGrades[0] = (forkliftSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[1] = (forkliftSecurityRoutineLabel.text! as NSString).floatValue
-            employee?.specificGrades[2] = (forkliftChecklistLabel.text! as NSString).floatValue
-            employee?.specificGrades[3] = (forkliftDownloadUploadLabel.text! as NSString).floatValue
-            employee?.specificGrades[4] = (forkliftExampleToFollowLabel.text! as NSString).floatValue
+            employee?.specificGradesArrays[0].append((forkliftSecurityLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[1].append((forkliftSecurityRoutineLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[2].append((forkliftChecklistLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[3].append((forkliftDownloadUploadLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[4].append((forkliftExampleToFollowLabel.text! as NSString).floatValue)
         } else if (employee?.type == .delivery || employee?.type == .deliveryAssistant) {
             //Delivery & DeliveryAssistant
-            employee?.specificGrades[0] = (deliverySecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[1] = (deliveryTrainingLabel.text! as NSString).floatValue
-            employee?.specificGrades[2] = (deliveryKnowSegmentLabel.text! as NSString).floatValue
-            employee?.specificGrades[3] = (deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue
-            employee?.specificGrades[4] = (deliveryAssistsLabel.text! as NSString).floatValue
-            employee?.specificGrades[5] = (deliveryTeamworkLabel.text! as NSString).floatValue
+            employee?.specificGradesArrays[0].append((deliverySecurityLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[1].append((deliveryTrainingLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[2].append((deliveryKnowSegmentLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[3].append((deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[4].append((deliveryAssistsLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[5].append((deliveryTeamworkLabel.text! as NSString).floatValue)
         } else {
             //Warehouse
-            employee?.specificGrades[0] = (warehouseSecurityLabel.text! as NSString).floatValue
-            employee?.specificGrades[1] = (warehouseSelectionGoalLabel.text! as NSString).floatValue
-            employee?.specificGrades[2] = (warehousePickeoGoalLabel.text! as NSString).floatValue
-            employee?.specificGrades[3] = (warehouseJobGoalsLabel.text! as NSString).floatValue
-            employee?.specificGrades[4] = (warehouseExampleToFollowLabel.text! as NSString).floatValue
+            employee?.specificGradesArrays[0].append((warehouseSecurityLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[1].append((warehouseSelectionGoalLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[2].append((warehousePickeoGoalLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[3].append((warehouseJobGoalsLabel.text! as NSString).floatValue)
+            employee?.specificGradesArrays[4].append((warehouseExampleToFollowLabel.text! as NSString).floatValue)
         }
     }
     
