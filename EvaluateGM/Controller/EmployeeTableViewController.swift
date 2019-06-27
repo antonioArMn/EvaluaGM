@@ -313,32 +313,24 @@ extension EmployeeTableViewController: DetailTableViewControllerDelegate {
                 }
             }
         case .delivery:
-            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+            for (index, oldEmployee) in deliveryEmployees.enumerated() {
                 if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
                     deliveryEmployees[index] = employee
                 }
             }
         case .warehouseAssistant:
-            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+            for (index, oldEmployee) in warehouseAssistantEmployees.enumerated() {
                 if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
                     warehouseAssistantEmployees[index] = employee
                 }
             }
         case .deliveryAssistant:
-            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+            for (index, oldEmployee) in deliveryAssistantEmployees.enumerated() {
                 if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
                     deliveryAssistantEmployees[index] = employee
                 }
             }
         }
-        
-//        for (sectionIndex, oldSection) in sections.enumerated() {
-//            for (rowIndex, oldRow) in oldSection.employees.enumerated() {
-//                if (oldRow.name == employee.name && oldRow.lastName == employee.lastName) {
-//                    sections[sectionIndex].employees[rowIndex] = employee
-//                }
-//            }
-//        }
     }
 }
 

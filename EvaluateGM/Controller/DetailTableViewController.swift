@@ -316,6 +316,8 @@ extension DetailTableViewController: ImagePickerDelegate {
         }
         employee?.photo = imageSelected
         setupUI()
-        //self.imageView.image = image
+        if let employee = employee {
+            delegate?.update(employee)
+        }
     }
 }
