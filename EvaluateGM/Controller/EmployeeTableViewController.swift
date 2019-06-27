@@ -16,9 +16,9 @@ class EmployeeTableViewController: UITableViewController {
     //Properties
     var user: User?
     var sections = [Section]()
-    var filteredEmployees = [Employee]()
+    var filteredEmployees = [Employee]() //For search bar
     
-    var employees: [Employee] = [
+    var forkliftEmployees: [Employee] = [
         Employee(name: "Christian", lastName: "Montacarga Aranda", type: .forklift),
         Employee(name: "Pablo", lastName: "Corona Flores", type: .forklift),
         Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .forklift),
@@ -43,6 +43,81 @@ class EmployeeTableViewController: UITableViewController {
         Employee(name: "Jorge", lastName: "Ruiz Frias", type: .forklift)
     ]
     
+    var deliveryEmployees: [Employee] = [
+        Employee(name: "Christian", lastName: "Reparto Aranda", type: .delivery),
+        Employee(name: "Pablo", lastName: "Corona Flores", type: .delivery),
+        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .delivery),
+        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .delivery),
+        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .delivery),
+        Employee(name: "José", lastName: "Herrera Ruiz", type: .delivery),
+        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .delivery),
+        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .delivery),
+        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .delivery),
+        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .delivery),
+        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .delivery),
+        Employee(name: "Diego", lastName: "Reyes Miranda", type: .delivery),
+        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .delivery),
+        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .delivery),
+        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .delivery),
+        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .delivery),
+        Employee(name: "Aaron", lastName: "Solis Pérez", type: .delivery),
+        Employee(name: "Samuel", lastName: "Pérez García", type: .delivery),
+        Employee(name: "Josué", lastName: "Corona Flores", type: .delivery),
+        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .delivery),
+        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .delivery),
+        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .delivery)
+    ]
+    
+    var warehouseAssistantEmployees: [Employee] = [
+        Employee(name: "Christian", lastName: "A.Almacen Aranda", type: .warehouseAssistant),
+        Employee(name: "Pablo", lastName: "Corona Flores", type: .warehouseAssistant),
+        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .warehouseAssistant),
+        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .warehouseAssistant),
+        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .warehouseAssistant),
+        Employee(name: "José", lastName: "Herrera Ruiz", type: .warehouseAssistant),
+        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .warehouseAssistant),
+        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .warehouseAssistant),
+        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .warehouseAssistant),
+        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .warehouseAssistant),
+        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .warehouseAssistant),
+        Employee(name: "Diego", lastName: "Reyes Miranda", type: .warehouseAssistant),
+        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .warehouseAssistant),
+        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .warehouseAssistant),
+        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .warehouseAssistant),
+        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .warehouseAssistant),
+        Employee(name: "Aaron", lastName: "Solis Pérez", type: .warehouseAssistant),
+        Employee(name: "Samuel", lastName: "Pérez García", type: .warehouseAssistant),
+        Employee(name: "Josué", lastName: "Corona Flores", type: .warehouseAssistant),
+        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .warehouseAssistant),
+        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .warehouseAssistant),
+        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .warehouseAssistant)
+    ]
+    
+    var deliveryAssistantEmployees: [Employee] = [
+        Employee(name: "Christian", lastName: "A.Reparto Aranda", type: .deliveryAssistant),
+        Employee(name: "Pablo", lastName: "Corona Flores", type: .deliveryAssistant),
+        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .deliveryAssistant),
+        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .deliveryAssistant),
+        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .deliveryAssistant),
+        Employee(name: "José", lastName: "Herrera Ruiz", type: .deliveryAssistant),
+        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .deliveryAssistant),
+        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .deliveryAssistant),
+        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .deliveryAssistant),
+        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .deliveryAssistant),
+        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .deliveryAssistant),
+        Employee(name: "Diego", lastName: "Reyes Miranda", type: .deliveryAssistant),
+        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .deliveryAssistant),
+        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .deliveryAssistant),
+        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .deliveryAssistant),
+        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .deliveryAssistant),
+        Employee(name: "Aaron", lastName: "Solis Pérez", type: .deliveryAssistant),
+        Employee(name: "Samuel", lastName: "Pérez García", type: .deliveryAssistant),
+        Employee(name: "Josué", lastName: "Corona Flores", type: .deliveryAssistant),
+        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .deliveryAssistant),
+        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .deliveryAssistant),
+        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .deliveryAssistant)
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -53,13 +128,30 @@ class EmployeeTableViewController: UITableViewController {
             return
         }
         print("User received in EmployeeTableVC: \(user)")
-        orderEmployees(employeesArray: employees)
+        orderEmployees(employeesArray: forkliftEmployees)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            orderEmployees(employeesArray: forkliftEmployees)
+        case 1:
+            orderEmployees(employeesArray: deliveryEmployees)
+        case 2:
+            orderEmployees(employeesArray: warehouseAssistantEmployees)
+        case 3:
+            orderEmployees(employeesArray: deliveryAssistantEmployees)
+        default:
+            print("Other case")
+        }
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -78,13 +170,7 @@ class EmployeeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "employeeCell", for: indexPath) as! EmployeeCell
         
         //2. Get the appropiate model object to display on the cell
-        //let section = sections[indexPath.section]
-        //let employee = section.employees[indexPath.row]
-        
-        //let section = sections[indexPath.section]
         let employee = sections[indexPath.section].employees[indexPath.row]
-        
-        //let employee = employees[indexPath.row]
         
         //3. Configuramos celda
         cell.photoImageView.image = employee.photo
@@ -163,109 +249,13 @@ class EmployeeTableViewController: UITableViewController {
     @IBAction func segmentedControlChange(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            employees = [
-                Employee(name: "Christian", lastName: "Montacarga Aranda", type: .forklift),
-                Employee(name: "Pablo", lastName: "Corona Flores", type: .forklift),
-                Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .forklift),
-                Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .forklift),
-                Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .forklift),
-                Employee(name: "José", lastName: "Herrera Ruiz", type: .forklift),
-                Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .forklift),
-                Employee(name: "Abraham", lastName: "Curiel Reyes", type: .forklift),
-                Employee(name: "Andrés", lastName: "Guardado Hernández", type: .forklift),
-                Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .forklift),
-                Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .forklift),
-                Employee(name: "Diego", lastName: "Reyes Miranda", type: .forklift),
-                Employee(name: "Rodrigo", lastName: "Flores Corona", type: .forklift),
-                Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .forklift),
-                Employee(name: "Jesús", lastName: "Miranda Blanco", type: .forklift),
-                Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .forklift),
-                Employee(name: "Aaron", lastName: "Solis Pérez", type: .forklift),
-                Employee(name: "Samuel", lastName: "Pérez García", type: .forklift),
-                Employee(name: "Josué", lastName: "Corona Flores", type: .forklift),
-                Employee(name: "Uriel", lastName: "Antuna Cruz", type: .forklift),
-                Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .forklift),
-                Employee(name: "Jorge", lastName: "Ruiz Frias", type: .forklift)
-            ]
-            orderEmployees(employeesArray: employees)
+            orderEmployees(employeesArray: forkliftEmployees)
         case 1:
-            employees = [
-                Employee(name: "Christian", lastName: "Reparto Aranda", type: .delivery),
-                Employee(name: "Pablo", lastName: "Corona Flores", type: .delivery),
-                Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .delivery),
-                Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .delivery),
-                Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .delivery),
-                Employee(name: "José", lastName: "Herrera Ruiz", type: .delivery),
-                Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .delivery),
-                Employee(name: "Abraham", lastName: "Curiel Reyes", type: .delivery),
-                Employee(name: "Andrés", lastName: "Guardado Hernández", type: .delivery),
-                Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .delivery),
-                Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .delivery),
-                Employee(name: "Diego", lastName: "Reyes Miranda", type: .delivery),
-                Employee(name: "Rodrigo", lastName: "Flores Corona", type: .delivery),
-                Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .delivery),
-                Employee(name: "Jesús", lastName: "Miranda Blanco", type: .delivery),
-                Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .delivery),
-                Employee(name: "Aaron", lastName: "Solis Pérez", type: .delivery),
-                Employee(name: "Samuel", lastName: "Pérez García", type: .delivery),
-                Employee(name: "Josué", lastName: "Corona Flores", type: .delivery),
-                Employee(name: "Uriel", lastName: "Antuna Cruz", type: .delivery),
-                Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .delivery),
-                Employee(name: "Jorge", lastName: "Ruiz Frias", type: .delivery)
-            ]
-            orderEmployees(employeesArray: employees)
+            orderEmployees(employeesArray: deliveryEmployees)
         case 2:
-            employees = [
-                Employee(name: "Christian", lastName: "A.Almacen Aranda", type: .warehouseAssistant),
-                Employee(name: "Pablo", lastName: "Corona Flores", type: .warehouseAssistant),
-                Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .warehouseAssistant),
-                Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .warehouseAssistant),
-                Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .warehouseAssistant),
-                Employee(name: "José", lastName: "Herrera Ruiz", type: .warehouseAssistant),
-                Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .warehouseAssistant),
-                Employee(name: "Abraham", lastName: "Curiel Reyes", type: .warehouseAssistant),
-                Employee(name: "Andrés", lastName: "Guardado Hernández", type: .warehouseAssistant),
-                Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .warehouseAssistant),
-                Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .warehouseAssistant),
-                Employee(name: "Diego", lastName: "Reyes Miranda", type: .warehouseAssistant),
-                Employee(name: "Rodrigo", lastName: "Flores Corona", type: .warehouseAssistant),
-                Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .warehouseAssistant),
-                Employee(name: "Jesús", lastName: "Miranda Blanco", type: .warehouseAssistant),
-                Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .warehouseAssistant),
-                Employee(name: "Aaron", lastName: "Solis Pérez", type: .warehouseAssistant),
-                Employee(name: "Samuel", lastName: "Pérez García", type: .warehouseAssistant),
-                Employee(name: "Josué", lastName: "Corona Flores", type: .warehouseAssistant),
-                Employee(name: "Uriel", lastName: "Antuna Cruz", type: .warehouseAssistant),
-                Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .warehouseAssistant),
-                Employee(name: "Jorge", lastName: "Ruiz Frias", type: .warehouseAssistant)
-            ]
-            orderEmployees(employeesArray: employees)
+            orderEmployees(employeesArray: warehouseAssistantEmployees)
         case 3:
-            employees = [
-                Employee(name: "Christian", lastName: "A.Reparto Aranda", type: .deliveryAssistant),
-                Employee(name: "Pablo", lastName: "Corona Flores", type: .deliveryAssistant),
-                Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .deliveryAssistant),
-                Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .deliveryAssistant),
-                Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .deliveryAssistant),
-                Employee(name: "José", lastName: "Herrera Ruiz", type: .deliveryAssistant),
-                Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .deliveryAssistant),
-                Employee(name: "Abraham", lastName: "Curiel Reyes", type: .deliveryAssistant),
-                Employee(name: "Andrés", lastName: "Guardado Hernández", type: .deliveryAssistant),
-                Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .deliveryAssistant),
-                Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .deliveryAssistant),
-                Employee(name: "Diego", lastName: "Reyes Miranda", type: .deliveryAssistant),
-                Employee(name: "Rodrigo", lastName: "Flores Corona", type: .deliveryAssistant),
-                Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .deliveryAssistant),
-                Employee(name: "Jesús", lastName: "Miranda Blanco", type: .deliveryAssistant),
-                Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .deliveryAssistant),
-                Employee(name: "Aaron", lastName: "Solis Pérez", type: .deliveryAssistant),
-                Employee(name: "Samuel", lastName: "Pérez García", type: .deliveryAssistant),
-                Employee(name: "Josué", lastName: "Corona Flores", type: .deliveryAssistant),
-                Employee(name: "Uriel", lastName: "Antuna Cruz", type: .deliveryAssistant),
-                Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .deliveryAssistant),
-                Employee(name: "Jorge", lastName: "Ruiz Frias", type: .deliveryAssistant)
-            ]
-            orderEmployees(employeesArray: employees)
+            orderEmployees(employeesArray: deliveryAssistantEmployees)
         default:
             print("Other case")
         }
@@ -300,6 +290,7 @@ class EmployeeTableViewController: UITableViewController {
             }
             detailTableViewController.user = user
             detailTableViewController.employee = sections[section].employees[row]
+            detailTableViewController.delegate = self
         }
     }
 }
@@ -310,8 +301,49 @@ extension EmployeeTableViewController: UISearchResultsUpdating {
     }
 }
 
+extension EmployeeTableViewController: DetailTableViewControllerDelegate {
+    func update(_ employee: Employee) {
+        print("Empleado actualizado: \(employee)")
+        
+        switch employee.type {
+        case .forklift:
+            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+                if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
+                    forkliftEmployees[index] = employee
+                }
+            }
+        case .delivery:
+            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+                if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
+                    deliveryEmployees[index] = employee
+                }
+            }
+        case .warehouseAssistant:
+            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+                if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
+                    warehouseAssistantEmployees[index] = employee
+                }
+            }
+        case .deliveryAssistant:
+            for (index, oldEmployee) in forkliftEmployees.enumerated() {
+                if(oldEmployee.name == employee.name && oldEmployee.lastName == employee.lastName) {
+                    deliveryAssistantEmployees[index] = employee
+                }
+            }
+        }
+        
+//        for (sectionIndex, oldSection) in sections.enumerated() {
+//            for (rowIndex, oldRow) in oldSection.employees.enumerated() {
+//                if (oldRow.name == employee.name && oldRow.lastName == employee.lastName) {
+//                    sections[sectionIndex].employees[rowIndex] = employee
+//                }
+//            }
+//        }
+    }
+}
+
 //For order employees alphabetically
 struct Section {
     let letter: String
-    let employees: [Employee]
+    var employees: [Employee]
 }

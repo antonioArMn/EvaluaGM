@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol DetailTableViewControllerDelegate: AnyObject {
+    func update(_ employee: Employee)
+}
+
 class DetailTableViewController: UITableViewController {
     
     //Properties
     var user: User?
     var employee: Employee?
     var imagePicker: ImagePicker!
+    weak var delegate: DetailTableViewControllerDelegate?
     
     //General Outlets
     @IBOutlet weak var imageView: UIImageView!
@@ -82,6 +87,9 @@ class DetailTableViewController: UITableViewController {
             return
         }
         employee = evaluateViewController.employee
+        if let employee = employee {
+            delegate?.update(employee)
+        }
     }
     @IBAction func cancel(unwindSegue: UIStoryboardSegue) {
         
