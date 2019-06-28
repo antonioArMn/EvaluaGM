@@ -79,11 +79,13 @@ struct Employee: Equatable, Comparable {
     }
     
     var average: Float {
-        switch type {
-        case .forklift, .warehouseAssistant:
-            return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 10
-        case .delivery, .deliveryAssistant:
-            return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 11
+        get {
+            switch type {
+            case .forklift, .warehouseAssistant:
+                return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 10
+            case .delivery, .deliveryAssistant:
+                return (cultureAttatchment + dpoImplementation + attitude + trainingAdaptation + performance + specificGrades.reduce(0, +)) / 11
+            }
         }
     }
     

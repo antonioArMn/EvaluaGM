@@ -262,6 +262,20 @@ class EmployeeTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    @IBAction func addEmployeeButtonTapped(_ sender: UIBarButtonItem) {
+        guard let user = user else{
+            return
+        }
+        if user.isSupervisor {
+            let alertController = UIAlertController(title: "Acción sólo válida para usuarios de recursos humanos.", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "toAddEmployeeVC", sender: nil)
+        }
+    }
+    
     //Functions
     func setupNavigationBar() {
         //Add search controller
@@ -281,7 +295,7 @@ class EmployeeTableViewController: UITableViewController {
         sections = keys.map{Section(letter: $0, employees: groupedDictionary[$0]!.sorted(by: <))}
     }
     
-    //let employee = employees[indexPath.row]
+    //Setup segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "toDetailVC") {
             guard let detailTableViewController = segue.destination as? DetailTableViewController, let section = tableView.indexPathForSelectedRow?.section, let row = tableView.indexPathForSelectedRow?.row else {
@@ -292,6 +306,14 @@ class EmployeeTableViewController: UITableViewController {
             detailTableViewController.employee = sections[section].employees[row]
             detailTableViewController.delegate = self
         }
+    }
+    
+    //Unwind segues
+    @IBAction func saveEmployee(unwindSegue: UIStoryboardSegue) {
+        print("Employee saved")
+    }
+    @IBAction func cancelNewEmployee(unwindSegue: UIStoryboardSegue) {
+        print("Cancel")
     }
 }
 
