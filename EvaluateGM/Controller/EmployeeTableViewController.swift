@@ -25,7 +25,7 @@ class EmployeeTableViewController: UITableViewController {
         Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .forklift),
         Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .forklift),
         Employee(name: "José", lastName: "Herrera Ruiz", type: .forklift),
-        Employee(name: "Cesar Alberto", lastName: "Bazán Caballero", type: .forklift),
+        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .forklift),
         Employee(name: "Abraham", lastName: "Curiel Reyes", type: .forklift),
         Employee(name: "Andrés", lastName: "Guardado Hernández", type: .forklift),
         Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .forklift),
@@ -129,12 +129,6 @@ class EmployeeTableViewController: UITableViewController {
         }
         print("User received in EmployeeTableVC: \(user)")
         orderEmployees(employeesArray: forkliftEmployees)
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,7 +169,14 @@ class EmployeeTableViewController: UITableViewController {
         //3. Configuramos celda
         cell.photoImageView.image = employee.photo
         cell.nameLabel.text = "\(employee.name) \(employee.lastName)"
-        cell.averageLabel.text = "\(String(format: "%.2f", employee.average)) ★" 
+        cell.averageLabel.text = "\(String(format: "%.2f", employee.getGeneralAverage())) ★"
+        if employee.averageIndicator {
+            cell.averageIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+            cell.averageIndicator.text = "↑"
+        } else {
+            cell.averageIndicator.textColor = .red
+            cell.averageIndicator.text = "↓"
+        }
         
         //Reorder control button
         cell.showsReorderControl = true
@@ -199,51 +200,6 @@ class EmployeeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64.0
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     //Actions
     @IBAction func segmentedControlChange(_ sender: UISegmentedControl) {

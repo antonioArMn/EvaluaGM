@@ -14,6 +14,7 @@ class EvaluateTableViewController: UITableViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var averageLabel: UILabel!
+    @IBOutlet weak var averageIndicator: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var evaluationAverage: UILabel!
     @IBOutlet weak var backgroundView: UIView!
@@ -81,12 +82,6 @@ class EvaluateTableViewController: UITableViewController {
         }
         print("Employee received in evaluateVC: \(employee)")
         setupUI()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     //General Actions
@@ -209,6 +204,7 @@ class EvaluateTableViewController: UITableViewController {
         employee?.attitudeArray.append((attitudeLabel.text! as NSString).floatValue)
         employee?.trainingAdaptationArray.append((traningAdaptationLabel.text! as NSString).floatValue)
         employee?.performanceArray.append((performanceLabel.text! as NSString).floatValue)
+        
         if (employee?.type == .forklift) {
             //Forklift
             employee?.specificGradesArrays[0].append((forkliftSecurityLabel.text! as NSString).floatValue)
@@ -216,6 +212,7 @@ class EvaluateTableViewController: UITableViewController {
             employee?.specificGradesArrays[2].append((forkliftChecklistLabel.text! as NSString).floatValue)
             employee?.specificGradesArrays[3].append((forkliftDownloadUploadLabel.text! as NSString).floatValue)
             employee?.specificGradesArrays[4].append((forkliftExampleToFollowLabel.text! as NSString).floatValue)
+            employee?.averageArray.append(((cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (forkliftSecurityLabel.text! as NSString).floatValue + (forkliftSecurityRoutineLabel.text! as NSString).floatValue + (forkliftChecklistLabel.text! as NSString).floatValue + (forkliftDownloadUploadLabel.text! as NSString).floatValue + (forkliftExampleToFollowLabel.text! as NSString).floatValue) / 10)
         } else if (employee?.type == .delivery || employee?.type == .deliveryAssistant) {
             //Delivery & DeliveryAssistant
             employee?.specificGradesArrays[0].append((deliverySecurityLabel.text! as NSString).floatValue)
@@ -224,6 +221,7 @@ class EvaluateTableViewController: UITableViewController {
             employee?.specificGradesArrays[3].append((deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue)
             employee?.specificGradesArrays[4].append((deliveryAssistsLabel.text! as NSString).floatValue)
             employee?.specificGradesArrays[5].append((deliveryTeamworkLabel.text! as NSString).floatValue)
+            employee?.averageArray.append(((cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (deliverySecurityLabel.text! as NSString).floatValue + (deliveryTrainingLabel.text! as NSString).floatValue + (deliveryKnowSegmentLabel.text! as NSString).floatValue + (deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue + (deliveryAssistsLabel.text! as NSString).floatValue + (deliveryTeamworkLabel.text! as NSString).floatValue) / 11)
         } else {
             //Warehouse
             employee?.specificGradesArrays[0].append((warehouseSecurityLabel.text! as NSString).floatValue)
@@ -231,6 +229,7 @@ class EvaluateTableViewController: UITableViewController {
             employee?.specificGradesArrays[2].append((warehousePickeoGoalLabel.text! as NSString).floatValue)
             employee?.specificGradesArrays[3].append((warehouseJobGoalsLabel.text! as NSString).floatValue)
             employee?.specificGradesArrays[4].append((warehouseExampleToFollowLabel.text! as NSString).floatValue)
+            employee?.averageArray.append(((cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (warehouseSecurityLabel.text! as NSString).floatValue + (warehouseSelectionGoalLabel.text! as NSString).floatValue + (warehousePickeoGoalLabel.text! as NSString).floatValue + (warehouseJobGoalsLabel.text! as NSString).floatValue + (warehouseExampleToFollowLabel.text! as NSString).floatValue) / 10)
         }
     }
     
@@ -279,7 +278,14 @@ class EvaluateTableViewController: UITableViewController {
         imageView.image = currentEmployee.photo
         nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
         typeLabel.text = currentEmployee.typeString
-        averageLabel.text = "\(String(format: "%.2f", currentEmployee.average)) ★"
+        averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
+        if currentEmployee.averageIndicator {
+            averageIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+            averageIndicator.text = "↑"
+        } else {
+            averageIndicator.textColor = .red
+            averageIndicator.text = "↓"
+        }
     }
     
     func shouldHideSection(section: Int) -> Bool {
@@ -354,73 +360,4 @@ class EvaluateTableViewController: UITableViewController {
             footerView.textLabel!.textColor = UIColor.clear
         }
     }
-
-    // MARK: - Table view data source
-    /*
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-    */
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

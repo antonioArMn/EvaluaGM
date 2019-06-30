@@ -25,14 +25,20 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var averageLabel: UILabel!
+    @IBOutlet weak var averageIndicator: UILabel!
     @IBOutlet weak var firstSectionView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var firstSectionStackView: UIStackView!
     @IBOutlet weak var cultureAttatchment: UILabel!
+    @IBOutlet weak var cultureAttatchmentIndicator: UILabel!
     @IBOutlet weak var dpoImplementation: UILabel!
+    @IBOutlet weak var dpoImplementationIndicator: UILabel!
     @IBOutlet weak var attitude: UILabel!
+    @IBOutlet weak var attitudeIndicator: UILabel!
     @IBOutlet weak var trainingAdaptation: UILabel!
+    @IBOutlet weak var trainingAdaptationIndicator: UILabel!
     @IBOutlet weak var performance: UILabel!
+    @IBOutlet weak var performanceIndicator: UILabel!
     @IBOutlet weak var cameraButton: UIButton!
     
     //Specific Outlets (Forklift)
@@ -66,12 +72,6 @@ class DetailTableViewController: UITableViewController {
         print("Employee received in detalVC: \(employee)")
         setupUI()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,12 +151,18 @@ class DetailTableViewController: UITableViewController {
         imageView.image = currentEmployee.photo
         nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
         typeLabel.text = currentEmployee.typeString
-        averageLabel.text = "\(String(format: "%.2f", currentEmployee.average)) ★"
-        cultureAttatchment.text = "\(String(format: "%.2f", currentEmployee.cultureAttatchment))"
-        dpoImplementation.text = "\(String(format: "%.2f", currentEmployee.dpoImplementation))"
-        attitude.text = "\(String(format: "%.2f", currentEmployee.attitude))"
-        trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.trainingAdaptation))"
-        performance.text = "\(String(format: "%.2f", currentEmployee.performance))"
+        averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
+        setIndicator(employee: currentEmployee, label: averageIndicator)
+        cultureAttatchment.text = "\(String(format: "%.2f", currentEmployee.getCultureAttatchmentAverage()))"
+        setIndicator(employee: currentEmployee, label: cultureAttatchmentIndicator)
+        dpoImplementation.text = "\(String(format: "%.2f", currentEmployee.getDpoImplementationAverage()))"
+        setIndicator(employee: currentEmployee, label: dpoImplementationIndicator)
+        attitude.text = "\(String(format: "%.2f", currentEmployee.getAttitudeAverage()))"
+        setIndicator(employee: currentEmployee, label: attitudeIndicator)
+        trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.getTrainingAdaptationAverage()))"
+        setIndicator(employee: currentEmployee, label: trainingAdaptationIndicator)
+        performance.text = "\(String(format: "%.2f", currentEmployee.getPerformanceAverage()))"
+        setIndicator(employee: currentEmployee, label: performanceIndicator)
         switch currentEmployee.type {
         case .forklift:
             forkliftSecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
@@ -206,6 +212,61 @@ class DetailTableViewController: UITableViewController {
             return false
         }
     }
+    
+    func setIndicator(employee: Employee, label: UILabel) {
+        switch label {
+        case averageIndicator:
+            if employee.averageIndicator {
+                label.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                label.text = "↑"
+            } else {
+                label.textColor = .red
+                label.text = "↓"
+            }
+        case cultureAttatchmentIndicator:
+            if employee.cultureAttatchmentIndicator {
+                label.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                label.text = "↑"
+            } else {
+                label.textColor = .red
+                label.text = "↓"
+            }
+        case dpoImplementationIndicator:
+            if employee.dpoImplementationIndicator {
+                label.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                label.text = "↑"
+            } else {
+                label.textColor = .red
+                label.text = "↓"
+            }
+        case attitudeIndicator:
+            if employee.attitudeIndicator {
+                label.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                label.text = "↑"
+            } else {
+                label.textColor = .red
+                label.text = "↓"
+            }
+        case trainingAdaptationIndicator:
+            if employee.trainingAdaptationIndicator {
+                label.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                label.text = "↑"
+            } else {
+                label.textColor = .red
+                label.text = "↓"
+            }
+        case performanceIndicator:
+            if employee.performanceIndicator {
+                label.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                label.text = "↑"
+            } else {
+                label.textColor = .red
+                label.text = "↓"
+            }
+        default:
+            print("Other case")
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -239,74 +300,6 @@ class DetailTableViewController: UITableViewController {
             footerView.textLabel!.textColor = UIColor.clear
         }
     }
-    
-    /*
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-    */
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension DetailTableViewController: ImagePickerDelegate {

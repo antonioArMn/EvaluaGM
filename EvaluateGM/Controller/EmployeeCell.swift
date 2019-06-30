@@ -14,6 +14,7 @@ class EmployeeCell: UITableViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var averageLabel: UILabel!
+    @IBOutlet weak var averageIndicator: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,8 +25,6 @@ class EmployeeCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
