@@ -12,20 +12,43 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     //Properties
     let pickerData = ["Montacarga", "Reparto", "Ayudante de almacén", "Ayudante de reparto"]
+    var employee = Employee(name: "Name", lastName: "lastName", type: .forklift)
+    var index = 0
     
     //Outlets
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    //Actions
+    @IBAction func nameTextFieldChange(_ sender: UITextField) {
+        if sender.text?.count != 0 && lastNameTextField.text?.count != 0{
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+    @IBAction func lastNameTextFieldChange(_ sender: UITextField) {
+        if sender.text?.count != 0 && nameTextField.text?.count != 0{
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+    @IBAction func hideKeyboard(_ sender: Any) {
+        view.endEditing(true)
+        pickerView.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
+        setupUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,11 +67,20 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
         return pickerData[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        index = row
+    }
+    
     //Methods
     func setupUI() {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -95).isActive = true
-        //backgroundView.heightAnchor.constraint(equalToConstant: imageView.frame.height / 2).isActive = true
+        backgroundView.heightAnchor.constraint(equalToConstant: 30 + imageView.frame.height / 2).isActive = true
+        
+        saveButton.isEnabled = false
         
         imageView.layer.borderWidth = 6.0
         imageView.layer.masksToBounds = false
@@ -64,5 +96,29 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
         cameraButton.layer.borderColor = UIColor.white.cgColor
         cameraButton.layer.cornerRadius = cameraButton.frame.size.height / 2
         cameraButton.clipsToBounds = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let name = nameTextField.text, let lastName = lastNameTextField.text else {
+            return
+        }
+        employee.name = name
+        employee.lastName = lastName
+        employee.type = setEmployeeType()
+    }
+    
+    func setEmployeeType() -> Type{
+        switch index {
+        case 0:
+            return .forklift
+        case 1:
+            return .delivery
+        case 2:
+            return .warehouseAssistant
+        case 3:
+            return .deliveryAssistant
+        default:
+            return .forklift
+        }
     }
 }

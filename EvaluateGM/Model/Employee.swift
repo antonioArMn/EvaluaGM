@@ -13,9 +13,9 @@ struct Employee: Equatable, Comparable {
     
     //General properties
     var photo: UIImage = UIImage(named: "User")!
-    let name: String
-    let lastName: String
-    let type: Type
+    var name: String
+    var lastName: String
+    var type: Type
     
     //General qualifications
     //Culture Attatchment Starts

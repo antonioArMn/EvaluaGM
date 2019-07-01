@@ -16,6 +16,7 @@ class EmployeeTableViewController: UITableViewController {
     //Properties
     var user: User?
     var sections = [Section]()
+    var employee = Employee(name: "Name", lastName: "lastName", type: .forklift)
     var filteredEmployees = [Employee]() //For search bar
     
     var forkliftEmployees: [Employee] = [
@@ -266,10 +267,24 @@ class EmployeeTableViewController: UITableViewController {
     
     //Unwind segues
     @IBAction func saveEmployee(unwindSegue: UIStoryboardSegue) {
-        print("Employee saved")
+        guard let addEmployeeViewController = unwindSegue.source as? AddEmployeeViewController else {
+            print("Cant receive new employee")
+            return
+        }
+        employee = addEmployeeViewController.employee
+        switch employee.type {
+        case .forklift:
+            forkliftEmployees.append(employee)
+        case .delivery:
+            deliveryEmployees.append(employee)
+        case .warehouseAssistant:
+            warehouseAssistantEmployees.append(employee)
+        case .deliveryAssistant:
+            deliveryAssistantEmployees.append(employee)
+        }
     }
     @IBAction func cancelNewEmployee(unwindSegue: UIStoryboardSegue) {
-        print("Cancel")
+
     }
 }
 
