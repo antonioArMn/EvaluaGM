@@ -95,7 +95,6 @@ class DetailTableViewController: UITableViewController {
         
     }
     @IBAction func cameraButtonTapped(_ sender: UIButton) {
-        print("Camera button tapped")
         self.imagePicker.present(from: sender)
     }
     @IBAction func evaluateButtonTapped(_ sender: UIBarButtonItem) {

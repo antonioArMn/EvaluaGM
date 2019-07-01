@@ -14,6 +14,7 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
     let pickerData = ["Montacarga", "Reparto", "Ayudante de almacén", "Ayudante de reparto"]
     var employee = Employee(name: "Name", lastName: "lastName", type: .forklift)
     var index = 0
+    var imagePicker: ImagePicker!
     
     //Outlets
     @IBOutlet weak var backgroundView: UIView!
@@ -43,11 +44,20 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
         view.endEditing(true)
         pickerView.endEditing(true)
     }
+    @IBAction func cameraButtonTapped(_ sender: UIButton) {
+        self.imagePicker.present(from: sender)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupUI()
     }
     
@@ -80,13 +90,19 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.heightAnchor.constraint(equalToConstant: 30 + imageView.frame.height / 2).isActive = true
         
-        saveButton.isEnabled = false
+        if nameTextField.text?.count != 0 && lastNameTextField.text?.count != 0{
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+        //saveButton.isEnabled = false
         
         imageView.layer.borderWidth = 6.0
         imageView.layer.masksToBounds = false
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.size.height / 2
         imageView.clipsToBounds = true
+        imageView.image = employee.photo
         
         cameraButton.translatesAutoresizingMaskIntoConstraints = false
         cameraButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10).isActive = true
@@ -120,5 +136,15 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
         default:
             return .forklift
         }
+    }
+}
+
+extension AddEmployeeViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        guard let imageSelected = image else {
+            return
+        }
+        employee.photo = imageSelected
+        setupUI()
     }
 }
