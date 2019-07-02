@@ -63,6 +63,14 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var warehouseJobGoals: UILabel!
     @IBOutlet weak var warehouseExampleToFollow: UILabel!
     
+    //Indicators Collections Outlets
+    @IBOutlet var firstSpecificGradeIndicators: [UILabel]!
+    @IBOutlet var secondSpecificGradeIndicators: [UILabel]!
+    @IBOutlet var thirdSpecificGradeIndicators: [UILabel]!
+    @IBOutlet var fourthSpecificGradeIndicators: [UILabel]!
+    @IBOutlet var fifthSpecificGradeIndicators: [UILabel]!
+    @IBOutlet var sixthSpecificGradeIndicators: [UILabel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let employee = employee else{
@@ -144,47 +152,94 @@ class DetailTableViewController: UITableViewController {
         cameraButton.layer.cornerRadius = cameraButton.frame.size.height / 2
         cameraButton.clipsToBounds = true
         
+        //firstSpecificGradeIndicator[0].textColor = .blue
+        //firstSpecificGradeIndicator[0].text = "↑"
+        //firstSpecificGradeIndicator[1].textColor = .orange
+        //firstSpecificGradeIndicator[1].text = "↑"
+        
         guard let currentEmployee = employee else {
             return
         }
         imageView.image = currentEmployee.photo
         nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
         typeLabel.text = currentEmployee.typeString
-        averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
-        setIndicator(employee: currentEmployee, label: averageIndicator)
-        cultureAttatchment.text = "\(String(format: "%.2f", currentEmployee.getCultureAttatchmentAverage()))"
-        setIndicator(employee: currentEmployee, label: cultureAttatchmentIndicator)
-        dpoImplementation.text = "\(String(format: "%.2f", currentEmployee.getDpoImplementationAverage()))"
-        setIndicator(employee: currentEmployee, label: dpoImplementationIndicator)
-        attitude.text = "\(String(format: "%.2f", currentEmployee.getAttitudeAverage()))"
-        setIndicator(employee: currentEmployee, label: attitudeIndicator)
-        trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.getTrainingAdaptationAverage()))"
-        setIndicator(employee: currentEmployee, label: trainingAdaptationIndicator)
-        performance.text = "\(String(format: "%.2f", currentEmployee.getPerformanceAverage()))"
-        setIndicator(employee: currentEmployee, label: performanceIndicator)
+        if currentEmployee.hasBeenEvaluated {
+            averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
+            setIndicator(employee: currentEmployee, label: averageIndicator)
+            cultureAttatchment.text = "\(String(format: "%.2f", currentEmployee.getCultureAttatchmentAverage()))"
+            setIndicator(employee: currentEmployee, label: cultureAttatchmentIndicator)
+            dpoImplementation.text = "\(String(format: "%.2f", currentEmployee.getDpoImplementationAverage()))"
+            setIndicator(employee: currentEmployee, label: dpoImplementationIndicator)
+            attitude.text = "\(String(format: "%.2f", currentEmployee.getAttitudeAverage()))"
+            setIndicator(employee: currentEmployee, label: attitudeIndicator)
+            trainingAdaptation.text = "\(String(format: "%.2f", currentEmployee.getTrainingAdaptationAverage()))"
+            setIndicator(employee: currentEmployee, label: trainingAdaptationIndicator)
+            performance.text = "\(String(format: "%.2f", currentEmployee.getPerformanceAverage()))"
+            setIndicator(employee: currentEmployee, label: performanceIndicator)
+        } else {
+            averageLabel.text = "⏤ ★"
+            averageIndicator.text = ""
+            cultureAttatchment.text = "⏤"
+            cultureAttatchmentIndicator.text = ""
+            dpoImplementation.text = "⏤"
+            dpoImplementationIndicator.text = ""
+            attitude.text = "⏤"
+            attitudeIndicator.text = ""
+            trainingAdaptation.text = "⏤"
+            trainingAdaptationIndicator.text = ""
+            performance.text = "⏤"
+            performanceIndicator.text = ""
+        }
+        
         switch currentEmployee.type {
         case .forklift:
-            forkliftSecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
-            forkliftSecurityRoutine.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
-            forkliftChecklist.text = "\(String(format: "%.2f", currentEmployee.specificGrades[2]))"
-            forkliftDownloadUpload.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
-            forkliftExampleToFollow.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
+            if currentEmployee.hasBeenEvaluated {
+                forkliftSecurity.text = "\(String(format: "%.2f", currentEmployee.getFirstSpecificGradeAverage()))"
+                forkliftSecurityRoutine.text = "\(String(format: "%.2f", currentEmployee.getSecondSpecificGradeAverage()))"
+                forkliftChecklist.text = "\(String(format: "%.2f", currentEmployee.getThirdSpecificGradeAverage()))"
+                forkliftDownloadUpload.text = "\(String(format: "%.2f", currentEmployee.getFourthSpecificGradeAverage()))"
+                forkliftExampleToFollow.text = "\(String(format: "%.2f", currentEmployee.getFifthSpecificGradeAverage()))"
+            } else {
+                forkliftSecurity.text = "⏤"
+                forkliftSecurityRoutine.text = "⏤"
+                forkliftChecklist.text = "⏤"
+                forkliftDownloadUpload.text = "⏤"
+                forkliftExampleToFollow.text = "⏤"
+            }
             
         case .delivery, .deliveryAssistant:
-            deliverySecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
-            deliveryTraining.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
-            deliveryKnowSegment.text = "\(String(format: "%.2f", currentEmployee.specificGrades[2]))"
-            deliveryKnowledgeIndicators.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
-            deliveryAssists.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
-            deliveryTeamwork.text = "\(String(format: "%.2f", currentEmployee.specificGrades[5]))"
+            if currentEmployee.hasBeenEvaluated {
+                deliverySecurity.text = "\(String(format: "%.2f", currentEmployee.getFirstSpecificGradeAverage()))"
+                deliveryTraining.text = "\(String(format: "%.2f", currentEmployee.getSecondSpecificGradeAverage()))"
+                deliveryKnowSegment.text = "\(String(format: "%.2f", currentEmployee.getThirdSpecificGradeAverage()))"
+                deliveryKnowledgeIndicators.text = "\(String(format: "%.2f", currentEmployee.getFourthSpecificGradeAverage()))"
+                deliveryAssists.text = "\(String(format: "%.2f", currentEmployee.getFifthSpecificGradeAverage()))"
+                deliveryTeamwork.text = "\(String(format: "%.2f", currentEmployee.getSixthSpecificGradeAverage()))"
+            } else {
+                deliverySecurity.text = "⏤"
+                deliveryTraining.text = "⏤"
+                deliveryKnowSegment.text = "⏤"
+                deliveryKnowledgeIndicators.text = "⏤"
+                deliveryAssists.text = "⏤"
+                deliveryTeamwork.text = "⏤"
+            }
             
         case .warehouseAssistant:
-            warehouseSecurity.text = "\(String(format: "%.2f", currentEmployee.specificGrades[0]))"
-            warehouseSelectionGoal.text = "\(String(format: "%.2f", currentEmployee.specificGrades[1]))"
-            warehousePickeoGoal.text = "\(String(format: "%.2f", currentEmployee.specificGrades[2]))"
-            warehouseJobGoals.text = "\(String(format: "%.2f", currentEmployee.specificGrades[3]))"
-            warehouseExampleToFollow.text = "\(String(format: "%.2f", currentEmployee.specificGrades[4]))"
+            if currentEmployee.hasBeenEvaluated {
+                warehouseSecurity.text = "\(String(format: "%.2f", currentEmployee.getFirstSpecificGradeAverage()))"
+                warehouseSelectionGoal.text = "\(String(format: "%.2f", currentEmployee.getSecondSpecificGradeAverage()))"
+                warehousePickeoGoal.text = "\(String(format: "%.2f", currentEmployee.getThirdSpecificGradeAverage()))"
+                warehouseJobGoals.text = "\(String(format: "%.2f", currentEmployee.getFourthSpecificGradeAverage()))"
+                warehouseExampleToFollow.text = "\(String(format: "%.2f", currentEmployee.getFifthSpecificGradeAverage()))"
+            } else {
+                warehouseSecurity.text = "⏤"
+                warehouseSelectionGoal.text = "⏤"
+                warehousePickeoGoal.text = "⏤"
+                warehouseJobGoals.text = "⏤"
+                warehouseExampleToFollow.text = "⏤"
+            }
         }
+        setSpecificIndicators()
     }
     
     func shouldHideSection(section: Int) -> Bool {
@@ -264,6 +319,105 @@ class DetailTableViewController: UITableViewController {
             }
         default:
             print("Other case")
+        }
+    }
+    
+    func setSpecificIndicators() {
+        guard let currentEmployee = employee else {
+            return
+        }
+        if currentEmployee.hasBeenEvaluated {
+            //1st
+            if currentEmployee.firstSpecificGradeIndicator {
+                for firstSpecificIndicator in firstSpecificGradeIndicators {
+                    firstSpecificIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                    firstSpecificIndicator.text = "↑"
+                }
+            } else {
+                for firstSpecificIndicator in firstSpecificGradeIndicators {
+                    firstSpecificIndicator.textColor = .red
+                    firstSpecificIndicator.text = "↓"
+                }
+            }
+            //2nd
+            if currentEmployee.secondSpecificGradeIndicator {
+                for secondSpecificIndicator in secondSpecificGradeIndicators {
+                    secondSpecificIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                    secondSpecificIndicator.text = "↑"
+                }
+            } else {
+                for secondSpecificIndicator in secondSpecificGradeIndicators {
+                    secondSpecificIndicator.textColor = .red
+                    secondSpecificIndicator.text = "↓"
+                }
+            }
+            //3rd
+            if currentEmployee.thirdSpecificGradeIndicator {
+                for thirdSpecificIndicator in thirdSpecificGradeIndicators {
+                    thirdSpecificIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                    thirdSpecificIndicator.text = "↑"
+                }
+            } else {
+                for thirdSpecificIndicator in thirdSpecificGradeIndicators {
+                    thirdSpecificIndicator.textColor = .red
+                    thirdSpecificIndicator.text = "↓"
+                }
+            }
+            //4th
+            if currentEmployee.fourthSpecificGradeIndicator {
+                for fourthSpecificIndicator in fourthSpecificGradeIndicators {
+                    fourthSpecificIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                    fourthSpecificIndicator.text = "↑"
+                }
+            } else {
+                for fourthSpecificIndicator in fourthSpecificGradeIndicators {
+                    fourthSpecificIndicator.textColor = .red
+                    fourthSpecificIndicator.text = "↓"
+                }
+            }
+            //5th
+            if currentEmployee.fifthSpecificGradeIndicator {
+                for fifthSpecificIndicator in fifthSpecificGradeIndicators {
+                    fifthSpecificIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                    fifthSpecificIndicator.text = "↑"
+                }
+            } else {
+                for fifthSpecificIndicator in fifthSpecificGradeIndicators {
+                    fifthSpecificIndicator.textColor = .red
+                    fifthSpecificIndicator.text = "↓"
+                }
+            }
+            //6th
+            if currentEmployee.sixthSpecificGradeIndicator {
+                for sixthSpecificIndicator in sixthSpecificGradeIndicators {
+                    sixthSpecificIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                    sixthSpecificIndicator.text = "↑"
+                }
+            } else {
+                for sixthSpecificIndicator in sixthSpecificGradeIndicators {
+                    sixthSpecificIndicator.textColor = .red
+                    sixthSpecificIndicator.text = "↓"
+                }
+            }
+        } else {
+            for firstSpecificIndicator in firstSpecificGradeIndicators {
+                firstSpecificIndicator.text = ""
+            }
+            for secondSpecificIndicator in secondSpecificGradeIndicators {
+                secondSpecificIndicator.text = ""
+            }
+            for thirdSpecificIndicator in thirdSpecificGradeIndicators {
+                thirdSpecificIndicator.text = ""
+            }
+            for fourthSpecificIndicator in fourthSpecificGradeIndicators {
+                fourthSpecificIndicator.text = ""
+            }
+            for fifthSpecificIndicator in fifthSpecificGradeIndicators {
+                fifthSpecificIndicator.text = ""
+            }
+            for sixthSpecificIndicator in sixthSpecificGradeIndicators {
+                sixthSpecificIndicator.text = ""
+            }
         }
     }
 

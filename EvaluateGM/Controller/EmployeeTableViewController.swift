@@ -170,13 +170,19 @@ class EmployeeTableViewController: UITableViewController {
         //3. Configuramos celda
         cell.photoImageView.image = employee.photo
         cell.nameLabel.text = "\(employee.name) \(employee.lastName)"
-        cell.averageLabel.text = "\(String(format: "%.2f", employee.getGeneralAverage())) ★"
-        if employee.averageIndicator {
-            cell.averageIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
-            cell.averageIndicator.text = "↑"
+        if employee.hasBeenEvaluated {
+            cell.averageLabel.text = "\(String(format: "%.2f", employee.getGeneralAverage())) ★"
+            if employee.averageIndicator {
+                cell.averageIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                cell.averageIndicator.text = "↑"
+            } else {
+                cell.averageIndicator.textColor = .red
+                cell.averageIndicator.text = "↓"
+            }
+
         } else {
-            cell.averageIndicator.textColor = .red
-            cell.averageIndicator.text = "↓"
+            cell.averageLabel.text = "⏤ ★"
+            cell.averageIndicator.text = ""
         }
         
         //Reorder control button

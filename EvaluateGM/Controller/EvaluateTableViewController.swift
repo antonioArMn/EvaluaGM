@@ -207,28 +207,28 @@ class EvaluateTableViewController: UITableViewController {
         
         if (employee?.type == .forklift) {
             //Forklift
-            employee?.specificGradesArrays[0].append((forkliftSecurityLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[1].append((forkliftSecurityRoutineLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[2].append((forkliftChecklistLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[3].append((forkliftDownloadUploadLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[4].append((forkliftExampleToFollowLabel.text! as NSString).floatValue)
+            employee?.firstSpecificGradeArray.append((forkliftSecurityLabel.text! as NSString).floatValue)
+            employee?.secondSpecificGradeArray.append((forkliftSecurityRoutineLabel.text! as NSString).floatValue)
+            employee?.thirdSpecificGradeArray.append((forkliftChecklistLabel.text! as NSString).floatValue)
+            employee?.fourthSpecificGradeArray.append((forkliftDownloadUploadLabel.text! as NSString).floatValue)
+            employee?.fifthSpecificGradeArray.append((forkliftExampleToFollowLabel.text! as NSString).floatValue)
             employee?.averageArray.append(((cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (forkliftSecurityLabel.text! as NSString).floatValue + (forkliftSecurityRoutineLabel.text! as NSString).floatValue + (forkliftChecklistLabel.text! as NSString).floatValue + (forkliftDownloadUploadLabel.text! as NSString).floatValue + (forkliftExampleToFollowLabel.text! as NSString).floatValue) / 10)
         } else if (employee?.type == .delivery || employee?.type == .deliveryAssistant) {
             //Delivery & DeliveryAssistant
-            employee?.specificGradesArrays[0].append((deliverySecurityLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[1].append((deliveryTrainingLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[2].append((deliveryKnowSegmentLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[3].append((deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[4].append((deliveryAssistsLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[5].append((deliveryTeamworkLabel.text! as NSString).floatValue)
+            employee?.firstSpecificGradeArray.append((deliverySecurityLabel.text! as NSString).floatValue)
+            employee?.secondSpecificGradeArray.append((deliveryTrainingLabel.text! as NSString).floatValue)
+            employee?.thirdSpecificGradeArray.append((deliveryKnowSegmentLabel.text! as NSString).floatValue)
+            employee?.fourthSpecificGradeArray.append((deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue)
+            employee?.fifthSpecificGradeArray.append((deliveryAssistsLabel.text! as NSString).floatValue)
+            employee?.sixthSpecificGradeArray.append((deliveryTeamworkLabel.text! as NSString).floatValue)
             employee?.averageArray.append(((cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (deliverySecurityLabel.text! as NSString).floatValue + (deliveryTrainingLabel.text! as NSString).floatValue + (deliveryKnowSegmentLabel.text! as NSString).floatValue + (deliveryKnowledgeIndicatorsLabel.text! as NSString).floatValue + (deliveryAssistsLabel.text! as NSString).floatValue + (deliveryTeamworkLabel.text! as NSString).floatValue) / 11)
         } else {
             //Warehouse
-            employee?.specificGradesArrays[0].append((warehouseSecurityLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[1].append((warehouseSelectionGoalLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[2].append((warehousePickeoGoalLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[3].append((warehouseJobGoalsLabel.text! as NSString).floatValue)
-            employee?.specificGradesArrays[4].append((warehouseExampleToFollowLabel.text! as NSString).floatValue)
+            employee?.firstSpecificGradeArray.append((warehouseSecurityLabel.text! as NSString).floatValue)
+            employee?.secondSpecificGradeArray.append((warehouseSelectionGoalLabel.text! as NSString).floatValue)
+            employee?.thirdSpecificGradeArray.append((warehousePickeoGoalLabel.text! as NSString).floatValue)
+            employee?.fourthSpecificGradeArray.append((warehouseJobGoalsLabel.text! as NSString).floatValue)
+            employee?.fifthSpecificGradeArray.append((warehouseExampleToFollowLabel.text! as NSString).floatValue)
             employee?.averageArray.append(((cultureAttatchmentLabel.text! as NSString).floatValue + (dpoImplementationLabel.text! as NSString).floatValue + (attitudeLabel.text! as NSString).floatValue + (traningAdaptationLabel.text! as NSString).floatValue + (performanceLabel.text! as NSString).floatValue + (warehouseSecurityLabel.text! as NSString).floatValue + (warehouseSelectionGoalLabel.text! as NSString).floatValue + (warehousePickeoGoalLabel.text! as NSString).floatValue + (warehouseJobGoalsLabel.text! as NSString).floatValue + (warehouseExampleToFollowLabel.text! as NSString).floatValue) / 10)
         }
     }
@@ -278,13 +278,18 @@ class EvaluateTableViewController: UITableViewController {
         imageView.image = currentEmployee.photo
         nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
         typeLabel.text = currentEmployee.typeString
-        averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
-        if currentEmployee.averageIndicator {
-            averageIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
-            averageIndicator.text = "↑"
+        if currentEmployee.hasBeenEvaluated {
+            averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
+            if currentEmployee.averageIndicator {
+                averageIndicator.textColor = UIColor(red:0.00, green:0.56, blue:0.00, alpha:1.0)
+                averageIndicator.text = "↑"
+            } else {
+                averageIndicator.textColor = .red
+                averageIndicator.text = "↓"
+            }
         } else {
-            averageIndicator.textColor = .red
-            averageIndicator.text = "↓"
+            averageLabel.text = "⏤ ★"
+            averageIndicator.text = ""
         }
     }
     

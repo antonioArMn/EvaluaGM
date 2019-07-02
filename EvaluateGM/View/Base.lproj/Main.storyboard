@@ -446,7 +446,7 @@
             <objects>
                 <tableViewController id="xPI-lw-LLJ" customClass="DetailTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="a8x-C8-hyn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="735.99999999999989"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1363,6 +1363,22 @@
                         <outlet property="warehousePickeoGoal" destination="8Hc-1y-Cgr" id="WNq-wj-eal"/>
                         <outlet property="warehouseSecurity" destination="m3r-MQ-Rpc" id="iyT-M4-QxU"/>
                         <outlet property="warehouseSelectionGoal" destination="xvq-oA-Fq7" id="IxK-yL-trj"/>
+                        <outletCollection property="firstSpecificGradeIndicators" destination="LBM-Li-ufn" collectionClass="NSMutableArray" id="XHe-2M-uom"/>
+                        <outletCollection property="secondSpecificGradeIndicators" destination="k9K-dp-oxu" collectionClass="NSMutableArray" id="K01-I9-b6Z"/>
+                        <outletCollection property="thirdSpecificGradeIndicators" destination="H78-42-Cgm" collectionClass="NSMutableArray" id="CmG-c9-2RC"/>
+                        <outletCollection property="fourthSpecificGradeIndicators" destination="NAf-Mq-p3u" collectionClass="NSMutableArray" id="th0-1V-VTu"/>
+                        <outletCollection property="firstSpecificGradeIndicators" destination="buD-T0-jdY" collectionClass="NSMutableArray" id="t8h-Tu-54E"/>
+                        <outletCollection property="secondSpecificGradeIndicators" destination="zjg-4b-Iwz" collectionClass="NSMutableArray" id="koJ-p6-8g0"/>
+                        <outletCollection property="thirdSpecificGradeIndicators" destination="mPd-kP-o7x" collectionClass="NSMutableArray" id="XjQ-Ij-c6e"/>
+                        <outletCollection property="fourthSpecificGradeIndicators" destination="1fd-ve-oi5" collectionClass="NSMutableArray" id="zkt-sP-1ta"/>
+                        <outletCollection property="fifthSpecificGradeIndicators" destination="ud2-MR-rHG" collectionClass="NSMutableArray" id="RWV-0A-qpU"/>
+                        <outletCollection property="sixthSpecificGradeIndicators" destination="NDW-lD-A9R" collectionClass="NSMutableArray" id="A7C-dE-UnT"/>
+                        <outletCollection property="firstSpecificGradeIndicators" destination="PRE-IM-BaX" collectionClass="NSMutableArray" id="ZIv-QT-ddF"/>
+                        <outletCollection property="secondSpecificGradeIndicators" destination="7qP-pT-A1N" collectionClass="NSMutableArray" id="X9J-Vq-8oo"/>
+                        <outletCollection property="thirdSpecificGradeIndicators" destination="zE5-XK-orc" collectionClass="NSMutableArray" id="GEk-a8-dii"/>
+                        <outletCollection property="fourthSpecificGradeIndicators" destination="dka-QI-6wd" collectionClass="NSMutableArray" id="Xpq-Gj-UmY"/>
+                        <outletCollection property="fifthSpecificGradeIndicators" destination="xkA-AU-yz7" collectionClass="NSMutableArray" id="xHv-DC-e2U"/>
+                        <outletCollection property="fifthSpecificGradeIndicators" destination="Vj3-x4-02q" collectionClass="NSMutableArray" id="O3B-BA-T7w"/>
                         <segue destination="1ag-LH-Ql6" kind="presentation" identifier="toEvaluateVC" id="2ai-op-90O"/>
                     </connections>
                 </tableViewController>
