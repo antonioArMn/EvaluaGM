@@ -33,24 +33,28 @@ class LoginViewController: UIViewController {
         //keepOpennedSession()
     }
     
+    //Unwind segues
+    @IBAction func saveUser(unwindSegue: UIStoryboardSegue) {
+        print("New user saved")
+    }
+    @IBAction func cancelNewUser(unwindSegue: UIStoryboardSegue) {
+        print("New user canceled")
+    }
+    
     //Actions
     @IBAction func supervisorSwitchChange(_ sender: UISwitch) {
         if sender.isOn {
             humanResourcesSwith.isOn = false
-            loginButton.isEnabled = true
-        }
-        if !sender.isOn && !humanResourcesSwith.isOn {
-            loginButton.isEnabled = false
+        } else {
+            humanResourcesSwith.isOn = true
         }
     }
     
     @IBAction func humanResourcesSwitchChange(_ sender: UISwitch) {
         if sender.isOn {
             supervisorSwith.isOn = false
-            loginButton.isEnabled = true
-        }
-        if !sender.isOn && !supervisorSwith.isOn {
-            loginButton.isEnabled = false
+        } else {
+            supervisorSwith.isOn = true
         }
     }
     
@@ -66,8 +70,6 @@ class LoginViewController: UIViewController {
             return
         }
         authenticateUser(email: email, pass: password)
-        //self.user = User(email: email, password: password, isSupervisor: supervisorSwith.isOn)
-        //performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
     }
     
     //Functions
@@ -137,13 +139,8 @@ class LoginViewController: UIViewController {
         humanResourcesSwith.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         
         //Switches
-        supervisorSwith.isOn = false
+        supervisorSwith.isOn = true
         humanResourcesSwith.isOn = false
-        
-        //Login button
-        loginButton.isEnabled = false
-        loginButton.setTitleColor(.gray, for: .disabled)
-        
     }
 
 }
