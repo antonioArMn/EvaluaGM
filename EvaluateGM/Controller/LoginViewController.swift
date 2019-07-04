@@ -94,7 +94,7 @@ class LoginViewController: UIViewController {
                 //Failed login
                 if let error = error?.localizedDescription {
                     print("Firebase error: \(error)")
-                    let alertController = UIAlertController(title: "Datos inválidos", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Datos inválidos", message: "Ingrese sus credenciales nuevamente.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)
