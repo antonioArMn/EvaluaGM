@@ -288,7 +288,7 @@ class EvaluateTableViewController: UITableViewController {
                 averageIndicator.text = "↓"
             }
         } else {
-            averageLabel.text = "⏤ ★"
+            averageLabel.text = "Sin evaluaciones"
             averageIndicator.text = ""
         }
     }

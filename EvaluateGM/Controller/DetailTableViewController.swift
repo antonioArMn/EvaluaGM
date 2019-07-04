@@ -177,7 +177,7 @@ class DetailTableViewController: UITableViewController {
             performance.text = "\(String(format: "%.2f", currentEmployee.getPerformanceAverage()))"
             setIndicator(employee: currentEmployee, label: performanceIndicator)
         } else {
-            averageLabel.text = "⏤ ★"
+            averageLabel.text = "Sin evaluaciones"
             averageIndicator.text = ""
             cultureAttatchment.text = "⏤"
             cultureAttatchmentIndicator.text = ""
