@@ -2739,6 +2739,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo3" translatesAutoresizingMaskIntoConstraints="NO" id="vpF-pB-bvd">
+                                <rect key="frame" x="107" y="268" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="2JP-3e-AUf"/>
+                                    <constraint firstAttribute="width" constant="200" id="mTU-AE-6se"/>
+                                </constraints>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-De-TNi">
                                 <rect key="frame" x="58.333333333333343" y="133" width="297.33333333333326" height="470"/>
                                 <subviews>
@@ -2878,6 +2885,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4VE-De-TNi" firstAttribute="centerX" secondItem="ERb-td-7Sb" secondAttribute="centerX" id="9ZB-q1-dyR"/>
+                            <constraint firstItem="vpF-pB-bvd" firstAttribute="centerX" secondItem="ERb-td-7Sb" secondAttribute="centerX" id="FT3-9K-FBG"/>
+                            <constraint firstItem="vpF-pB-bvd" firstAttribute="centerY" secondItem="ERb-td-7Sb" secondAttribute="centerY" id="WQF-ud-CKQ"/>
                             <constraint firstItem="4VE-De-TNi" firstAttribute="top" secondItem="JMs-Tf-P6b" secondAttribute="top" constant="17" id="npE-98-uLw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JMs-Tf-P6b"/>
@@ -2897,6 +2906,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="NVX-3h-Qhy" id="NbR-eA-6hf"/>
                         <outlet property="humanResourcesSwitch" destination="Yzt-Ib-AWH" id="S2p-la-Osy"/>
+                        <outlet property="imageView" destination="vpF-pB-bvd" id="TmI-e1-JfC"/>
                         <outlet property="lastNameTextField" destination="fHe-ev-etL" id="kLf-jY-uHe"/>
                         <outlet property="nameTextField" destination="BMk-P0-ExP" id="u3E-KX-Ual"/>
                         <outlet property="passwordTextField" destination="nxy-oM-M0P" id="xVW-ON-OUL"/>

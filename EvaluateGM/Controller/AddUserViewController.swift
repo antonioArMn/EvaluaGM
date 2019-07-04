@@ -18,6 +18,7 @@ class AddUserViewController: UIViewController {
     @IBOutlet weak var reaffirmPasswordTextField: UITextField!
     @IBOutlet weak var supervisorSwitch: UISwitch!
     @IBOutlet weak var humanResourcesSwitch: UISwitch!
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,8 @@ class AddUserViewController: UIViewController {
     }
     
     func setupUI() {
+        imageView.alpha = 0.05
+        
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         nameTextField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
