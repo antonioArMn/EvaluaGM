@@ -59,8 +59,9 @@ class LoginViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             return
         }
-        self.user = User(email: email, password: password, isSupervisor: supervisorSwith.isOn)
-        performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
+        authenticateUser(email: email, pass: password)
+        //self.user = User(email: email, password: password, isSupervisor: supervisorSwith.isOn)
+        //performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
     }
     
     //Functions
@@ -71,6 +72,28 @@ class LoginViewController: UIViewController {
                 return
             }
             employeeTableViewController.user = self.user
+        }
+    }
+    
+    func authenticateUser(email: String, pass: String) {
+        Auth.auth().signIn(withEmail: email, password: pass) { (user, error) in
+            if let user = user {
+                //Successful login
+                print("Login existoso, usuario: \(user)")
+                self.user = User(email: email, password: pass, isSupervisor: self.supervisorSwith.isOn)
+                self.performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
+            } else {
+                //Failed login
+                if let error = error?.localizedDescription {
+                    print("Error en firebase: \(error)")
+                    let alertController = UIAlertController(title: "Datos inválidos", message: nil, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    print("Error en codigo")
+                }
+            }
         }
     }
     
