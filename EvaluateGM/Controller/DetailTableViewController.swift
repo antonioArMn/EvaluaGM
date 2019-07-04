@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol DetailTableViewControllerDelegate: AnyObject {
     func update(_ employee: Employee)
@@ -108,6 +109,23 @@ class DetailTableViewController: UITableViewController {
     @IBAction func evaluateButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "toEvaluateVC", sender: nil)
     }
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Cerrar sesión", message: "¿Está seguro que desea cerrar sesión?", preferredStyle: .actionSheet)
+        let acceptAction = UIAlertAction(title: "Si", style: .destructive) { (_) in
+            do {
+                try Auth.auth().signOut()
+                print("Successful logout")
+                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "toLoginVC2", sender: nil)
+            } catch {
+                print("Unexpected error: \(error)")
+            }
+        }
+        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(acceptAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     //Setup Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -151,11 +169,6 @@ class DetailTableViewController: UITableViewController {
         cameraButton.layer.borderColor = UIColor.white.cgColor
         cameraButton.layer.cornerRadius = cameraButton.frame.size.height / 2
         cameraButton.clipsToBounds = true
-        
-        //firstSpecificGradeIndicator[0].textColor = .blue
-        //firstSpecificGradeIndicator[0].text = "↑"
-        //firstSpecificGradeIndicator[1].textColor = .orange
-        //firstSpecificGradeIndicator[1].text = "↑"
         
         guard let currentEmployee = employee else {
             return

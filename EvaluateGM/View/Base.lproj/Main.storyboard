@@ -285,7 +285,7 @@
                         <barButtonItem title="Cerrar sesión" id="POx-fa-8l9">
                             <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="nvy-ot-ecY"/>
+                                <action selector="logout:" destination="alj-NI-77M" id="btW-JP-xGe"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="1ny-Jk-52p"/>
@@ -314,6 +314,7 @@
                     <connections>
                         <outlet property="segmentedControl" destination="utw-6w-1oj" id="q2j-cn-5Jd"/>
                         <segue destination="X0M-Sa-lwq" kind="presentation" identifier="toAddEmployeeVC" id="tT4-pp-XXT"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toLoginVC" id="eag-rA-DRU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znx-ga-ov6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1314,7 +1315,7 @@
                         <barButtonItem title="Cerrar sesión" id="emo-R8-sXX">
                             <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="un4-Ny-YCf"/>
+                                <action selector="logout:" destination="xPI-lw-LLJ" id="6wR-yD-CQY"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="iee-NC-Tri"/>
@@ -1380,6 +1381,7 @@
                         <outletCollection property="fifthSpecificGradeIndicators" destination="xkA-AU-yz7" collectionClass="NSMutableArray" id="xHv-DC-e2U"/>
                         <outletCollection property="fifthSpecificGradeIndicators" destination="Vj3-x4-02q" collectionClass="NSMutableArray" id="O3B-BA-T7w"/>
                         <segue destination="1ag-LH-Ql6" kind="presentation" identifier="toEvaluateVC" id="2ai-op-90O"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toLoginVC2" id="Hb1-hf-OxX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IGD-1l-y6E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2751,6 +2753,6 @@
         <image name="logo3" width="2000" height="2000"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="un4-Ny-YCf"/>
+        <segue reference="Hb1-hf-OxX"/>
     </inferredMetricsTieBreakers>
 </document>
