@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
@@ -22,10 +23,13 @@ class LoginViewController: UIViewController {
     //Properties
     var user: User?
     var createdUser: User?
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        //Database connection
+        ref = Database.database().reference()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +54,7 @@ class LoginViewController: UIViewController {
         Auth.auth().createUser(withEmail: newUser.email, password: newUser.password) { (user, error) in
             if user != nil {
                 print("User created successfully")
+                self.saveUserInDB()
             } else {
                 if let error = error?.localizedDescription {
                     print("Firebase error: \(error)")
@@ -124,6 +129,23 @@ class LoginViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func saveUserInDB() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        guard let email = Auth.auth().currentUser?.email else { return }
+        guard let newUser = createdUser else { return }
+        
+        let fields: [String: Any] = ["name": newUser.name,
+                                     "lastName": newUser.lastName,
+                                     "email": email,
+                                     "isSupervisor": newUser.isSupervisor,
+                                     "userId": userId]
+        ref.child("users").child(userId).setValue(fields)
+        let alertController = UIAlertController(title: "Nuevo usuario", message: "Nuevo usuario registrado exitosamente.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func keepOpennedSession() {
