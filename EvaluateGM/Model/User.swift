@@ -15,4 +15,13 @@ struct User {
     var email: String
     var password: String
     var isSupervisor: Bool
+    var userId: String = ""
+    
+    init(name: String, lastName: String, email: String, password: String, isSupervisor: Bool) {
+        self.name = name
+        self.lastName = lastName
+        self.email = email
+        self.password = password
+        self.isSupervisor = isSupervisor
+    }
 }

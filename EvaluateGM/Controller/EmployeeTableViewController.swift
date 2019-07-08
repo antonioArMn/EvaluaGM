@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class EmployeeTableViewController: UITableViewController {
     
@@ -15,10 +16,13 @@ class EmployeeTableViewController: UITableViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     //Properties
-    var user: User?
+    //var user: User? //We dont need to receive user from loginVC
+    var currentUser: User?
     var sections = [Section]()
     var employee = Employee(name: "Name", lastName: "lastName", type: .forklift)
     var filteredEmployees = [Employee]() //For search bar
+    
+    var ref: DatabaseReference!
     
 //    var forkliftEmployees: [Employee] = []
 //    var deliveryEmployees: [Employee] = []
@@ -129,13 +133,18 @@ class EmployeeTableViewController: UITableViewController {
         super.viewDidLoad()
         setupNavigationBar()
         
+        ref = Database.database().reference()
+        readCurrentUser()
+        
         tableView.dataSource = self
         tableView.delegate = self
-        guard let user = user else{
-            print("User no received in EmployeeTableVC")
-            return
-        }
-        print("User received in EmployeeTableVC: \(user)")
+        
+        //guard let user = user else{
+        //    print("User no received in EmployeeTableVC")
+        //    return
+        //}
+        //print("User received in EmployeeTableVC: \(user)")
+        
         orderEmployees(employeesArray: forkliftEmployees)
     }
     
@@ -233,7 +242,7 @@ class EmployeeTableViewController: UITableViewController {
     }
     
     @IBAction func addEmployeeButtonTapped(_ sender: UIBarButtonItem) {
-        guard let user = user else{
+        guard let user = currentUser else{
             return
         }
         if user.isSupervisor {
@@ -282,6 +291,25 @@ class EmployeeTableViewController: UITableViewController {
         sections = keys.map{Section(letter: $0, employees: groupedDictionary[$0]!.sorted(by: <))}
     }
     
+    func readCurrentUser() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        ref.child("users").child(userId).observeSingleEvent(of: .value) { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let name = value?["name"] as? String ?? ""
+            let lastName = value?["lastName"] as? String ?? ""
+            let email = value?["email"] as? String ?? ""
+            let password = value?["password"] as? String ?? ""
+            let isSupervisor = value?["isSupervisor"] as? Bool ?? false
+            let userId = value?["userId"] as? String ?? ""
+            self.currentUser = User(name: name, lastName: lastName, email: email, password: password, isSupervisor: isSupervisor)
+            guard var currentUser = self.currentUser else {
+                return
+            }
+            currentUser.userId = userId
+            print("Current user: \(currentUser)")
+        }
+    }
+    
     //Setup segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "toDetailVC") {
@@ -289,7 +317,7 @@ class EmployeeTableViewController: UITableViewController {
                 print("Cant set employee")
                 return
             }
-            detailTableViewController.user = user
+            detailTableViewController.user = currentUser //user
             detailTableViewController.employee = sections[section].employees[row]
             detailTableViewController.delegate = self
         }

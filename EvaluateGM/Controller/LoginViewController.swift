@@ -13,8 +13,6 @@ import FirebaseDatabase
 class LoginViewController: UIViewController {
     
     //Outlets
-    @IBOutlet weak var supervisorSwith: UISwitch!
-    @IBOutlet weak var humanResourcesSwith: UISwitch!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -23,6 +21,7 @@ class LoginViewController: UIViewController {
     //Properties
     var user: User?
     var createdUser: User?
+    var createdPassword: String?
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
@@ -68,22 +67,6 @@ class LoginViewController: UIViewController {
     }
     
     //Actions
-    @IBAction func supervisorSwitchChange(_ sender: UISwitch) {
-        if sender.isOn {
-            humanResourcesSwith.isOn = false
-        } else {
-            humanResourcesSwith.isOn = true
-        }
-    }
-    
-    @IBAction func humanResourcesSwitchChange(_ sender: UISwitch) {
-        if sender.isOn {
-            supervisorSwith.isOn = false
-        } else {
-            supervisorSwith.isOn = true
-        }
-    }
-    
     @IBAction func hideKeyboard(_ sender: Any) {
         view.endEditing(true)
     }
@@ -99,22 +82,22 @@ class LoginViewController: UIViewController {
     }
     
     //Functions
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "toEmployeesTableVC") {
-            guard let navigationController = segue.destination as? UINavigationController, let employeeTableViewController = navigationController.viewControllers.first as? EmployeeTableViewController else {
-                print("Cant set login user")
-                return
-            }
-            employeeTableViewController.user = self.user
-        }
-    }
+    //Dont need to send data
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if(segue.identifier == "toEmployeesTableVC") {
+//            guard let navigationController = segue.destination as? UINavigationController, let employeeTableViewController = navigationController.viewControllers.first as? EmployeeTableViewController else {
+//                print("Cant set login user")
+//                return
+//            }
+//            employeeTableViewController.user = self.user
+//        }
+//    }
     
     func authenticateUser(email: String, pass: String) {
         Auth.auth().signIn(withEmail: email, password: pass) { (user, error) in
             if let user = user {
                 //Successful login
                 print("Successful login, user: \(user)")
-                self.user = User(name: "Nombre", lastName: "Apellidos", email: email, password: pass, isSupervisor: self.supervisorSwith.isOn)
                 self.performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
             } else {
                 //Failed login
@@ -140,6 +123,7 @@ class LoginViewController: UIViewController {
                                      "lastName": newUser.lastName,
                                      "email": email,
                                      "isSupervisor": newUser.isSupervisor,
+                                     "password": newUser.password,
                                      "userId": userId]
         ref.child("users").child(userId).setValue(fields)
         let alertController = UIAlertController(title: "Nuevo usuario", message: "Nuevo usuario registrado exitosamente.", preferredStyle: .alert)
@@ -174,16 +158,6 @@ class LoginViewController: UIViewController {
         loginButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         loginButton.layer.cornerRadius = 5.0
-        
-        supervisorSwith.translatesAutoresizingMaskIntoConstraints = false
-        supervisorSwith.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-        
-        humanResourcesSwith.translatesAutoresizingMaskIntoConstraints = false
-        humanResourcesSwith.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-        
-        //Switches
-        supervisorSwith.isOn = true
-        humanResourcesSwith.isOn = false
     }
 
 }
