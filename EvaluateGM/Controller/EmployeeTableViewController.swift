@@ -237,7 +237,7 @@ class EmployeeTableViewController: UITableViewController {
             return
         }
         if user.isSupervisor {
-            let alertController = UIAlertController(title: "Acción sólo válida para usuarios de recursos humanos.", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Acceso denegado", message: "Acción sólo válida para usuarios de recursos humanos.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
@@ -246,7 +246,7 @@ class EmployeeTableViewController: UITableViewController {
         }
     }
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Cerrar sesión", message: "¿Está seguro que desea cerrar sesión?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Cierre de sesión", message: "¿Está seguro que desea cerrar sesión?", preferredStyle: .actionSheet)
         let acceptAction = UIAlertAction(title: "Si", style: .destructive) { (_) in
             do {
                 try Auth.auth().signOut()

@@ -110,7 +110,7 @@ class DetailTableViewController: UITableViewController {
         performSegue(withIdentifier: "toEvaluateVC", sender: nil)
     }
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Cerrar sesión", message: "¿Está seguro que desea cerrar sesión?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Cierre de sesión", message: "¿Está seguro que desea cerrar sesión?", preferredStyle: .actionSheet)
         let acceptAction = UIAlertAction(title: "Si", style: .destructive) { (_) in
             do {
                 try Auth.auth().signOut()
@@ -140,7 +140,7 @@ class DetailTableViewController: UITableViewController {
                 }
                 evaluateTableViewController.employee = employee
             } else {
-                let alertController = UIAlertController(title: "Acción sólo válida para usuarios supervisores.", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Acceso denegado", message: "Acción sólo válida para usuarios supervisores.", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                 alertController.addAction(okAction)
                 present(alertController, animated: true, completion: nil)
