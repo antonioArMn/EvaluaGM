@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 struct User {
-    //let name: String
-    let email: String
-    let password: String
-    let isSupervisor: Bool
+    var name: String
+    var lastName: String
+    var email: String
+    var password: String
+    var isSupervisor: Bool
 }

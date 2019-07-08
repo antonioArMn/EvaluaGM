@@ -95,7 +95,6 @@ class AddEmployeeViewController: UIViewController, UIPickerViewDelegate, UIPicke
         } else {
             saveButton.isEnabled = false
         }
-        //saveButton.isEnabled = false
         
         imageView.layer.borderWidth = 6.0
         imageView.layer.masksToBounds = false

@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
 
     //Properties
     var user: User?
+    var createdUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +30,36 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        emailTextField.text = ""
+        passwordTextField.text = ""
         //Uncomment to keep session and not login every time app runs
         //keepOpennedSession()
     }
     
     //Unwind segues
     @IBAction func saveUser(unwindSegue: UIStoryboardSegue) {
-        print("New user saved")
+        guard let addUserViewController = unwindSegue.source as? AddUserTableViewController else {
+            print("Cant receive new user")
+            return
+        }
+        createdUser = addUserViewController.user
+        guard let newUser = createdUser else {
+            return
+        }
+        //Create User
+        Auth.auth().createUser(withEmail: newUser.email, password: newUser.password) { (user, error) in
+            if user != nil {
+                print("User created successfully")
+            } else {
+                if let error = error?.localizedDescription {
+                    print("Firebase error: \(error)")
+                } else {
+                    print("Code error")
+                }
+            }
+        }
     }
     @IBAction func cancelNewUser(unwindSegue: UIStoryboardSegue) {
-        print("New user canceled")
     }
     
     //Actions
@@ -88,7 +109,7 @@ class LoginViewController: UIViewController {
             if let user = user {
                 //Successful login
                 print("Successful login, user: \(user)")
-                self.user = User(email: email, password: pass, isSupervisor: self.supervisorSwith.isOn)
+                self.user = User(name: "Nombre", lastName: "Apellidos", email: email, password: pass, isSupervisor: self.supervisorSwith.isOn)
                 self.performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
             } else {
                 //Failed login

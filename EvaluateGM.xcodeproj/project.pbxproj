@@ -15,7 +15,7 @@
 		F718A61F22CE3A6600BD7D1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F718A61C22CE3A6500BD7D1F /* GoogleService-Info.plist */; };
 		F73ED53322B4089C004EB83B /* UITextField+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73ED53222B4089C004EB83B /* UITextField+Empty.swift */; };
 		F73F456022C69AD1008C33E9 /* AddEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73F455F22C69AD1008C33E9 /* AddEmployeeViewController.swift */; };
-		F78AD3A022CE6D26009EDBAD /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78AD39F22CE6D26009EDBAD /* AddUserViewController.swift */; };
+		F797875B22D2A4DF009783C4 /* AddUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797875A22D2A4DF009783C4 /* AddUserTableViewController.swift */; };
 		F7A01E1622C0066E009331AD /* EvaluateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A01E1522C0066E009331AD /* EvaluateTableViewController.swift */; };
 		F7A8EBF222B1A2D700B23BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8EBF122B1A2D700B23BBA /* AppDelegate.swift */; };
 		F7A8EBF722B1A2D700B23BBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7A8EBF522B1A2D700B23BBA /* Main.storyboard */; };
@@ -61,7 +61,7 @@
 		F718A61C22CE3A6500BD7D1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F73ED53222B4089C004EB83B /* UITextField+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Empty.swift"; sourceTree = "<group>"; };
 		F73F455F22C69AD1008C33E9 /* AddEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeViewController.swift; sourceTree = "<group>"; };
-		F78AD39F22CE6D26009EDBAD /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
+		F797875A22D2A4DF009783C4 /* AddUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewController.swift; sourceTree = "<group>"; };
 		F7A01E1522C0066E009331AD /* EvaluateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateTableViewController.swift; sourceTree = "<group>"; };
 		F7A8EBEE22B1A2D700B23BBA /* EvaluateGM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaluateGM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7A8EBF122B1A2D700B23BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 				F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */,
 				F7A01E1522C0066E009331AD /* EvaluateTableViewController.swift */,
 				F73F455F22C69AD1008C33E9 /* AddEmployeeViewController.swift */,
-				F78AD39F22CE6D26009EDBAD /* AddUserViewController.swift */,
+				F797875A22D2A4DF009783C4 /* AddUserTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,10 +476,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A8EC2422B1C5E300B23BBA /* LoginViewController.swift in Sources */,
-				F78AD3A022CE6D26009EDBAD /* AddUserViewController.swift in Sources */,
 				F7A8EC2822B20AC300B23BBA /* Employee.swift in Sources */,
 				F7A01E1622C0066E009331AD /* EvaluateTableViewController.swift in Sources */,
 				F7DC5DDF22BD3AE300DD7FD7 /* EmployeeTableViewController.swift in Sources */,
+				F797875B22D2A4DF009783C4 /* AddUserTableViewController.swift in Sources */,
 				F73F456022C69AD1008C33E9 /* AddEmployeeViewController.swift in Sources */,
 				F7BF800B22BE926900DD5719 /* ImagePicker.swift in Sources */,
 				F7DC5DDD22BD398400DD7FD7 /* EmployeeCell.swift in Sources */,
