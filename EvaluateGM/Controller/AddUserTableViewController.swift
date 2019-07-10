@@ -87,7 +87,7 @@ class AddUserTableViewController: UITableViewController {
         } else {
             samePasswords = false
             passwordsIndicator.text = "✗"
-            passwordsIndicator.textColor = UIColor(red:0.58, green:0.07, blue:0.00, alpha:1.0)
+            passwordsIndicator.textColor = .red
         }
         if sender.text?.count != 0 && nameTextField.text?.count != 0 && lastNameTextField.text?.count != 0 && emailTextField.text?.count != 0 && reafirmPasswordTextField.text?.count != 0 && samePasswords {
             saveButton.isEnabled = true
@@ -104,7 +104,7 @@ class AddUserTableViewController: UITableViewController {
         } else {
             samePasswords = false
             passwordsIndicator.text = "✗"
-            passwordsIndicator.textColor = UIColor(red:0.58, green:0.07, blue:0.00, alpha:1.0)
+            passwordsIndicator.textColor = .red
         }
         if sender.text?.count != 0 && nameTextField.text?.count != 0 && lastNameTextField.text?.count != 0 && emailTextField.text?.count != 0 && passwordTextField.text?.count != 0 && samePasswords {
             saveButton.isEnabled = true

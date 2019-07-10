@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class EmployeeTableViewController: UITableViewController {
     
@@ -340,6 +341,25 @@ class EmployeeTableViewController: UITableViewController {
         case .deliveryAssistant:
             deliveryAssistantEmployees.append(employee)
         }
+        //Save in storage
+        let storage = Storage.storage().reference()
+        let imageName = UUID()
+        let forkliftDirectory = storage.child("forkliftProfileImages/\(imageName)")
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/png"
+        forkliftDirectory.putData(employee.photo.pngData()!, metadata: metadata) { (data, error) in
+            if error == nil {
+                print("Forklift employee profile image saved.")
+            } else {
+                if let error = error?.localizedDescription {
+                    print("Firebase error: \(error)")
+                } else {
+                    print("Code error")
+                }
+            }
+        }
+        
+        //Save in database
     }
     @IBAction func cancelNewEmployee(unwindSegue: UIStoryboardSegue) {
 
