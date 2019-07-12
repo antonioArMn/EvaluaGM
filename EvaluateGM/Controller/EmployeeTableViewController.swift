@@ -145,7 +145,7 @@ class EmployeeTableViewController: UITableViewController {
         //    return
         //}
         //print("User received in EmployeeTableVC: \(user)")
-        
+        readForkliftEmployees()
         orderEmployees(employeesArray: forkliftEmployees)
     }
     
@@ -311,8 +311,20 @@ class EmployeeTableViewController: UITableViewController {
         }
     }
     
-    func readEmployees() {
-        
+    func readForkliftEmployees() {
+        print("start readForkliftEmployees")
+        ref.child("forkliftEmployees").observe(DataEventType.value) { (snapshot) in
+            self.forkliftEmployees.removeAll()
+            for employee in snapshot.children.allObjects as! [DataSnapshot] {
+                let values = employee.value as? [String: AnyObject]
+                let name = values!["name"] as? String ?? ""
+                let lastname = values!["lastName"] as? String ?? ""
+                let forkliftEmployee = Employee(name: name, lastName: lastname, type: .forklift)
+                self.forkliftEmployees.append(forkliftEmployee)
+            }
+            print(self.forkliftEmployees)
+        }
+        print("end readForkliftEmployees")
     }
     
     //Setup segue
