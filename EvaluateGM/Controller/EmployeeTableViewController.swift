@@ -146,24 +146,28 @@ class EmployeeTableViewController: UITableViewController {
         //}
         //print("User received in EmployeeTableVC: \(user)")
         readForkliftEmployees()
-        orderEmployees(employeesArray: forkliftEmployees)
+        //orderEmployees(employeesArray: forkliftEmployees)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            orderEmployees(employeesArray: forkliftEmployees)
+            //orderEmployees(employeesArray: forkliftEmployees)
+            readForkliftEmployees()
         case 1:
-            orderEmployees(employeesArray: deliveryEmployees)
+            //orderEmployees(employeesArray: deliveryEmployees)
+            readDeliveryEmployees()
         case 2:
-            orderEmployees(employeesArray: warehouseAssistantEmployees)
+            //orderEmployees(employeesArray: warehouseAssistantEmployees)
+            readWarehouseEmployees()
         case 3:
-            orderEmployees(employeesArray: deliveryAssistantEmployees)
+            //orderEmployees(employeesArray: deliveryAssistantEmployees)
+            readDeliveryAssistantEmployees()
         default:
             print("Other case")
         }
-        tableView.reloadData()
+        //tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -229,17 +233,21 @@ class EmployeeTableViewController: UITableViewController {
     @IBAction func segmentedControlChange(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            orderEmployees(employeesArray: forkliftEmployees)
+            //orderEmployees(employeesArray: forkliftEmployees)
+            readForkliftEmployees()
         case 1:
-            orderEmployees(employeesArray: deliveryEmployees)
+            //orderEmployees(employeesArray: deliveryEmployees)
+            readDeliveryEmployees()
         case 2:
-            orderEmployees(employeesArray: warehouseAssistantEmployees)
+            //orderEmployees(employeesArray: warehouseAssistantEmployees)
+            readWarehouseEmployees()
         case 3:
-            orderEmployees(employeesArray: deliveryAssistantEmployees)
+            //orderEmployees(employeesArray: deliveryAssistantEmployees)
+            readDeliveryAssistantEmployees()
         default:
             print("Other case")
         }
-        tableView.reloadData()
+        //tableView.reloadData()
     }
     
     @IBAction func addEmployeeButtonTapped(_ sender: UIBarButtonItem) {
@@ -312,7 +320,6 @@ class EmployeeTableViewController: UITableViewController {
     }
     
     func readForkliftEmployees() {
-        print("start readForkliftEmployees")
         ref.child("forkliftEmployees").observe(DataEventType.value) { (snapshot) in
             self.forkliftEmployees.removeAll()
             for employee in snapshot.children.allObjects as! [DataSnapshot] {
@@ -322,9 +329,62 @@ class EmployeeTableViewController: UITableViewController {
                 let forkliftEmployee = Employee(name: name, lastName: lastname, type: .forklift)
                 self.forkliftEmployees.append(forkliftEmployee)
             }
-            print(self.forkliftEmployees)
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.forkliftEmployees)
+                self.tableView.reloadData()
+            }
         }
-        print("end readForkliftEmployees")
+    }
+    
+    func readDeliveryEmployees() {
+        ref.child("deliveryEmployees").observe(DataEventType.value) { (snapshot) in
+            self.deliveryEmployees.removeAll()
+            for employee in snapshot.children.allObjects as! [DataSnapshot] {
+                let values = employee.value as? [String: AnyObject]
+                let name = values!["name"] as? String ?? ""
+                let lastname = values!["lastName"] as? String ?? ""
+                let deliveryEmployee = Employee(name: name, lastName: lastname, type: .delivery)
+                self.deliveryEmployees.append(deliveryEmployee)
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.deliveryEmployees)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func readWarehouseEmployees() {
+        ref.child("warehouseAssistantEmployees").observe(DataEventType.value) { (snapshot) in
+            self.warehouseAssistantEmployees.removeAll()
+            for employee in snapshot.children.allObjects as! [DataSnapshot] {
+                let values = employee.value as? [String: AnyObject]
+                let name = values!["name"] as? String ?? ""
+                let lastname = values!["lastName"] as? String ?? ""
+                let warehouseEmployee = Employee(name: name, lastName: lastname, type: .warehouseAssistant)
+                self.warehouseAssistantEmployees.append(warehouseEmployee)
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func readDeliveryAssistantEmployees() {
+        ref.child("deliveryAssistantEmployees").observe(DataEventType.value) { (snapshot) in
+            self.deliveryAssistantEmployees.removeAll()
+            for employee in snapshot.children.allObjects as! [DataSnapshot] {
+                let values = employee.value as? [String: AnyObject]
+                let name = values!["name"] as? String ?? ""
+                let lastname = values!["lastName"] as? String ?? ""
+                let deliveryAssistantEmployee = Employee(name: name, lastName: lastname, type: .deliveryAssistant)
+                self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
+                self.tableView.reloadData()
+            }
+        }
     }
     
     //Setup segue
