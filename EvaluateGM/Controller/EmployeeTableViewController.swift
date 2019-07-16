@@ -30,106 +30,6 @@ class EmployeeTableViewController: UITableViewController {
     var warehouseAssistantEmployees: [Employee] = []
     var deliveryAssistantEmployees: [Employee] = []
     
-//    var forkliftEmployees: [Employee] = [
-//        Employee(name: "Christian", lastName: "Montacarga Aranda", type: .forklift),
-//        Employee(name: "Pablo", lastName: "Corona Flores", type: .forklift),
-//        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .forklift),
-//        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .forklift),
-//        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .forklift),
-//        Employee(name: "José", lastName: "Herrera Ruiz", type: .forklift),
-//        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .forklift),
-//        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .forklift),
-//        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .forklift),
-//        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .forklift),
-//        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .forklift),
-//        Employee(name: "Diego", lastName: "Reyes Miranda", type: .forklift),
-//        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .forklift),
-//        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .forklift),
-//        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .forklift),
-//        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .forklift),
-//        Employee(name: "Aaron", lastName: "Solis Pérez", type: .forklift),
-//        Employee(name: "Samuel", lastName: "Pérez García", type: .forklift),
-//        Employee(name: "Josué", lastName: "Corona Flores", type: .forklift),
-//        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .forklift),
-//        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .forklift),
-//        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .forklift)
-//    ]
-//
-//    var deliveryEmployees: [Employee] = [
-//        Employee(name: "Christian", lastName: "Reparto Aranda", type: .delivery),
-//        Employee(name: "Pablo", lastName: "Corona Flores", type: .delivery),
-//        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .delivery),
-//        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .delivery),
-//        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .delivery),
-//        Employee(name: "José", lastName: "Herrera Ruiz", type: .delivery),
-//        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .delivery),
-//        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .delivery),
-//        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .delivery),
-//        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .delivery),
-//        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .delivery),
-//        Employee(name: "Diego", lastName: "Reyes Miranda", type: .delivery),
-//        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .delivery),
-//        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .delivery),
-//        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .delivery),
-//        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .delivery),
-//        Employee(name: "Aaron", lastName: "Solis Pérez", type: .delivery),
-//        Employee(name: "Samuel", lastName: "Pérez García", type: .delivery),
-//        Employee(name: "Josué", lastName: "Corona Flores", type: .delivery),
-//        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .delivery),
-//        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .delivery),
-//        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .delivery)
-//    ]
-//
-//    var warehouseAssistantEmployees: [Employee] = [
-//        Employee(name: "Christian", lastName: "A.Almacen Aranda", type: .warehouseAssistant),
-//        Employee(name: "Pablo", lastName: "Corona Flores", type: .warehouseAssistant),
-//        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .warehouseAssistant),
-//        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .warehouseAssistant),
-//        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .warehouseAssistant),
-//        Employee(name: "José", lastName: "Herrera Ruiz", type: .warehouseAssistant),
-//        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .warehouseAssistant),
-//        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .warehouseAssistant),
-//        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .warehouseAssistant),
-//        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .warehouseAssistant),
-//        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .warehouseAssistant),
-//        Employee(name: "Diego", lastName: "Reyes Miranda", type: .warehouseAssistant),
-//        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .warehouseAssistant),
-//        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .warehouseAssistant),
-//        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .warehouseAssistant),
-//        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .warehouseAssistant),
-//        Employee(name: "Aaron", lastName: "Solis Pérez", type: .warehouseAssistant),
-//        Employee(name: "Samuel", lastName: "Pérez García", type: .warehouseAssistant),
-//        Employee(name: "Josué", lastName: "Corona Flores", type: .warehouseAssistant),
-//        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .warehouseAssistant),
-//        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .warehouseAssistant),
-//        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .warehouseAssistant)
-//    ]
-//
-//    var deliveryAssistantEmployees: [Employee] = [
-//        Employee(name: "Christian", lastName: "A.Reparto Aranda", type: .deliveryAssistant),
-//        Employee(name: "Pablo", lastName: "Corona Flores", type: .deliveryAssistant),
-//        Employee(name: "Gerardo", lastName: "Cruz Ramírez", type: .deliveryAssistant),
-//        Employee(name: "Fernando", lastName: "Belmont Hurtado", type: .deliveryAssistant),
-//        Employee(name: "José Antonio", lastName: "Arellano Mendoza", type: .deliveryAssistant),
-//        Employee(name: "José", lastName: "Herrera Ruiz", type: .deliveryAssistant),
-//        Employee(name: "César Alberto", lastName: "Bazán Caballero", type: .deliveryAssistant),
-//        Employee(name: "Abraham", lastName: "Curiel Reyes", type: .deliveryAssistant),
-//        Employee(name: "Andrés", lastName: "Guardado Hernández", type: .deliveryAssistant),
-//        Employee(name: "Guillermo", lastName: "Ochoa Guerrero", type: .deliveryAssistant),
-//        Employee(name: "Raúl Alonso", lastName: "Jiménez Mendoza", type: .deliveryAssistant),
-//        Employee(name: "Diego", lastName: "Reyes Miranda", type: .deliveryAssistant),
-//        Employee(name: "Rodrigo", lastName: "Flores Corona", type: .deliveryAssistant),
-//        Employee(name: "Francisco", lastName: "Guerrero Treviño", type: .deliveryAssistant),
-//        Employee(name: "Jesús", lastName: "Miranda Blanco", type: .deliveryAssistant),
-//        Employee(name: "Julio Armando", lastName: "Calderón Dorantes", type: .deliveryAssistant),
-//        Employee(name: "Aaron", lastName: "Solis Pérez", type: .deliveryAssistant),
-//        Employee(name: "Samuel", lastName: "Pérez García", type: .deliveryAssistant),
-//        Employee(name: "Josué", lastName: "Corona Flores", type: .deliveryAssistant),
-//        Employee(name: "Uriel", lastName: "Antuna Cruz", type: .deliveryAssistant),
-//        Employee(name: "Marco Antonio", lastName: "Tabares Abarca", type: .deliveryAssistant),
-//        Employee(name: "Jorge", lastName: "Ruiz Frias", type: .deliveryAssistant)
-//    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -145,29 +45,23 @@ class EmployeeTableViewController: UITableViewController {
         //    return
         //}
         //print("User received in EmployeeTableVC: \(user)")
-        readForkliftEmployees()
-        //orderEmployees(employeesArray: forkliftEmployees)
+        //readForkliftEmployees()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            //orderEmployees(employeesArray: forkliftEmployees)
             readForkliftEmployees()
         case 1:
-            //orderEmployees(employeesArray: deliveryEmployees)
             readDeliveryEmployees()
         case 2:
-            //orderEmployees(employeesArray: warehouseAssistantEmployees)
             readWarehouseEmployees()
         case 3:
-            //orderEmployees(employeesArray: deliveryAssistantEmployees)
             readDeliveryAssistantEmployees()
         default:
             print("Other case")
         }
-        //tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -233,21 +127,16 @@ class EmployeeTableViewController: UITableViewController {
     @IBAction func segmentedControlChange(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            //orderEmployees(employeesArray: forkliftEmployees)
             readForkliftEmployees()
         case 1:
-            //orderEmployees(employeesArray: deliveryEmployees)
             readDeliveryEmployees()
         case 2:
-            //orderEmployees(employeesArray: warehouseAssistantEmployees)
             readWarehouseEmployees()
         case 3:
-            //orderEmployees(employeesArray: deliveryAssistantEmployees)
             readDeliveryAssistantEmployees()
         default:
             print("Other case")
         }
-        //tableView.reloadData()
     }
     
     @IBAction func addEmployeeButtonTapped(_ sender: UIBarButtonItem) {
@@ -326,12 +215,26 @@ class EmployeeTableViewController: UITableViewController {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
                 let lastname = values!["lastName"] as? String ?? ""
-                let forkliftEmployee = Employee(name: name, lastName: lastname, type: .forklift)
-                self.forkliftEmployees.append(forkliftEmployee)
-            }
-            DispatchQueue.main.async {
-                self.orderEmployees(employeesArray: self.forkliftEmployees)
-                self.tableView.reloadData()
+                var forkliftEmployee = Employee(name: name, lastName: lastname, type: .forklift)
+                let photoURL = values!["photo"] as? String ?? ""
+                let imageStorage = Storage.storage().reference(forURL: photoURL)
+                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                    if let error = error?.localizedDescription {
+                        print("Error while downloading image: \(error)")
+                    } else {
+                        if let imageData = data {
+                            print("Correct image data")
+                            forkliftEmployee.photo = UIImage(data: imageData)!
+                            self.forkliftEmployees.append(forkliftEmployee)
+                            print("Total: \(self.forkliftEmployees.count)")
+                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+                            DispatchQueue.main.async {
+                                self.orderEmployees(employeesArray: self.forkliftEmployees)
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                })
             }
         }
     }
@@ -343,12 +246,26 @@ class EmployeeTableViewController: UITableViewController {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
                 let lastname = values!["lastName"] as? String ?? ""
-                let deliveryEmployee = Employee(name: name, lastName: lastname, type: .delivery)
-                self.deliveryEmployees.append(deliveryEmployee)
-            }
-            DispatchQueue.main.async {
-                self.orderEmployees(employeesArray: self.deliveryEmployees)
-                self.tableView.reloadData()
+                var deliveryEmployee = Employee(name: name, lastName: lastname, type: .delivery)
+                let photoURL = values!["photo"] as? String ?? ""
+                let imageStorage = Storage.storage().reference(forURL: photoURL)
+                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                    if let error = error?.localizedDescription {
+                        print("Error while downloading image: \(error)")
+                    } else {
+                        if let imageData = data {
+                            print("Correct image data")
+                            deliveryEmployee.photo = UIImage(data: imageData)!
+                            self.deliveryEmployees.append(deliveryEmployee)
+                            print("Total: \(self.deliveryEmployees.count)")
+                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+                            DispatchQueue.main.async {
+                                self.orderEmployees(employeesArray: self.deliveryEmployees)
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                })
             }
         }
     }
@@ -360,12 +277,26 @@ class EmployeeTableViewController: UITableViewController {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
                 let lastname = values!["lastName"] as? String ?? ""
-                let warehouseEmployee = Employee(name: name, lastName: lastname, type: .warehouseAssistant)
-                self.warehouseAssistantEmployees.append(warehouseEmployee)
-            }
-            DispatchQueue.main.async {
-                self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
-                self.tableView.reloadData()
+                var warehouseEmployee = Employee(name: name, lastName: lastname, type: .warehouseAssistant)
+                let photoURL = values!["photo"] as? String ?? ""
+                let imageStorage = Storage.storage().reference(forURL: photoURL)
+                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                    if let error = error?.localizedDescription {
+                        print("Error while downloading image: \(error)")
+                    } else {
+                        if let imageData = data {
+                            print("Correct image data")
+                            warehouseEmployee.photo = UIImage(data: imageData)!
+                            self.warehouseAssistantEmployees.append(warehouseEmployee)
+                            print("Total: \(self.warehouseAssistantEmployees.count)")
+                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+                            DispatchQueue.main.async {
+                                self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                })
             }
         }
     }
@@ -377,12 +308,26 @@ class EmployeeTableViewController: UITableViewController {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
                 let lastname = values!["lastName"] as? String ?? ""
-                let deliveryAssistantEmployee = Employee(name: name, lastName: lastname, type: .deliveryAssistant)
-                self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
-            }
-            DispatchQueue.main.async {
-                self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
-                self.tableView.reloadData()
+                var deliveryAssistantEmployee = Employee(name: name, lastName: lastname, type: .deliveryAssistant)
+                let photoURL = values!["photo"] as? String ?? ""
+                let imageStorage = Storage.storage().reference(forURL: photoURL)
+                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                    if let error = error?.localizedDescription {
+                        print("Error while downloading image: \(error)")
+                    } else {
+                        if let imageData = data {
+                            print("Correct image data")
+                            deliveryAssistantEmployee.photo = UIImage(data: imageData)!
+                            self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
+                            print("Total: \(self.deliveryAssistantEmployees.count)")
+                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+                            DispatchQueue.main.async {
+                                self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                })
             }
         }
     }
@@ -417,8 +362,8 @@ class EmployeeTableViewController: UITableViewController {
             let forkliftDirectory = storage.child("forkliftProfileImages/\(imageName)")
             let metadata = StorageMetadata()
             metadata.contentType = "image/png"
-            guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
-            forkliftDirectory.putData(data, metadata: metadata) { (data, error) in
+            //guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
+            forkliftDirectory.putData(employee.photo.pngData()!, metadata: metadata) { (data, error) in
                 if error == nil {
                     print("Forklift employee profile image saved.")
                 } else {
@@ -463,7 +408,6 @@ class EmployeeTableViewController: UITableViewController {
                                          "averageIndicator": employee.averageIndicator]
             
             ref.child("forkliftEmployees").child(idForkliftEmployee).setValue(fields)
-            //forkliftEmployees.append(employee)
         case .delivery:
             //Save image in storage
             let storage = Storage.storage().reference()
@@ -517,7 +461,6 @@ class EmployeeTableViewController: UITableViewController {
                                          "averageIndicator": employee.averageIndicator]
             
             ref.child("deliveryEmployees").child(idDeliveryEmployee).setValue(fields)
-            //deliveryEmployees.append(employee)
         case .warehouseAssistant:
             //Save image in storage
             let storage = Storage.storage().reference()
@@ -571,7 +514,6 @@ class EmployeeTableViewController: UITableViewController {
                                          "averageIndicator": employee.averageIndicator]
             
             ref.child("warehouseAssistantEmployees").child(idWarehouseAssistantEmployee).setValue(fields)
-            //warehouseAssistantEmployees.append(employee)
         case .deliveryAssistant:
             //Save image in storage
             let storage = Storage.storage().reference()
@@ -625,15 +567,9 @@ class EmployeeTableViewController: UITableViewController {
                                          "averageIndicator": employee.averageIndicator]
             
             ref.child("deliveryAssistantEmployees").child(idDeliveryAssistantEmployee).setValue(fields)
-            //deliveryAssistantEmployees.append(employee)
         }
-        
-//        let alertController = UIAlertController(title: "Nuevo empleado", message: "Nuevo empleado registrado exitosamente.", preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-//        alertController.addAction(okAction)
-//        self.present(alertController, animated: true, completion: nil)
-        
     }
+    
     @IBAction func cancelNewEmployee(unwindSegue: UIStoryboardSegue) {
 
     }
