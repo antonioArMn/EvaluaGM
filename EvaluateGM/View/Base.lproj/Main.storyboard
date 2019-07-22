@@ -1505,11 +1505,18 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="iee-NC-Tri"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Resumen" largeTitleDisplayMode="never" id="yPo-aG-NQc">
-                        <barButtonItem key="rightBarButtonItem" title="Evaluar" id="4ZX-EM-xmT">
-                            <connections>
-                                <action selector="evaluateButtonTapped:" destination="xPI-lw-LLJ" id="fKU-EK-Cge"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="trash" id="sDi-Rt-2MM">
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="xPI-lw-LLJ" id="ccd-Mi-uIl"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Evaluar" id="4ZX-EM-xmT">
+                                <connections>
+                                    <action selector="evaluateButtonTapped:" destination="xPI-lw-LLJ" id="fKU-EK-Cge"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

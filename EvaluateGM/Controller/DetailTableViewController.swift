@@ -113,6 +113,39 @@ class DetailTableViewController: UITableViewController {
     @IBAction func evaluateButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "toEvaluateVC", sender: nil)
     }
+    @IBAction func deleteButtonTapped(_ sender: UIBarButtonItem) {
+        guard let user = user  else {
+            return
+        }
+        if(user.isSupervisor) {
+            let alertController = UIAlertController(title: "Acceso denegado", message: "Acción sólo válida para usuarios de Recursos Humanos.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "Eliminar empleado", message: "¿Está seguro de eliminar el registro? Está acción es irreversible.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Si", style: .destructive) { (_) in
+                guard let currentEmployee = self.employee else {
+                    return
+                }
+                switch currentEmployee.type {
+                case .forklift:
+                    self.ref.child("forkliftEmployees").child(currentEmployee.id).removeValue()
+                case .delivery:
+                    self.ref.child("deliveryEmployees").child(currentEmployee.id).removeValue()
+                case .warehouseAssistant:
+                    self.ref.child("warehouseAssistantEmployees").child(currentEmployee.id).removeValue()
+                case .deliveryAssistant:
+                    self.ref.child("deliveryAssistantEmployees").child(currentEmployee.id).removeValue()
+                }
+                self.navigationController?.popViewController(animated: true)
+            }
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
+        }
+    }
     @IBAction func logout(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Cierre de sesión", message: "¿Está seguro que desea cerrar sesión?", preferredStyle: .actionSheet)
         let acceptAction = UIAlertAction(title: "Si", style: .destructive) { (_) in

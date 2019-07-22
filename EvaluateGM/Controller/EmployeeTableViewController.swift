@@ -211,6 +211,8 @@ class EmployeeTableViewController: UITableViewController {
     func readForkliftEmployees() {
         ref.child("forkliftEmployees").observe(DataEventType.value) { (snapshot) in
             self.forkliftEmployees.removeAll()
+            self.orderEmployees(employeesArray: self.forkliftEmployees)
+            self.tableView.reloadData()
             for employee in snapshot.children.allObjects as! [DataSnapshot] {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
@@ -297,6 +299,8 @@ class EmployeeTableViewController: UITableViewController {
     func readDeliveryEmployees() {
         ref.child("deliveryEmployees").observe(DataEventType.value) { (snapshot) in
             self.deliveryEmployees.removeAll()
+            self.orderEmployees(employeesArray: self.deliveryEmployees)
+            self.tableView.reloadData()
             for employee in snapshot.children.allObjects as! [DataSnapshot] {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
@@ -383,6 +387,8 @@ class EmployeeTableViewController: UITableViewController {
     func readWarehouseEmployees() {
         ref.child("warehouseAssistantEmployees").observe(DataEventType.value) { (snapshot) in
             self.warehouseAssistantEmployees.removeAll()
+            self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
+            self.tableView.reloadData()
             for employee in snapshot.children.allObjects as! [DataSnapshot] {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
@@ -469,6 +475,8 @@ class EmployeeTableViewController: UITableViewController {
     func readDeliveryAssistantEmployees() {
         ref.child("deliveryAssistantEmployees").observe(DataEventType.value) { (snapshot) in
             self.deliveryAssistantEmployees.removeAll()
+            self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
+            self.tableView.reloadData()
             for employee in snapshot.children.allObjects as! [DataSnapshot] {
                 let values = employee.value as? [String: AnyObject]
                 let name = values!["name"] as? String ?? ""
