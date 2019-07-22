@@ -254,7 +254,6 @@ class EmployeeTableViewController: UITableViewController {
                         print("Error while downloading image: \(error)")
                     } else {
                         if let imageData = data {
-                            print("Correct image data")
                             deliveryEmployee.photo = UIImage(data: imageData)!
                             self.deliveryEmployees.append(deliveryEmployee)
                             print("Total: \(self.deliveryEmployees.count)")
@@ -285,7 +284,6 @@ class EmployeeTableViewController: UITableViewController {
                         print("Error while downloading image: \(error)")
                     } else {
                         if let imageData = data {
-                            print("Correct image data")
                             warehouseEmployee.photo = UIImage(data: imageData)!
                             self.warehouseAssistantEmployees.append(warehouseEmployee)
                             print("Total: \(self.warehouseAssistantEmployees.count)")
@@ -316,7 +314,6 @@ class EmployeeTableViewController: UITableViewController {
                         print("Error while downloading image: \(error)")
                     } else {
                         if let imageData = data {
-                            print("Correct image data")
                             deliveryAssistantEmployee.photo = UIImage(data: imageData)!
                             self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
                             print("Total: \(self.deliveryAssistantEmployees.count)")
@@ -362,8 +359,8 @@ class EmployeeTableViewController: UITableViewController {
             let forkliftDirectory = storage.child("forkliftProfileImages/\(imageName)")
             let metadata = StorageMetadata()
             metadata.contentType = "image/png"
-            //guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
-            forkliftDirectory.putData(employee.photo.pngData()!, metadata: metadata) { (data, error) in
+            guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
+            forkliftDirectory.putData(data, metadata: metadata) { (data, error) in
                 if error == nil {
                     print("Forklift employee profile image saved.")
                 } else {
