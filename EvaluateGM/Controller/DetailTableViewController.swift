@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 protocol DetailTableViewControllerDelegate: AnyObject {
     func update(_ employee: Employee)
@@ -20,6 +22,7 @@ class DetailTableViewController: UITableViewController {
     var employee: Employee?
     var imagePicker: ImagePicker!
     weak var delegate: DetailTableViewControllerDelegate?
+    var ref: DatabaseReference!
     
     //General Outlets
     @IBOutlet weak var imageView: UIImageView!
@@ -74,11 +77,12 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         guard let employee = employee else{
             print("Employee no received in detailVC")
             return
         }
-        print("Employee received in detalVC: \(employee)")
+        print("Employee received in detailVC: \(employee)")
         setupUI()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }

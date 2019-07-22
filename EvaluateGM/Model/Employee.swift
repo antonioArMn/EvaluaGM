@@ -15,6 +15,8 @@ struct Employee: Equatable, Comparable {
     var photo: UIImage = UIImage(named: "User")!
     var name: String
     var lastName: String
+    var id: String = ""
+    var photoURL: String = ""
     var type: Type
     var hasBeenEvaluated: Bool {
         if averageArray.count == 0 {

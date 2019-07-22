@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 class EvaluateTableViewController: UITableViewController {
     
@@ -73,9 +76,11 @@ class EvaluateTableViewController: UITableViewController {
     
     //Properties
     var employee: Employee?
+    var ref: DatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         guard let employee = employee else{
             print("Employee no received in detailVC")
             return
