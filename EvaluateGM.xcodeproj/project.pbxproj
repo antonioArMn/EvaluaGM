@@ -64,7 +64,7 @@
 		F73F455F22C69AD1008C33E9 /* AddEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeViewController.swift; sourceTree = "<group>"; };
 		F797875A22D2A4DF009783C4 /* AddUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewController.swift; sourceTree = "<group>"; };
 		F7A01E1522C0066E009331AD /* EvaluateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateTableViewController.swift; sourceTree = "<group>"; };
-		F7A8EBEE22B1A2D700B23BBA /* EvaluateGM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaluateGM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7A8EBEE22B1A2D700B23BBA /* Evalúa GM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Evalúa GM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7A8EBF122B1A2D700B23BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7A8EBF622B1A2D700B23BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F7A8EBF822B1A2D800B23BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		F7A8EBEF22B1A2D700B23BBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F7A8EBEE22B1A2D700B23BBA /* EvaluateGM.app */,
+				F7A8EBEE22B1A2D700B23BBA /* Evalúa GM.app */,
 				F7A8EC0222B1A2D900B23BBA /* EvaluateGMTests.xctest */,
 				F7A8EC0D22B1A2D900B23BBA /* EvaluateGMUITests.xctest */,
 			);
@@ -246,9 +246,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F7A8EBED22B1A2D700B23BBA /* EvaluateGM */ = {
+		F7A8EBED22B1A2D700B23BBA /* Evalúa GM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F7A8EC1622B1A2D900B23BBA /* Build configuration list for PBXNativeTarget "EvaluateGM" */;
+			buildConfigurationList = F7A8EC1622B1A2D900B23BBA /* Build configuration list for PBXNativeTarget "Evalúa GM" */;
 			buildPhases = (
 				EE81F6573A92F46E6361F4F3 /* [CP] Check Pods Manifest.lock */,
 				F7A8EBEA22B1A2D700B23BBA /* Sources */,
@@ -260,9 +260,9 @@
 			);
 			dependencies = (
 			);
-			name = EvaluateGM;
+			name = "Evalúa GM";
 			productName = EvaluateGM;
-			productReference = F7A8EBEE22B1A2D700B23BBA /* EvaluateGM.app */;
+			productReference = F7A8EBEE22B1A2D700B23BBA /* Evalúa GM.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F7A8EC0122B1A2D900B23BBA /* EvaluateGMTests */ = {
@@ -339,7 +339,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F7A8EBED22B1A2D700B23BBA /* EvaluateGM */,
+				F7A8EBED22B1A2D700B23BBA /* Evalúa GM */,
 				F7A8EC0122B1A2D900B23BBA /* EvaluateGMTests */,
 				F7A8EC0C22B1A2D900B23BBA /* EvaluateGMUITests */,
 			);
@@ -515,12 +515,12 @@
 /* Begin PBXTargetDependency section */
 		F7A8EC0422B1A2D900B23BBA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F7A8EBED22B1A2D700B23BBA /* EvaluateGM */;
+			target = F7A8EBED22B1A2D700B23BBA /* Evalúa GM */;
 			targetProxy = F7A8EC0322B1A2D900B23BBA /* PBXContainerItemProxy */;
 		};
 		F7A8EC0F22B1A2D900B23BBA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F7A8EBED22B1A2D700B23BBA /* EvaluateGM */;
+			target = F7A8EBED22B1A2D700B23BBA /* Evalúa GM */;
 			targetProxy = F7A8EC0E22B1A2D900B23BBA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -793,7 +793,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F7A8EC1622B1A2D900B23BBA /* Build configuration list for PBXNativeTarget "EvaluateGM" */ = {
+		F7A8EC1622B1A2D900B23BBA /* Build configuration list for PBXNativeTarget "Evalúa GM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F7A8EC1722B1A2D900B23BBA /* Debug */,
