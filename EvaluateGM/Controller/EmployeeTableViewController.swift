@@ -50,17 +50,20 @@ class EmployeeTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            readForkliftEmployees()
-        case 1:
-            readDeliveryEmployees()
-        case 2:
-            readWarehouseEmployees()
-        case 3:
-            readDeliveryAssistantEmployees()
-        default:
-            print("Other case")
+        guard let active = self.navigationItem.searchController?.isActive else { return }
+        if !active {
+            switch segmentedControl.selectedSegmentIndex {
+            case 0:
+                readForkliftEmployees()
+            case 1:
+                readDeliveryEmployees()
+            case 2:
+                readWarehouseEmployees()
+            case 3:
+                readDeliveryAssistantEmployees()
+            default:
+                print("Other case")
+            }
         }
     }
 
@@ -175,6 +178,7 @@ class EmployeeTableViewController: UITableViewController {
         //Add search controller
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Buscar"
         searchController.searchBar.setValue("Cancelar", forKey: "_cancelButtonText")
         navigationItem.searchController = searchController
@@ -805,7 +809,73 @@ class EmployeeTableViewController: UITableViewController {
 
 extension EmployeeTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        //TODO
+        filterEmployees(search: (self.navigationItem.searchController?.searchBar.text)!)
+    }
+    func filterEmployees(search: String) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            if self.navigationItem.searchController?.searchBar.text?.count == 0 {
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.forkliftEmployees)
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.filteredEmployees = forkliftEmployees.filter({ (employee) -> Bool in
+                    return(employee.name.lowercased().contains(search.lowercased()) || employee.lastName.lowercased().contains(search.lowercased()))
+                })
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.filteredEmployees)
+                    self.tableView.reloadData()
+                }
+            }
+        case 1:
+            if self.navigationItem.searchController?.searchBar.text?.count == 0 {
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.deliveryEmployees)
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.filteredEmployees = deliveryEmployees.filter({ (employee) -> Bool in
+                    return(employee.name.lowercased().contains(search.lowercased()) || employee.lastName.lowercased().contains(search.lowercased()))
+                })
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.filteredEmployees)
+                    self.tableView.reloadData()
+                }
+            }
+        case 2:
+            if self.navigationItem.searchController?.searchBar.text?.count == 0 {
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.filteredEmployees = warehouseAssistantEmployees.filter({ (employee) -> Bool in
+                    return(employee.name.lowercased().contains(search.lowercased()) || employee.lastName.lowercased().contains(search.lowercased()))
+                })
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.filteredEmployees)
+                    self.tableView.reloadData()
+                }
+            }
+        case 3:
+            if self.navigationItem.searchController?.searchBar.text?.count == 0 {
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.filteredEmployees = deliveryAssistantEmployees.filter({ (employee) -> Bool in
+                    return(employee.name.lowercased().contains(search.lowercased()) || employee.lastName.lowercased().contains(search.lowercased()))
+                })
+                DispatchQueue.main.async {
+                    self.orderEmployees(employeesArray: self.filteredEmployees)
+                    self.tableView.reloadData()
+                }
+            }
+        default:
+            print("Other case")
+        }
     }
 }
 
