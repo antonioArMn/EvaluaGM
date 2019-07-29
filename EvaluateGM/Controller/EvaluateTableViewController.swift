@@ -283,6 +283,29 @@ class EvaluateTableViewController: UITableViewController {
         imageView.image = currentEmployee.photo
         nameLabel.text = currentEmployee.name + " " + currentEmployee.lastName
         typeLabel.text = currentEmployee.typeString
+        
+        //Profile image
+        if let photoUrl = URL(string: currentEmployee.photoURL) {
+            let task = URLSession.shared.dataTask(with: photoUrl) { (data, response, error) in
+                if error != nil {
+                    guard let error = error else {
+                        return
+                    }
+                    print("Error while downloading image: \(error)")
+                    return
+                }
+                DispatchQueue.main.async {
+                    if let data = data {
+                        self.imageView.image = UIImage(data: data)
+                    } else {
+                        self.imageView.image = UIImage(named: "User")
+                    }
+                }
+            }
+            task.resume()
+        }
+
+        
         if currentEmployee.hasBeenEvaluated {
             averageLabel.text = "\(String(format: "%.2f", currentEmployee.getGeneralAverage())) ★"
             if currentEmployee.averageIndicator {

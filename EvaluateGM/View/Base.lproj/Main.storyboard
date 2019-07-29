@@ -1511,7 +1511,7 @@
                                     <action selector="deleteButtonTapped:" destination="xPI-lw-LLJ" id="ccd-Mi-uIl"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Evaluar" id="4ZX-EM-xmT">
+                            <barButtonItem systemItem="compose" id="4ZX-EM-xmT">
                                 <connections>
                                     <action selector="evaluateButtonTapped:" destination="xPI-lw-LLJ" id="fKU-EK-Cge"/>
                                 </connections>

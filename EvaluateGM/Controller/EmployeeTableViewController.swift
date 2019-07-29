@@ -6,6 +6,7 @@
 //  Copyright © 2019 José Antonio Arellano Mendoza. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
@@ -78,7 +79,7 @@ class EmployeeTableViewController: UITableViewController {
         let employee = sections[indexPath.section].employees[indexPath.row]
         
         //3. Configuramos celda
-        cell.photoImageView.image = employee.photo
+        cell.photoImageView.image = UIImage(named: "User")
         cell.nameLabel.text = "\(employee.name) \(employee.lastName)"
         if employee.hasBeenEvaluated {
             cell.averageLabel.text = "\(String(format: "%.2f", employee.getGeneralAverage())) ★"
@@ -93,6 +94,27 @@ class EmployeeTableViewController: UITableViewController {
         } else {
             cell.averageLabel.text = "Sin evaluaciones"
             cell.averageIndicator.text = ""
+        }
+        
+        //Profile image
+        if let photoUrl = URL(string: employee.photoURL) {
+            let task = URLSession.shared.dataTask(with: photoUrl) { (data, response, error) in
+                if error != nil {
+                    guard let error = error else {
+                        return
+                    }
+                    print(error)
+                    return
+                }
+                DispatchQueue.main.async {
+                    if let data = data {
+                        cell.photoImageView.image = UIImage(data: data)
+                    } else {
+                        cell.photoImageView.image = UIImage(named: "User")
+                    }
+                }
+            }
+            task.resume()
         }
         
         //Reorder control button
@@ -604,12 +626,60 @@ class EmployeeTableViewController: UITableViewController {
             let storage = Storage.storage().reference()
             let imageName = UUID()
             let forkliftDirectory = storage.child("forkliftProfileImages/\(imageName)")
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/png"
             guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
-            forkliftDirectory.putData(data, metadata: metadata) { (data, error) in
+            forkliftDirectory.putData(data, metadata: nil) { (metadata, error) in
                 if error == nil {
                     print("Forklift employee profile image saved.")
+                    forkliftDirectory.downloadURL(completion: { (url, error) in
+                        if error != nil {
+                            if let error = error {
+                                print("Failed to download url: \(error)")
+                                return
+                            } else {
+                                print("Unexpexted error whiel downloading image")
+                                return
+                            }
+                        } else {
+                            guard let url = url else {
+                                print("Unexpected error while saving new employee to DB")
+                                return
+                            }
+                            self.employee.photoURL = url.absoluteString
+                            //Save in database
+                            guard let idForkliftEmployee = self.ref.childByAutoId().key else { return } //Generic id
+                            let fields: [String: Any] = ["photo": self.employee.photoURL,
+                                                         "name": self.employee.name,
+                                                         "lastName": self.employee.lastName,
+                                                         "hasBeenEvaluated": self.employee.hasBeenEvaluated,
+                                                         "employeeId": idForkliftEmployee,
+                                                         "cultureAttatchmentArray": self.employee.cultureAttatchmentArray,
+                                                         "cultureAttatchmentIndicator": self.employee.cultureAttatchmentIndicator,
+                                                         "dpoImplementationArray": self.employee.dpoImplementationArray,
+                                                         "dpoImplementationIndicator": self.employee.dpoImplementationIndicator,
+                                                         "attitudeArray": self.employee.attitudeArray,
+                                                         "attitudeIndicator": self.employee.attitudeIndicator,
+                                                         "trainingAdaptationArray": self.employee.trainingAdaptationArray,
+                                                         "trainingAdaptationIndicator": self.employee.trainingAdaptationIndicator,
+                                                         "performanceArray": self.employee.performanceArray,
+                                                         "performanceIndicator": self.employee.performanceIndicator,
+                                                         "firstSpecificGradeArray": self.employee.firstSpecificGradeArray,
+                                                         "firstSpecificGradeIndicator": self.employee.firstSpecificGradeIndicator,
+                                                         "secondSpecificGradeArray": self.employee.secondSpecificGradeArray,
+                                                         "secondSpecificGradeIndicator": self.employee.secondSpecificGradeIndicator,
+                                                         "thirdSpecificGradeArray": self.employee.thirdSpecificGradeArray,
+                                                         "thirdSpecificGradeIndicator": self.employee.thirdSpecificGradeIndicator,
+                                                         "fourthSpecificGradeArray": self.employee.fourthSpecificGradeArray,
+                                                         "fourthSpecificGradeIndicator": self.employee.fourthSpecificGradeIndicator,
+                                                         "fifthSpecificGradeArray": self.employee.fifthSpecificGradeArray,
+                                                         "fifthSpecificGradeIndicator": self.employee.fifthSpecificGradeIndicator,
+                                                         "sixthSpecificGradeArray": self.employee.sixthSpecificGradeArray,
+                                                         "sixthSpecificGradeIndicator": self.employee.sixthSpecificGradeIndicator,
+                                                         "averageArray": self.employee.averageArray,
+                                                         "averageIndicator": self.employee.averageIndicator]
+                            
+                            self.ref.child("forkliftEmployees").child(idForkliftEmployee).setValue(fields)
+                        }
+                    })
                 } else {
                     if let error = error?.localizedDescription {
                         print("Firebase error: \(error)")
@@ -618,51 +688,65 @@ class EmployeeTableViewController: UITableViewController {
                     }
                 }
             }
-            
-            //Save in database
-            guard let idForkliftEmployee = ref.childByAutoId().key else { return } //Generic id
-            let fields: [String: Any] = ["photo": String(describing: forkliftDirectory),
-                                         "name": employee.name,
-                                         "lastName": employee.lastName,
-                                         "hasBeenEvaluated": employee.hasBeenEvaluated,
-                                         "employeeId": idForkliftEmployee,
-                                         "cultureAttatchmentArray": employee.cultureAttatchmentArray,
-                                         "cultureAttatchmentIndicator": employee.cultureAttatchmentIndicator,
-                                         "dpoImplementationArray": employee.dpoImplementationArray,
-                                         "dpoImplementationIndicator": employee.dpoImplementationIndicator,
-                                         "attitudeArray": employee.attitudeArray,
-                                         "attitudeIndicator": employee.attitudeIndicator,
-                                         "trainingAdaptationArray": employee.trainingAdaptationArray,
-                                         "trainingAdaptationIndicator": employee.trainingAdaptationIndicator,
-                                         "performanceArray": employee.performanceArray,
-                                         "performanceIndicator": employee.performanceIndicator,
-                                         "firstSpecificGradeArray": employee.firstSpecificGradeArray,
-                                         "firstSpecificGradeIndicator": employee.firstSpecificGradeIndicator,
-                                         "secondSpecificGradeArray": employee.secondSpecificGradeArray,
-                                         "secondSpecificGradeIndicator": employee.secondSpecificGradeIndicator,
-                                         "thirdSpecificGradeArray": employee.thirdSpecificGradeArray,
-                                         "thirdSpecificGradeIndicator": employee.thirdSpecificGradeIndicator,
-                                         "fourthSpecificGradeArray": employee.fourthSpecificGradeArray,
-                                         "fourthSpecificGradeIndicator": employee.fourthSpecificGradeIndicator,
-                                         "fifthSpecificGradeArray": employee.fifthSpecificGradeArray,
-                                         "fifthSpecificGradeIndicator": employee.fifthSpecificGradeIndicator,
-                                         "sixthSpecificGradeArray": employee.sixthSpecificGradeArray,
-                                         "sixthSpecificGradeIndicator": employee.sixthSpecificGradeIndicator,
-                                         "averageArray": employee.averageArray,
-                                         "averageIndicator": employee.averageIndicator]
-            
-            ref.child("forkliftEmployees").child(idForkliftEmployee).setValue(fields)
         case .delivery:
             //Save image in storage
             let storage = Storage.storage().reference()
             let imageName = UUID()
             let deliveryDirectory = storage.child("deliveryProfileImages/\(imageName)")
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/png"
             guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
-            deliveryDirectory.putData(data, metadata: metadata) { (data, error) in
+            deliveryDirectory.putData(data, metadata: nil) { (metadata, error) in
                 if error == nil {
                     print("Delivery employee profile image saved.")
+                    deliveryDirectory.downloadURL(completion: { (url, error) in
+                        if error != nil {
+                            if let error = error {
+                                print("Failed to download url: \(error)")
+                                return
+                            } else {
+                                print("Unexpexted error whiel downloading image")
+                                return
+                            }
+                        } else {
+                            guard let url = url else {
+                                print("Unexpected error while saving new employee to DB")
+                                return
+                            }
+                            self.employee.photoURL = url.absoluteString
+                            //Save in database
+                            guard let idDeliveryEmployee = self.ref.childByAutoId().key else { return } //Generic id
+                            let fields: [String: Any] = ["photo": self.employee.photoURL,
+                                                         "name": self.employee.name,
+                                                         "lastName": self.employee.lastName,
+                                                         "hasBeenEvaluated": self.employee.hasBeenEvaluated,
+                                                         "employeeId": idDeliveryEmployee,
+                                                         "cultureAttatchmentArray": self.employee.cultureAttatchmentArray,
+                                                         "cultureAttatchmentIndicator": self.employee.cultureAttatchmentIndicator,
+                                                         "dpoImplementationArray": self.employee.dpoImplementationArray,
+                                                         "dpoImplementationIndicator": self.employee.dpoImplementationIndicator,
+                                                         "attitudeArray": self.employee.attitudeArray,
+                                                         "attitudeIndicator": self.employee.attitudeIndicator,
+                                                         "trainingAdaptationArray": self.employee.trainingAdaptationArray,
+                                                         "trainingAdaptationIndicator": self.employee.trainingAdaptationIndicator,
+                                                         "performanceArray": self.employee.performanceArray,
+                                                         "performanceIndicator": self.employee.performanceIndicator,
+                                                         "firstSpecificGradeArray": self.employee.firstSpecificGradeArray,
+                                                         "firstSpecificGradeIndicator": self.employee.firstSpecificGradeIndicator,
+                                                         "secondSpecificGradeArray": self.employee.secondSpecificGradeArray,
+                                                         "secondSpecificGradeIndicator": self.employee.secondSpecificGradeIndicator,
+                                                         "thirdSpecificGradeArray": self.employee.thirdSpecificGradeArray,
+                                                         "thirdSpecificGradeIndicator": self.employee.thirdSpecificGradeIndicator,
+                                                         "fourthSpecificGradeArray": self.employee.fourthSpecificGradeArray,
+                                                         "fourthSpecificGradeIndicator": self.employee.fourthSpecificGradeIndicator,
+                                                         "fifthSpecificGradeArray": self.employee.fifthSpecificGradeArray,
+                                                         "fifthSpecificGradeIndicator": self.employee.fifthSpecificGradeIndicator,
+                                                         "sixthSpecificGradeArray": self.employee.sixthSpecificGradeArray,
+                                                         "sixthSpecificGradeIndicator": self.employee.sixthSpecificGradeIndicator,
+                                                         "averageArray": self.employee.averageArray,
+                                                         "averageIndicator": self.employee.averageIndicator]
+                            
+                            self.ref.child("deliveryEmployees").child(idDeliveryEmployee).setValue(fields)
+                        }
+                    })
                 } else {
                     if let error = error?.localizedDescription {
                         print("Firebase error: \(error)")
@@ -671,51 +755,65 @@ class EmployeeTableViewController: UITableViewController {
                     }
                 }
             }
-            
-            //Save in database
-            guard let idDeliveryEmployee = ref.childByAutoId().key else { return } //Generic id
-            let fields: [String: Any] = ["photo": String(describing: deliveryDirectory),
-                                         "name": employee.name,
-                                         "lastName": employee.lastName,
-                                         "hasBeenEvaluated": employee.hasBeenEvaluated,
-                                         "employeeId": idDeliveryEmployee,
-                                         "cultureAttatchmentArray": employee.cultureAttatchmentArray,
-                                         "cultureAttatchmentIndicator": employee.cultureAttatchmentIndicator,
-                                         "dpoImplementationArray": employee.dpoImplementationArray,
-                                         "dpoImplementationIndicator": employee.dpoImplementationIndicator,
-                                         "attitudeArray": employee.attitudeArray,
-                                         "attitudeIndicator": employee.attitudeIndicator,
-                                         "trainingAdaptationArray": employee.trainingAdaptationArray,
-                                         "trainingAdaptationIndicator": employee.trainingAdaptationIndicator,
-                                         "performanceArray": employee.performanceArray,
-                                         "performanceIndicator": employee.performanceIndicator,
-                                         "firstSpecificGradeArray": employee.firstSpecificGradeArray,
-                                         "firstSpecificGradeIndicator": employee.firstSpecificGradeIndicator,
-                                         "secondSpecificGradeArray": employee.secondSpecificGradeArray,
-                                         "secondSpecificGradeIndicator": employee.secondSpecificGradeIndicator,
-                                         "thirdSpecificGradeArray": employee.thirdSpecificGradeArray,
-                                         "thirdSpecificGradeIndicator": employee.thirdSpecificGradeIndicator,
-                                         "fourthSpecificGradeArray": employee.fourthSpecificGradeArray,
-                                         "fourthSpecificGradeIndicator": employee.fourthSpecificGradeIndicator,
-                                         "fifthSpecificGradeArray": employee.fifthSpecificGradeArray,
-                                         "fifthSpecificGradeIndicator": employee.fifthSpecificGradeIndicator,
-                                         "sixthSpecificGradeArray": employee.sixthSpecificGradeArray,
-                                         "sixthSpecificGradeIndicator": employee.sixthSpecificGradeIndicator,
-                                         "averageArray": employee.averageArray,
-                                         "averageIndicator": employee.averageIndicator]
-            
-            ref.child("deliveryEmployees").child(idDeliveryEmployee).setValue(fields)
         case .warehouseAssistant:
             //Save image in storage
             let storage = Storage.storage().reference()
             let imageName = UUID()
             let warehouseAssistantDirectory = storage.child("warehouseAssistantProfileImages/\(imageName)")
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/png"
             guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
-            warehouseAssistantDirectory.putData(data, metadata: metadata) { (data, error) in
+            warehouseAssistantDirectory.putData(data, metadata: nil) { (metadata, error) in
                 if error == nil {
                     print("Warehouse assistant employee profile image saved.")
+                    warehouseAssistantDirectory.downloadURL(completion: { (url, error) in
+                        if error != nil {
+                            if let error = error {
+                                print("Failed to download url: \(error)")
+                                return
+                            } else {
+                                print("Unexpexted error whiel downloading image")
+                                return
+                            }
+                        } else {
+                            guard let url = url else {
+                                print("Unexpected error while saving new employee to DB")
+                                return
+                            }
+                            self.employee.photoURL = url.absoluteString
+                            //Save in database
+                            guard let idWarehouseAssistantEmployee = self.ref.childByAutoId().key else { return } //Generic id
+                            let fields: [String: Any] = ["photo": self.employee.photoURL,
+                                                         "name": self.employee.name,
+                                                         "lastName": self.employee.lastName,
+                                                         "hasBeenEvaluated": self.employee.hasBeenEvaluated,
+                                                         "employeeId": idWarehouseAssistantEmployee,
+                                                         "cultureAttatchmentArray": self.employee.cultureAttatchmentArray,
+                                                         "cultureAttatchmentIndicator": self.employee.cultureAttatchmentIndicator,
+                                                         "dpoImplementationArray": self.employee.dpoImplementationArray,
+                                                         "dpoImplementationIndicator": self.employee.dpoImplementationIndicator,
+                                                         "attitudeArray": self.employee.attitudeArray,
+                                                         "attitudeIndicator": self.employee.attitudeIndicator,
+                                                         "trainingAdaptationArray": self.employee.trainingAdaptationArray,
+                                                         "trainingAdaptationIndicator": self.employee.trainingAdaptationIndicator,
+                                                         "performanceArray": self.employee.performanceArray,
+                                                         "performanceIndicator": self.employee.performanceIndicator,
+                                                         "firstSpecificGradeArray": self.employee.firstSpecificGradeArray,
+                                                         "firstSpecificGradeIndicator": self.employee.firstSpecificGradeIndicator,
+                                                         "secondSpecificGradeArray": self.employee.secondSpecificGradeArray,
+                                                         "secondSpecificGradeIndicator": self.employee.secondSpecificGradeIndicator,
+                                                         "thirdSpecificGradeArray": self.employee.thirdSpecificGradeArray,
+                                                         "thirdSpecificGradeIndicator": self.employee.thirdSpecificGradeIndicator,
+                                                         "fourthSpecificGradeArray": self.employee.fourthSpecificGradeArray,
+                                                         "fourthSpecificGradeIndicator": self.employee.fourthSpecificGradeIndicator,
+                                                         "fifthSpecificGradeArray": self.employee.fifthSpecificGradeArray,
+                                                         "fifthSpecificGradeIndicator": self.employee.fifthSpecificGradeIndicator,
+                                                         "sixthSpecificGradeArray": self.employee.sixthSpecificGradeArray,
+                                                         "sixthSpecificGradeIndicator": self.employee.sixthSpecificGradeIndicator,
+                                                         "averageArray": self.employee.averageArray,
+                                                         "averageIndicator": self.employee.averageIndicator]
+                            
+                            self.ref.child("warehouseAssistantEmployees").child(idWarehouseAssistantEmployee).setValue(fields)
+                        }
+                    })
                 } else {
                     if let error = error?.localizedDescription {
                         print("Firebase error: \(error)")
@@ -724,51 +822,65 @@ class EmployeeTableViewController: UITableViewController {
                     }
                 }
             }
-            
-            //Save in database
-            guard let idWarehouseAssistantEmployee = ref.childByAutoId().key else { return } //Generic id
-            let fields: [String: Any] = ["photo": String(describing: warehouseAssistantDirectory),
-                                         "name": employee.name,
-                                         "lastName": employee.lastName,
-                                         "hasBeenEvaluated": employee.hasBeenEvaluated,
-                                         "employeeId": idWarehouseAssistantEmployee,
-                                         "cultureAttatchmentArray": employee.cultureAttatchmentArray,
-                                         "cultureAttatchmentIndicator": employee.cultureAttatchmentIndicator,
-                                         "dpoImplementationArray": employee.dpoImplementationArray,
-                                         "dpoImplementationIndicator": employee.dpoImplementationIndicator,
-                                         "attitudeArray": employee.attitudeArray,
-                                         "attitudeIndicator": employee.attitudeIndicator,
-                                         "trainingAdaptationArray": employee.trainingAdaptationArray,
-                                         "trainingAdaptationIndicator": employee.trainingAdaptationIndicator,
-                                         "performanceArray": employee.performanceArray,
-                                         "performanceIndicator": employee.performanceIndicator,
-                                         "firstSpecificGradeArray": employee.firstSpecificGradeArray,
-                                         "firstSpecificGradeIndicator": employee.firstSpecificGradeIndicator,
-                                         "secondSpecificGradeArray": employee.secondSpecificGradeArray,
-                                         "secondSpecificGradeIndicator": employee.secondSpecificGradeIndicator,
-                                         "thirdSpecificGradeArray": employee.thirdSpecificGradeArray,
-                                         "thirdSpecificGradeIndicator": employee.thirdSpecificGradeIndicator,
-                                         "fourthSpecificGradeArray": employee.fourthSpecificGradeArray,
-                                         "fourthSpecificGradeIndicator": employee.fourthSpecificGradeIndicator,
-                                         "fifthSpecificGradeArray": employee.fifthSpecificGradeArray,
-                                         "fifthSpecificGradeIndicator": employee.fifthSpecificGradeIndicator,
-                                         "sixthSpecificGradeArray": employee.sixthSpecificGradeArray,
-                                         "sixthSpecificGradeIndicator": employee.sixthSpecificGradeIndicator,
-                                         "averageArray": employee.averageArray,
-                                         "averageIndicator": employee.averageIndicator]
-            
-            ref.child("warehouseAssistantEmployees").child(idWarehouseAssistantEmployee).setValue(fields)
         case .deliveryAssistant:
             //Save image in storage
             let storage = Storage.storage().reference()
             let imageName = UUID()
             let deliveryAssistantDirectory = storage.child("deliveryAssistantProfileImages/\(imageName)")
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/png"
             guard let data = employee.photo.jpegData(compressionQuality: 0.95) else { return }
-            deliveryAssistantDirectory.putData(data, metadata: metadata) { (data, error) in
+            deliveryAssistantDirectory.putData(data, metadata: nil) { (metadata, error) in
                 if error == nil {
                     print("Delivery assistant employee profile image saved.")
+                    deliveryAssistantDirectory.downloadURL(completion: { (url, error) in
+                        if error != nil {
+                            if let error = error {
+                                print("Failed to download url: \(error)")
+                                return
+                            } else {
+                                print("Unexpexted error whiel downloading image")
+                                return
+                            }
+                        } else {
+                            guard let url = url else {
+                                print("Unexpected error while saving new employee to DB")
+                                return
+                            }
+                            self.employee.photoURL = url.absoluteString
+                            //Save in database
+                            guard let idDeliveryAssistantEmployee = self.ref.childByAutoId().key else { return } //Generic id
+                            let fields: [String: Any] = ["photo": self.employee.photoURL,
+                                                         "name": self.employee.name,
+                                                         "lastName": self.employee.lastName,
+                                                         "hasBeenEvaluated": self.employee.hasBeenEvaluated,
+                                                         "employeeId": idDeliveryAssistantEmployee,
+                                                         "cultureAttatchmentArray": self.employee.cultureAttatchmentArray,
+                                                         "cultureAttatchmentIndicator": self.employee.cultureAttatchmentIndicator,
+                                                         "dpoImplementationArray": self.employee.dpoImplementationArray,
+                                                         "dpoImplementationIndicator": self.employee.dpoImplementationIndicator,
+                                                         "attitudeArray": self.employee.attitudeArray,
+                                                         "attitudeIndicator": self.employee.attitudeIndicator,
+                                                         "trainingAdaptationArray": self.employee.trainingAdaptationArray,
+                                                         "trainingAdaptationIndicator": self.employee.trainingAdaptationIndicator,
+                                                         "performanceArray": self.employee.performanceArray,
+                                                         "performanceIndicator": self.employee.performanceIndicator,
+                                                         "firstSpecificGradeArray": self.employee.firstSpecificGradeArray,
+                                                         "firstSpecificGradeIndicator": self.employee.firstSpecificGradeIndicator,
+                                                         "secondSpecificGradeArray": self.employee.secondSpecificGradeArray,
+                                                         "secondSpecificGradeIndicator": self.employee.secondSpecificGradeIndicator,
+                                                         "thirdSpecificGradeArray": self.employee.thirdSpecificGradeArray,
+                                                         "thirdSpecificGradeIndicator": self.employee.thirdSpecificGradeIndicator,
+                                                         "fourthSpecificGradeArray": self.employee.fourthSpecificGradeArray,
+                                                         "fourthSpecificGradeIndicator": self.employee.fourthSpecificGradeIndicator,
+                                                         "fifthSpecificGradeArray": self.employee.fifthSpecificGradeArray,
+                                                         "fifthSpecificGradeIndicator": self.employee.fifthSpecificGradeIndicator,
+                                                         "sixthSpecificGradeArray": self.employee.sixthSpecificGradeArray,
+                                                         "sixthSpecificGradeIndicator": self.employee.sixthSpecificGradeIndicator,
+                                                         "averageArray": self.employee.averageArray,
+                                                         "averageIndicator": self.employee.averageIndicator]
+                            
+                            self.ref.child("deliveryAssistantEmployees").child(idDeliveryAssistantEmployee).setValue(fields)
+                        }
+                    })
                 } else {
                     if let error = error?.localizedDescription {
                         print("Firebase error: \(error)")
@@ -777,40 +889,6 @@ class EmployeeTableViewController: UITableViewController {
                     }
                 }
             }
-            
-            //Save in database
-            guard let idDeliveryAssistantEmployee = ref.childByAutoId().key else { return } //Generic id
-            let fields: [String: Any] = ["photo": String(describing: deliveryAssistantDirectory),
-                                         "name": employee.name,
-                                         "lastName": employee.lastName,
-                                         "hasBeenEvaluated": employee.hasBeenEvaluated,
-                                         "employeeId": idDeliveryAssistantEmployee,
-                                         "cultureAttatchmentArray": employee.cultureAttatchmentArray,
-                                         "cultureAttatchmentIndicator": employee.cultureAttatchmentIndicator,
-                                         "dpoImplementationArray": employee.dpoImplementationArray,
-                                         "dpoImplementationIndicator": employee.dpoImplementationIndicator,
-                                         "attitudeArray": employee.attitudeArray,
-                                         "attitudeIndicator": employee.attitudeIndicator,
-                                         "trainingAdaptationArray": employee.trainingAdaptationArray,
-                                         "trainingAdaptationIndicator": employee.trainingAdaptationIndicator,
-                                         "performanceArray": employee.performanceArray,
-                                         "performanceIndicator": employee.performanceIndicator,
-                                         "firstSpecificGradeArray": employee.firstSpecificGradeArray,
-                                         "firstSpecificGradeIndicator": employee.firstSpecificGradeIndicator,
-                                         "secondSpecificGradeArray": employee.secondSpecificGradeArray,
-                                         "secondSpecificGradeIndicator": employee.secondSpecificGradeIndicator,
-                                         "thirdSpecificGradeArray": employee.thirdSpecificGradeArray,
-                                         "thirdSpecificGradeIndicator": employee.thirdSpecificGradeIndicator,
-                                         "fourthSpecificGradeArray": employee.fourthSpecificGradeArray,
-                                         "fourthSpecificGradeIndicator": employee.fourthSpecificGradeIndicator,
-                                         "fifthSpecificGradeArray": employee.fifthSpecificGradeArray,
-                                         "fifthSpecificGradeIndicator": employee.fifthSpecificGradeIndicator,
-                                         "sixthSpecificGradeArray": employee.sixthSpecificGradeArray,
-                                         "sixthSpecificGradeIndicator": employee.sixthSpecificGradeIndicator,
-                                         "averageArray": employee.averageArray,
-                                         "averageIndicator": employee.averageIndicator]
-            
-            ref.child("deliveryAssistantEmployees").child(idDeliveryAssistantEmployee).setValue(fields)
         }
     }
     
