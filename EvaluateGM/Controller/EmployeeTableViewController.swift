@@ -17,7 +17,6 @@ class EmployeeTableViewController: UITableViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     //Properties
-    //var user: User? //We dont need to receive user from loginVC
     var currentUser: User?
     var sections = [Section]()
     var employee = Employee(name: "Name", lastName: "lastName", type: .forklift) //For new added employee
@@ -39,13 +38,6 @@ class EmployeeTableViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        
-        //guard let user = user else{
-        //    print("User no received in EmployeeTableVC")
-        //    return
-        //}
-        //print("User received in EmployeeTableVC: \(user)")
-        //readForkliftEmployees()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -278,24 +270,29 @@ class EmployeeTableViewController: UITableViewController {
                 forkliftEmployee.sixthSpecificGradeIndicator = sixthSpecificGradeIndicator
                 forkliftEmployee.averageArray = averageArray
                 forkliftEmployee.averageIndicator = averageIndicator
+                self.forkliftEmployees.append(forkliftEmployee)
                 //Image
-                let imageStorage = Storage.storage().reference(forURL: photoURL)
-                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                    if let error = error?.localizedDescription {
-                        print("Error while downloading image: \(error)")
-                    } else {
-                        if let imageData = data {
-                            forkliftEmployee.photo = UIImage(data: imageData)!
-                            self.forkliftEmployees.append(forkliftEmployee)
-                            print("Total forklift: \(self.forkliftEmployees.count)")
-                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
-                            DispatchQueue.main.async {
-                                self.orderEmployees(employeesArray: self.forkliftEmployees)
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                })
+//                let imageStorage = Storage.storage().reference(forURL: photoURL)
+//                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+//                    if let error = error?.localizedDescription {
+//                        print("Error while downloading image: \(error)")
+//                    } else {
+//                        if let imageData = data {
+//                            forkliftEmployee.photo = UIImage(data: imageData)!
+//                            self.forkliftEmployees.append(forkliftEmployee)
+//                            print("Total forklift: \(self.forkliftEmployees.count)")
+//                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+//                            DispatchQueue.main.async {
+//                                self.orderEmployees(employeesArray: self.forkliftEmployees)
+//                                self.tableView.reloadData()
+//                            }
+//                        }
+//                    }
+//                })
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.forkliftEmployees)
+                self.tableView.reloadData()
             }
         }
     }
@@ -366,24 +363,29 @@ class EmployeeTableViewController: UITableViewController {
                 deliveryEmployee.sixthSpecificGradeIndicator = sixthSpecificGradeIndicator
                 deliveryEmployee.averageArray = averageArray
                 deliveryEmployee.averageIndicator = averageIndicator
+                self.deliveryEmployees.append(deliveryEmployee)
                 //Image
-                let imageStorage = Storage.storage().reference(forURL: photoURL)
-                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                    if let error = error?.localizedDescription {
-                        print("Error while downloading image: \(error)")
-                    } else {
-                        if let imageData = data {
-                            deliveryEmployee.photo = UIImage(data: imageData)!
-                            self.deliveryEmployees.append(deliveryEmployee)
-                            print("Total delivery: \(self.deliveryEmployees.count)")
-                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
-                            DispatchQueue.main.async {
-                                self.orderEmployees(employeesArray: self.deliveryEmployees)
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                })
+//                let imageStorage = Storage.storage().reference(forURL: photoURL)
+//                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+//                    if let error = error?.localizedDescription {
+//                        print("Error while downloading image: \(error)")
+//                    } else {
+//                        if let imageData = data {
+//                            deliveryEmployee.photo = UIImage(data: imageData)!
+//                            self.deliveryEmployees.append(deliveryEmployee)
+//                            print("Total delivery: \(self.deliveryEmployees.count)")
+//                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+//                            DispatchQueue.main.async {
+//                                self.orderEmployees(employeesArray: self.deliveryEmployees)
+//                                self.tableView.reloadData()
+//                            }
+//                        }
+//                    }
+//                })
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.deliveryEmployees)
+                self.tableView.reloadData()
             }
         }
     }
@@ -454,24 +456,29 @@ class EmployeeTableViewController: UITableViewController {
                 warehouseEmployee.sixthSpecificGradeIndicator = sixthSpecificGradeIndicator
                 warehouseEmployee.averageArray = averageArray
                 warehouseEmployee.averageIndicator = averageIndicator
+                self.warehouseAssistantEmployees.append(warehouseEmployee)
                 //Image
-                let imageStorage = Storage.storage().reference(forURL: photoURL)
-                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                    if let error = error?.localizedDescription {
-                        print("Error while downloading image: \(error)")
-                    } else {
-                        if let imageData = data {
-                            warehouseEmployee.photo = UIImage(data: imageData)!
-                            self.warehouseAssistantEmployees.append(warehouseEmployee)
-                            print("Total warehouse: \(self.warehouseAssistantEmployees.count)")
-                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
-                            DispatchQueue.main.async {
-                                self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                })
+//                let imageStorage = Storage.storage().reference(forURL: photoURL)
+//                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+//                    if let error = error?.localizedDescription {
+//                        print("Error while downloading image: \(error)")
+//                    } else {
+//                        if let imageData = data {
+//                            warehouseEmployee.photo = UIImage(data: imageData)!
+//                            self.warehouseAssistantEmployees.append(warehouseEmployee)
+//                            print("Total warehouse: \(self.warehouseAssistantEmployees.count)")
+//                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+//                            DispatchQueue.main.async {
+//                                self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
+//                                self.tableView.reloadData()
+//                            }
+//                        }
+//                    }
+//                })
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
+                self.tableView.reloadData()
             }
         }
     }
@@ -542,24 +549,29 @@ class EmployeeTableViewController: UITableViewController {
                 deliveryAssistantEmployee.sixthSpecificGradeIndicator = sixthSpecificGradeIndicator
                 deliveryAssistantEmployee.averageArray = averageArray
                 deliveryAssistantEmployee.averageIndicator = averageIndicator
+                self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
                 //Image
-                let imageStorage = Storage.storage().reference(forURL: photoURL)
-                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
-                    if let error = error?.localizedDescription {
-                        print("Error while downloading image: \(error)")
-                    } else {
-                        if let imageData = data {
-                            deliveryAssistantEmployee.photo = UIImage(data: imageData)!
-                            self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
-                            print("Total delivery assistant: \(self.deliveryAssistantEmployees.count)")
-                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
-                            DispatchQueue.main.async {
-                                self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                })
+//                let imageStorage = Storage.storage().reference(forURL: photoURL)
+//                imageStorage.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+//                    if let error = error?.localizedDescription {
+//                        print("Error while downloading image: \(error)")
+//                    } else {
+//                        if let imageData = data {
+//                            deliveryAssistantEmployee.photo = UIImage(data: imageData)!
+//                            self.deliveryAssistantEmployees.append(deliveryAssistantEmployee)
+//                            print("Total delivery assistant: \(self.deliveryAssistantEmployees.count)")
+//                            //self.orderEmployees(employeesArray: self.forkliftEmployees)
+//                            DispatchQueue.main.async {
+//                                self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
+//                                self.tableView.reloadData()
+//                            }
+//                        }
+//                    }
+//                })
+            }
+            DispatchQueue.main.async {
+                self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
+                self.tableView.reloadData()
             }
         }
     }

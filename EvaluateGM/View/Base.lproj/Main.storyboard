@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Evalúa_GM" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,13 +153,13 @@
         <!--Empleados-->
         <scene sceneID="TE9-t8-2hO">
             <objects>
-                <tableViewController id="alj-NI-77M" customClass="EmployeeTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="alj-NI-77M" customClass="EmployeeTableViewController" customModule="Evalúa_GM" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mrz-To-xXG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="employeeCell" rowHeight="94" id="g36-Ai-zRf" customClass="EmployeeCell" customModule="EvaluateGM" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="employeeCell" rowHeight="94" id="g36-Ai-zRf" customClass="EmployeeCell" customModule="Evalúa_GM" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="94"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g36-Ai-zRf" id="DOC-3H-JgI">
@@ -270,7 +270,7 @@
         <!--Nuevo usuario-->
         <scene sceneID="1qh-92-dGi">
             <objects>
-                <tableViewController id="0It-WN-eBI" customClass="AddUserTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0It-WN-eBI" customClass="AddUserTableViewController" customModule="Evalúa_GM" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="sef-he-h0m">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -508,7 +508,7 @@
         <!--Nuevo empleado-->
         <scene sceneID="zGa-Tv-bfM">
             <objects>
-                <viewController id="7Ec-us-6Ng" customClass="AddEmployeeViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Ec-us-6Ng" customClass="AddEmployeeViewController" customModule="Evalúa_GM" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8C9-YG-3GX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -629,7 +629,7 @@
         <!--Resumen-->
         <scene sceneID="l58-cQ-U6k">
             <objects>
-                <tableViewController id="xPI-lw-LLJ" customClass="DetailTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="xPI-lw-LLJ" customClass="DetailTableViewController" customModule="Evalúa_GM" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="a8x-C8-hyn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1582,7 +1582,7 @@
         <!--Evaluar-->
         <scene sceneID="NLV-P9-ShT">
             <objects>
-                <tableViewController id="9Hq-Iv-CWy" customClass="EvaluateTableViewController" customModule="EvaluateGM" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="9Hq-Iv-CWy" customClass="EvaluateTableViewController" customModule="Evalúa_GM" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="8hw-yP-kYW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
