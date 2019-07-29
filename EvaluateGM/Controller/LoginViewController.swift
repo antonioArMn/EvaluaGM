@@ -81,18 +81,6 @@ class LoginViewController: UIViewController {
         authenticateUser(email: email, pass: password)
     }
     
-    //Functions
-    //Dont need to send data
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if(segue.identifier == "toEmployeesTableVC") {
-//            guard let navigationController = segue.destination as? UINavigationController, let employeeTableViewController = navigationController.viewControllers.first as? EmployeeTableViewController else {
-//                print("Cant set login user")
-//                return
-//            }
-//            employeeTableViewController.user = self.user
-//        }
-//    }
-    
     func authenticateUser(email: String, pass: String) {
         Auth.auth().signIn(withEmail: email, password: pass) { (user, error) in
             if let user = user {
