@@ -30,6 +30,7 @@
 		F7DC5DD922BC912100DD7FD7 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */; };
 		F7DC5DDD22BD398400DD7FD7 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */; };
 		F7DC5DDF22BD3AE300DD7FD7 /* EmployeeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */; };
+		F7E2009A22EFE31C00A64407 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E2009922EFE31C00A64407 /* UIImageView+Cache.swift */; };
 		F7E4E7BD22D65D1F00BDB512 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4E7BC22D65D1F00BDB512 /* UIImage+resize.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		F7DC5DD822BC912100DD7FD7 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		F7DC5DDC22BD398400DD7FD7 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		F7DC5DDE22BD3AE300DD7FD7 /* EmployeeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewController.swift; sourceTree = "<group>"; };
+		F7E2009922EFE31C00A64407 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		F7E4E7BC22D65D1F00BDB512 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		FE0CD63268DB981A48C8E7ED /* Pods-EvaluateGMUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvaluateGMUITests.debug.xcconfig"; path = "Target Support Files/Pods-EvaluateGMUITests/Pods-EvaluateGMUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 			children = (
 				F73ED53222B4089C004EB83B /* UITextField+Empty.swift */,
 				F7E4E7BC22D65D1F00BDB512 /* UIImage+resize.swift */,
+				F7E2009922EFE31C00A64407 /* UIImageView+Cache.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				F73ED53322B4089C004EB83B /* UITextField+Empty.swift in Sources */,
 				F7A8EBF222B1A2D700B23BBA /* AppDelegate.swift in Sources */,
 				F7A8EC2622B20A0800B23BBA /* User.swift in Sources */,
+				F7E2009A22EFE31C00A64407 /* UIImageView+Cache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

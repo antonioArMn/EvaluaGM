@@ -98,23 +98,7 @@ class EmployeeTableViewController: UITableViewController {
         
         //Profile image
         if let photoUrl = URL(string: employee.photoURL) {
-            let task = URLSession.shared.dataTask(with: photoUrl) { (data, response, error) in
-                if error != nil {
-                    guard let error = error else {
-                        return
-                    }
-                    print(error)
-                    return
-                }
-                DispatchQueue.main.async {
-                    if let data = data {
-                        cell.photoImageView.image = UIImage(data: data)
-                    } else {
-                        cell.photoImageView.image = UIImage(named: "User")
-                    }
-                }
-            }
-            task.resume()
+            cell.photoImageView.loadImageUsingCacheWithUrlString(urlString: photoUrl)
         }
         
         //Reorder control button
