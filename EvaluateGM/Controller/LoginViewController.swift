@@ -17,7 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet weak var rememberUserSwitch: UISwitch!
+    
     //Properties
     var user: User?
     var createdUser: User?
@@ -33,8 +34,15 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextField.text = ""
         passwordTextField.text = ""
+        //Remember email
+        if let rememberedEmail = UserDefaults.standard.object(forKey: "usersEmail") {
+            emailTextField.text = rememberedEmail as? String
+            rememberUserSwitch.isOn = true
+        } else {
+            emailTextField.text = ""
+            rememberUserSwitch.isOn = false
+        }
         //Uncomment to keep session and not login every time app runs
         //keepOpennedSession()
     }
@@ -80,13 +88,17 @@ class LoginViewController: UIViewController {
         }
         authenticateUser(email: email, pass: password)
     }
-    
     func authenticateUser(email: String, pass: String) {
         Auth.auth().signIn(withEmail: email, password: pass) { (user, error) in
             if let user = user {
                 //Successful login
                 print("Successful login, user: \(user)")
                 self.performSegue(withIdentifier: "toEmployeesTableVC", sender: nil)
+                if self.rememberUserSwitch.isOn {
+                    UserDefaults.standard.set(self.emailTextField.text, forKey: "usersEmail")
+                } else {
+                    UserDefaults.standard.removeObject(forKey: "usersEmail")
+                }
             } else {
                 //Failed login
                 if let error = error?.localizedDescription {
@@ -146,6 +158,9 @@ class LoginViewController: UIViewController {
         loginButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         loginButton.layer.cornerRadius = 5.0
+        
+        rememberUserSwitch.translatesAutoresizingMaskIntoConstraints = false
+        rememberUserSwitch.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
     }
 
 }
