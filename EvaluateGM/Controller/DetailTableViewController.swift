@@ -206,6 +206,8 @@ class DetailTableViewController: UITableViewController {
         cameraButton.layer.borderColor = UIColor.white.cgColor
         cameraButton.layer.cornerRadius = cameraButton.frame.size.height / 2
         cameraButton.clipsToBounds = true
+        cameraButton.isEnabled = false
+        cameraButton.isHidden = true
         
         guard let currentEmployee = employee else {
             return
