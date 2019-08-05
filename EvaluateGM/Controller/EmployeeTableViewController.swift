@@ -212,6 +212,7 @@ class EmployeeTableViewController: UITableViewController {
     
     func readForkliftEmployees() {
         ref.child("forkliftEmployees").observe(DataEventType.value) { (snapshot) in
+            self.segmentedControl.selectedSegmentIndex = 0
             self.forkliftEmployees.removeAll()
             self.orderEmployees(employeesArray: self.forkliftEmployees)
             self.tableView.reloadData()
@@ -287,6 +288,7 @@ class EmployeeTableViewController: UITableViewController {
     
     func readDeliveryEmployees() {
         ref.child("deliveryEmployees").observe(DataEventType.value) { (snapshot) in
+            self.segmentedControl.selectedSegmentIndex = 1
             self.deliveryEmployees.removeAll()
             self.orderEmployees(employeesArray: self.deliveryEmployees)
             self.tableView.reloadData()
@@ -362,6 +364,7 @@ class EmployeeTableViewController: UITableViewController {
     
     func readWarehouseEmployees() {
         ref.child("warehouseAssistantEmployees").observe(DataEventType.value) { (snapshot) in
+            self.segmentedControl.selectedSegmentIndex = 2
             self.warehouseAssistantEmployees.removeAll()
             self.orderEmployees(employeesArray: self.warehouseAssistantEmployees)
             self.tableView.reloadData()
@@ -437,6 +440,7 @@ class EmployeeTableViewController: UITableViewController {
     
     func readDeliveryAssistantEmployees() {
         ref.child("deliveryAssistantEmployees").observe(DataEventType.value) { (snapshot) in
+            self.segmentedControl.selectedSegmentIndex = 3
             self.deliveryAssistantEmployees.removeAll()
             self.orderEmployees(employeesArray: self.deliveryAssistantEmployees)
             self.tableView.reloadData()
