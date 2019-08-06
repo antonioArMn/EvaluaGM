@@ -18,6 +18,7 @@ class SupervisorsTableViewController: UITableViewController {
     var sortedSupervisors: [User] = []
     var ref: DatabaseReference!
     var sectionsHeaders: [String] = ["Promedio de evaluaciones hechas"]
+    var sectionsFooters: [String] = ["S/E: Sin evaluaciones"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class SupervisorsTableViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
         
         readSupervisors()
 
@@ -49,6 +51,10 @@ class SupervisorsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionsHeaders[section]
     }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return sectionsFooters[section]
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SupervisorCell", for: indexPath)
@@ -64,7 +70,7 @@ class SupervisorsTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = "↓ \(String(format: "%.2f", supervisor.getGeneralAverage()))"
             }
         } else {
-            cell.detailTextLabel?.text = "N/A"
+            cell.detailTextLabel?.text = "S/E"
         }
         
         //4. Retornamos celda
