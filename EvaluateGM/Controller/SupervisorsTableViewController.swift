@@ -18,7 +18,7 @@ class SupervisorsTableViewController: UITableViewController {
     var sortedSupervisors: [User] = []
     var ref: DatabaseReference!
     var sectionsHeaders: [String] = ["Promedio de evaluaciones hechas"]
-    var sectionsFooters: [String] = ["S/E: Sin evaluaciones"]
+    var sectionsFooters: [String] = ["S/E: Sin evaluaciones hechas"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +30,6 @@ class SupervisorsTableViewController: UITableViewController {
         tableView.allowsSelection = false
         
         readSupervisors()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
