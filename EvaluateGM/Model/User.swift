@@ -16,6 +16,30 @@ struct User {
     var password: String
     var isSupervisor: Bool
     var userId: String = ""
+    var averageIndicator: Bool = true
+    var averageArray: [Float] = [] {
+        didSet {
+            if oldValue.count > 0{
+                if((oldValue.reduce(0,+) / Float(oldValue.count)) < (averageArray.reduce(0,+) / Float(averageArray.count))) {
+                    averageIndicator = true
+                } else if((oldValue.reduce(0,+) / Float(oldValue.count)) == (averageArray.reduce(0,+) / Float(averageArray.count))) {
+                    averageIndicator = true
+                } else {
+                    averageIndicator = false
+                }
+            } else {
+                averageIndicator = true
+            }
+        }
+    }
+    
+    func getGeneralAverage() -> Float {
+        if averageArray.count == 0 {
+            return 0.0
+        } else {
+            return averageArray.reduce(0, +) / Float(averageArray.count)
+        }
+    }
     
     init(name: String, lastName: String, email: String, password: String, isSupervisor: Bool) {
         self.name = name

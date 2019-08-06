@@ -76,16 +76,18 @@ class EvaluateTableViewController: UITableViewController {
     
     //Properties
     var employee: Employee?
+    var user: User?
     var ref: DatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        guard let employee = employee else{
-            print("Employee no received in detailVC")
+        guard let employee = employee, let user = user else{
+            print("Employee or user no received in detailVC")
             return
         }
         print("Employee received in evaluateVC: \(employee)")
+        print("User received in evaluateVC: \(user)")
         setupUI()
     }
     

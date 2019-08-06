@@ -78,11 +78,12 @@ class DetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        guard let employee = employee else{
-            print("Employee no received in detailVC")
+        guard let employee = employee, let user = user else{
+            print("Employee or user no received in detailVC")
             return
         }
         print("Employee received in detailVC: \(employee)")
+        print("User received in detailVC: \(user)")
         setupUI()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
@@ -176,6 +177,7 @@ class DetailTableViewController: UITableViewController {
                     return
                 }
                 evaluateTableViewController.employee = employee
+                evaluateTableViewController.user = user
             } else {
                 let alertController = UIAlertController(title: "Acceso denegado", message: "Acción sólo válida para usuarios supervisores.", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
