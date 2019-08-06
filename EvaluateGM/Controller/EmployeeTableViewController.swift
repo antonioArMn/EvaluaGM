@@ -201,12 +201,13 @@ class EmployeeTableViewController: UITableViewController {
             let password = value?["password"] as? String ?? ""
             let isSupervisor = value?["isSupervisor"] as? Bool ?? false
             let userId = value?["userId"] as? String ?? ""
+            let averageArray = value?["averageArray"] as? [Float] ?? []
+            let averageIndicator = value?["averageIndicator"] as? Bool ?? true
             self.currentUser = User(name: name, lastName: lastName, email: email, password: password, isSupervisor: isSupervisor)
-            guard var currentUser = self.currentUser else {
-                return
-            }
-            currentUser.userId = userId
-            print("Current user: \(currentUser)")
+            self.currentUser?.userId = userId
+            self.currentUser?.averageArray = averageArray
+            self.currentUser?.averageIndicator = averageIndicator
+            print("Current user: \(String(describing: self.currentUser))")
         }
     }
     
@@ -1035,6 +1036,20 @@ extension EmployeeTableViewController: DetailTableViewControllerDelegate {
                                          "averageIndicator": employee.averageIndicator]
             ref.child("deliveryAssistantEmployees").child(employee.id).setValue(fields)
         }
+    }
+    
+    func updateUser(_ user: User) {
+        print("Updated User: \(user)")
+        let fields: [String: Any] = ["name": user.name,
+                                     "lastName": user.lastName,
+                                     "email": user.email,
+                                     "isSupervisor": user.isSupervisor,
+                                     "password": user.password,
+                                     "averageIndicator": user.averageIndicator,
+                                     "averageArray": user.averageArray,
+                                     "hasEvaluated": user.hasEvaluated,
+                                     "userId": user.userId]
+        ref.child("users").child(user.userId).setValue(fields)
     }
 }
 

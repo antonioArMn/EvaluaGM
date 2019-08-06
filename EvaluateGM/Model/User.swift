@@ -32,6 +32,13 @@ struct User {
             }
         }
     }
+    var hasEvaluated: Bool {
+        if averageArray.count == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
     
     func getGeneralAverage() -> Float {
         if averageArray.count == 0 {

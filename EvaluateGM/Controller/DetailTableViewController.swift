@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 protocol DetailTableViewControllerDelegate: AnyObject {
     func update(_ employee: Employee)
+    func updateUser(_ user: User)
 }
 
 class DetailTableViewController: UITableViewController {
@@ -101,8 +102,12 @@ class DetailTableViewController: UITableViewController {
             return
         }
         employee = evaluateViewController.employee
+        user = evaluateViewController.user
         if let employee = employee {
             delegate?.update(employee)
+        }
+        if let user = user {
+            delegate?.updateUser(user)
         }
     }
     @IBAction func cancel(unwindSegue: UIStoryboardSegue) {
