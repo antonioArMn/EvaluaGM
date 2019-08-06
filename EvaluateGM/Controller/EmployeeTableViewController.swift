@@ -16,6 +16,7 @@ class EmployeeTableViewController: UITableViewController {
     
     //Outlets
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var supervisorsBarButtonItem: UIBarButtonItem!
     
     //Properties
     var currentUser: User?
@@ -32,6 +33,7 @@ class EmployeeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigationBar()
         
         ref = Database.database().reference()
@@ -169,6 +171,19 @@ class EmployeeTableViewController: UITableViewController {
         alert.addAction(acceptAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
+    }
+    @IBAction func supervisorsButtonTapped(_ sender: UIBarButtonItem) {
+        guard let user = currentUser else{
+            return
+        }
+        if user.isSupervisor {
+            let alertController = UIAlertController(title: "Acceso denegado", message: "Acción sólo válida para usuarios de recursos humanos.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "toSupervisorsVC", sender: nil)
+        }
     }
     
     //Functions

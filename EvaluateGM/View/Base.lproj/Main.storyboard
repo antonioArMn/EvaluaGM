@@ -249,6 +249,11 @@
                                 <action selector="logout:" destination="alj-NI-77M" id="btW-JP-xGe"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Supervisores" id="Sov-yg-ZdD">
+                            <connections>
+                                <action selector="supervisorsButtonTapped:" destination="alj-NI-77M" id="fYT-WP-IaM"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="1ny-Jk-52p"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Empleados" id="YJD-ak-xI9">
@@ -274,8 +279,10 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="segmentedControl" destination="utw-6w-1oj" id="q2j-cn-5Jd"/>
+                        <outlet property="supervisorsBarButtonItem" destination="Sov-yg-ZdD" id="F7d-YJ-x0E"/>
                         <segue destination="X0M-Sa-lwq" kind="presentation" identifier="toAddEmployeeVC" id="tT4-pp-XXT"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="toLoginVC" id="eag-rA-DRU"/>
+                        <segue destination="yAA-HK-JcW" kind="show" identifier="toSupervisorsVC" id="zyY-mb-YXe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znx-ga-ov6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1517,6 +1524,11 @@
                                 <action selector="logout:" destination="xPI-lw-LLJ" id="6wR-yD-CQY"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Supervisores" id="IlN-BA-lAX">
+                            <connections>
+                                <action selector="supervisorsButtonTapped:" destination="xPI-lw-LLJ" id="hb5-M3-sHq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="iee-NC-Tri"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Resumen" largeTitleDisplayMode="never" id="yPo-aG-NQc">
@@ -1588,6 +1600,7 @@
                         <outletCollection property="fifthSpecificGradeIndicators" destination="Vj3-x4-02q" collectionClass="NSMutableArray" id="O3B-BA-T7w"/>
                         <segue destination="1ag-LH-Ql6" kind="presentation" identifier="toEvaluateVC" id="2ai-op-90O"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="toLoginVC2" id="Hb1-hf-OxX"/>
+                        <segue destination="yAA-HK-JcW" kind="show" identifier="toSupervisorsVC2" id="PMc-Na-Dy9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IGD-1l-y6E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2952,6 +2965,35 @@
             </objects>
             <point key="canvasLocation" x="1728" y="748"/>
         </scene>
+        <!--Supervisores-->
+        <scene sceneID="Va8-7w-d4h">
+            <objects>
+                <tableViewController id="yAA-HK-JcW" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="U9d-of-olp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="I9c-5c-2BL">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I9c-5c-2BL" id="eCO-jz-OQp">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="yAA-HK-JcW" id="M1T-yd-0UD"/>
+                            <outlet property="delegate" destination="yAA-HK-JcW" id="qEX-NM-Jug"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Supervisores" largeTitleDisplayMode="never" id="Ojl-9M-uLM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXQ-Hw-QBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2525" y="748"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bmh-vz-YcN">
             <objects>
@@ -2977,6 +3019,7 @@
         <image name="logo3" width="2000" height="2000"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eag-rA-DRU"/>
+        <segue reference="PMc-Na-Dy9"/>
+        <segue reference="Hb1-hf-OxX"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -169,6 +169,19 @@ class DetailTableViewController: UITableViewController {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
+    @IBAction func supervisorsButtonTapped(_ sender: UIBarButtonItem) {
+        guard let user = user else{
+            return
+        }
+        if user.isSupervisor {
+            let alertController = UIAlertController(title: "Acceso denegado", message: "Acción sólo válida para usuarios de recursos humanos.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "toSupervisorsVC2", sender: nil)
+        }
+    }
     
     //Setup Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
