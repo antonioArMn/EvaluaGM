@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct User {
+struct User: Comparable {
     var name: String
     var lastName: String
     var email: String
@@ -46,6 +46,10 @@ struct User {
         } else {
             return averageArray.reduce(0, +) / Float(averageArray.count)
         }
+    }
+    
+    static func < (lhs: User, rhs: User) -> Bool {
+        return rhs.getGeneralAverage() < lhs.getGeneralAverage()
     }
     
     init(name: String, lastName: String, email: String, password: String, isSupervisor: Bool) {
