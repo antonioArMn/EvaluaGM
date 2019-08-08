@@ -591,10 +591,7 @@
                                     <constraint firstAttribute="width" constant="45" id="6na-J1-xIe"/>
                                     <constraint firstAttribute="height" constant="45" id="LIt-uu-MXu"/>
                                 </constraints>
-                                <state key="normal" image="cameraIcon">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <state key="normal" image="cameraIcon"/>
                                 <connections>
                                     <action selector="cameraButtonTapped:" destination="7Ec-us-6Ng" eventType="touchUpInside" id="oiT-jz-eqL"/>
                                 </connections>
@@ -3031,7 +3028,7 @@
     </scenes>
     <resources>
         <image name="User" width="600" height="600"/>
-        <image name="cameraIcon" width="30" height="30"/>
+        <image name="cameraIcon" width="24" height="24"/>
         <image name="logo3" width="2000" height="2000"/>
     </resources>
     <inferredMetricsTieBreakers>
